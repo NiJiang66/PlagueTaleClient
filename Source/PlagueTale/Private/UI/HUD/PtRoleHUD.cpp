@@ -6,6 +6,8 @@
 
 void APtRoleHUD::BeginPlay()
 {
+	Super::BeginPlay();
+
 	RoleWidget = CreateWidget<UPtRoleUserWidget>(GetWorld(), RoleWidgetClass);
 	if (RoleWidget) {
 		RoleWidget->AddToViewport();

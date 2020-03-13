@@ -102,5 +102,31 @@ public:
 
 };
 
+class KBENGINEPLUGINS_API ROOM_INFO
+{
+public:
+	uint64 RoomId;
+	FString Name;
+
+	ROOM_INFO():
+	RoomId(0),
+	Name()
+	{
+	}
+
+};
+
+class KBENGINEPLUGINS_API ROOM_LIST
+{
+public:
+	TArray<ROOM_INFO> Value;
+
+	ROOM_LIST():
+	Value()
+	{
+	}
+
+};
+
 
 }

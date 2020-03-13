@@ -89,7 +89,7 @@ void PtAccountBase::onRemoteMethodCall(MemoryStream& stream)
 
 	switch(pMethod->methodUtype)
 	{
-		case 6:
+		case 9:
 		{
 			uint8 OnCreateRoleResult_arg1 = stream.readUint8();
 			ROLE_INFO OnCreateRoleResult_arg2;
@@ -97,20 +97,35 @@ void PtAccountBase::onRemoteMethodCall(MemoryStream& stream)
 			OnCreateRoleResult(OnCreateRoleResult_arg1, OnCreateRoleResult_arg2);
 			break;
 		}
-		case 7:
+		case 13:
+		{
+			uint8 OnCreateRoom_arg1 = stream.readUint8();
+			ROOM_INFO OnCreateRoom_arg2;
+			((DATATYPE_ROOM_INFO*)pMethod->args[1])->createFromStreamEx(stream, OnCreateRoom_arg2);
+			OnCreateRoom(OnCreateRoom_arg1, OnCreateRoom_arg2);
+			break;
+		}
+		case 10:
 		{
 			uint64 OnRemoveRole_arg1 = stream.readUint64();
 			OnRemoveRole(OnRemoveRole_arg1);
 			break;
 		}
-		case 5:
+		case 8:
 		{
 			ROLE_LIST OnReqRoleList_arg1;
 			((DATATYPE_ROLE_LIST*)pMethod->args[0])->createFromStreamEx(stream, OnReqRoleList_arg1);
 			OnReqRoleList(OnReqRoleList_arg1);
 			break;
 		}
-		case 8:
+		case 12:
+		{
+			ROOM_LIST OnReqRoomList_arg1;
+			((DATATYPE_ROOM_LIST*)pMethod->args[0])->createFromStreamEx(stream, OnReqRoomList_arg1);
+			OnReqRoomList(OnReqRoomList_arg1);
+			break;
+		}
+		case 11:
 		{
 			uint8 OnSelectRoleGame_arg1 = stream.readUint8();
 			uint64 OnSelectRoleGame_arg2 = stream.readUint64();

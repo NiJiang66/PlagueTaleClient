@@ -45,5 +45,27 @@ void DATATYPE_ROLE_LIST::addToStreamEx(Bundle& stream, const ROLE_LIST& v)
 	Value_DataType.addToStreamEx(stream, v.Value);
 }
 
+void DATATYPE_ROOM_INFO::createFromStreamEx(MemoryStream& stream, ROOM_INFO& datas)
+{
+	datas.RoomId = stream.readUint64();
+	datas.Name = stream.readUnicode();
+}
+
+void DATATYPE_ROOM_INFO::addToStreamEx(Bundle& stream, const ROOM_INFO& v)
+{
+	stream.writeUint64(v.RoomId);
+	stream.writeUnicode(v.Name);
+}
+
+void DATATYPE_ROOM_LIST::createFromStreamEx(MemoryStream& stream, ROOM_LIST& datas)
+{
+	Value_DataType.createFromStreamEx(stream, datas.Value);
+}
+
+void DATATYPE_ROOM_LIST::addToStreamEx(Bundle& stream, const ROOM_LIST& v)
+{
+	Value_DataType.addToStreamEx(stream, v.Value);
+}
+
 
 }

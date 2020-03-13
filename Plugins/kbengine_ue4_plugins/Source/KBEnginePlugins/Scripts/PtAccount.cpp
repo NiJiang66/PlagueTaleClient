@@ -53,7 +53,7 @@ void KBEngine::PtAccount::OnReqRoleList(const ROLE_LIST& arg1)
 		RoleInfo.InitData(arg.Dbid, arg.Name, arg.RoleType, (LastSelRole == arg.Dbid));
 		EventData->RoleList.Add(RoleInfo);
 	}
-
+	//告诉UE4客户端相应的GameMode
 	KBENGINE_EVENT_FIRE("OnReqRoleList", EventData);
 }
 
@@ -85,7 +85,7 @@ void KBEngine::PtAccount::OnCreateRoleResult(uint8 arg1, const ROLE_INFO& arg2)
 		PtH::Debug() << "PtAccount::OnCreateRoleResult : ErrorCode unknow --> " << arg1 << PtH::Endl();
 		break;
 	}
-
+	//告诉UE4客户端相应的GameMode
 	KBENGINE_EVENT_FIRE("OnCreateRoleResult", EventData);
 }
 
@@ -110,7 +110,7 @@ void KBEngine::PtAccount::OnRemoveRole(uint64 arg1)
 
 	//从本地列表移除角色
 	RoleList.Value.RemoveAt(InfoIndex);
-
+	//告诉UE4客户端相应的GameMode相应的GameMode
 	KBENGINE_EVENT_FIRE("OnRemoveRole", EventData);
 }
 
@@ -125,8 +125,33 @@ void KBEngine::PtAccount::OnSelectRoleGame(uint8 arg1, uint64 arg2)
 
 	UKBEventData_OnSelectRoleGame* EventData = NewObject<UKBEventData_OnSelectRoleGame>();
 	EventData->Dbid = arg2;
-
+	//告诉UE4客户端相应的GameMode创建房间成功
 	KBENGINE_EVENT_FIRE("OnSelectRoleGame", EventData);
+}
+
+void KBEngine::PtAccount::OnReqRoomList(const ROOM_LIST& arg1)
+{
+	UKBEventData_OnReqRoomList* EventData = NewObject<UKBEventData_OnReqRoomList>();
+	for (auto& arg : arg1.Value) {
+		FROOM_INFO RoomInfo;
+		RoomInfo.InitData(arg.RoomId, arg.Name);
+		EventData->RoomList.Add(RoomInfo);
+	}
+	//告诉UE4客户端请求房间列表成功
+	KBENGINE_EVENT_FIRE("OnReqRoomList", EventData);
+}
+
+void KBEngine::PtAccount::OnCreateRoom(uint8 arg1, const ROOM_INFO& arg2)
+{
+	if (arg1 == 1) {
+		//如果创建失败
+		PtH::Debug() << "PtAccount::OnCreateRoom() Faild By Name : " << arg2.Name << PtH::Endl();
+		return;
+	}
+	UKBEventData_OnCreateRoom* EventData = NewObject<UKBEventData_OnCreateRoom>();
+	EventData->RoomInfo.InitData(arg2.RoomId, arg2.Name);
+	//告诉UE4客户端创建房间成功
+	KBENGINE_EVENT_FIRE("OnCreateRoom", EventData);
 }
 
 void KBEngine::PtAccount::ReqCreateRole(uint8 RoleType, const FString& Name)
@@ -147,6 +172,24 @@ void KBEngine::PtAccount::SelectRoleGame(uint64 Dbid)
 	pBaseEntityCall->ReqSelectRoleGame(Dbid);
 }
 
+void KBEngine::PtAccount::ReqRoomList()
+{
+	PtH::Debug() << "PtAccount::ReqRoomList()" << PtH::Endl();
+	pBaseEntityCall->ReqRoomList();
+}
+
+void KBEngine::PtAccount::ReqCreateRoom(const FString& Name)
+{
+	PtH::Debug() << "PtAccount::ReqCreateRoom(): Name -->" << Name << PtH::Endl();
+	pBaseEntityCall->ReqCreateRoom(Name);
+}
+
+void KBEngine::PtAccount::SelectRoomGame(uint64 RoomId)
+{
+	PtH::Debug() << "PtAccount::SelectRoomGame(): RoomId -->" << RoomId << PtH::Endl();
+	pBaseEntityCall->SelectRoomGame(RoomId);
+}
+
 void KBEngine::PtAccount::RegisterClientReqEvent()
 {
 	//注册事件, 这些事件是用于在PtRoleGameMode通过KBENGINE_EVENT_FIRE宏触发事件时可以调用到这里注册的函数
@@ -163,6 +206,20 @@ void KBEngine::PtAccount::RegisterClientReqEvent()
 	KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("SelectRoleGame", "SelectRoleGame", [this](const UKBEventData* EventData)	{
 		const UKBEventData_SelectRoleGame* ServerData = Cast<UKBEventData_SelectRoleGame>(EventData);
 		SelectRoleGame(ServerData->RoleInfo.Dbid);
+	});
+
+	KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("ReqRoomList", "ReqRoomList", [this](const UKBEventData* EventData) {
+		ReqRoomList();
+	});
+
+	KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("ReqCreateRoom", "ReqCreateRoom", [this](const UKBEventData* EventData) {
+		const UKBEventData_ReqCreateRoom* ServerData = Cast<UKBEventData_ReqCreateRoom>(EventData);
+		ReqCreateRoom(ServerData->RoomName);
+	});
+
+	KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("SelectRoomGame", "SelectRoomGame", [this](const UKBEventData* EventData) {
+		const UKBEventData_SelectRoomGame* ServerData = Cast<UKBEventData_SelectRoomGame>(EventData);
+		SelectRoomGame(ServerData->RoomId);
 	});
 }
 

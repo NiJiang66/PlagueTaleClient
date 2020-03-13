@@ -5,23 +5,22 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Scripts/PtEventData.h"
-#include "PtRoleItem.generated.h"
+#include "PtRoomItem.generated.h"
 
 class UImage;
 class UButton;
 class UTextBlock;
 
-/**	定义角色条目选中代理，参数为Bdid */
-DECLARE_DELEGATE_OneParam(FRoleItemSelect, uint64)
+/**	定义房间条目选中代理，参数为Bdid */
+DECLARE_DELEGATE_OneParam(FRoomItemSelect, uint64)
 
 /**
- * 选角界面上的角色列表条目
+ * 房间列表的条目
  */
 UCLASS()
-class PLAGUETALE_API UPtRoleItem : public UUserWidget
+class PLAGUETALE_API UPtRoomItem : public UUserWidget
 {
 	GENERATED_BODY()
-
 public:
 
 	/** 绑定该UI控件的代理事件 */
@@ -32,7 +31,7 @@ public:
 	void ItemButtonEvent();
 
 	/**	初始化角色条目信息 */
-	void InitItem(FROLE_INFO InRoleInfo);
+	void InitItem(FROOM_INFO InRoomInfo);
 
 	/**	选择条目 */
 	void ItemSelect();
@@ -49,15 +48,17 @@ public:
 	UPROPERTY(Meta = (BindWidget))
 	UButton* ItemBtn;
 
-	/**	保存角色类型名称 */
+	/**	保存房间名称 */
 	UPROPERTY(Meta = (BindWidget))
 	UTextBlock* ItemName;
 
-	/**	角色信息 */
+	/**	房间信息 */
 	UPROPERTY()
-	FROLE_INFO RoleInfo;
+	FROOM_INFO RoomInfo;
 
-	/**	角色条目选中代理，参数为Bdid */
-	FRoleItemSelect RoleItemSelectDel;
+	/**	房间条目选中代理，参数为Bdid */
+	FRoomItemSelect RoomItemSelectDel;
 
+	/**	保存是否被选中 */
+	bool IsSelected;
 };

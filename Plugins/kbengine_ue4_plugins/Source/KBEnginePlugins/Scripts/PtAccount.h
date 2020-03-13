@@ -14,7 +14,6 @@ namespace KBEngine
 		virtual void __init__() override;
 		virtual void onDestroy() override;
 
-	public:
 		/**	请求角色列表回调函数 */
 		virtual void OnReqRoleList(const ROLE_LIST& arg1) override;
 		/**	创建角色结果回调函数 */
@@ -24,6 +23,12 @@ namespace KBEngine
 		/**	选择角色进入游戏回调函数 */
 		virtual void OnSelectRoleGame(uint8 arg1, uint64 arg2) override;
 
+		/**	请求房间列表回调函数 */
+		virtual void OnReqRoomList(const ROOM_LIST& arg1) override;
+		/**	创建房间回调函数 */
+		virtual void OnCreateRoom(uint8 arg1, const ROOM_INFO& arg2) override;
+
+	public:
 		/**	客户端请求创建新角色 */
 		void ReqCreateRole(uint8 RoleType, const FString& Name);
 		/**	客户端请求移除角色 */
@@ -31,6 +36,13 @@ namespace KBEngine
 		//void RegRemoveRole(uint64 Dbid);
 		/**	客户端请求选择角色进入游戏 */
 		void SelectRoleGame(uint64 Dbid);
+
+		/**	客户端请求房间列表 */
+		void ReqRoomList();
+		/**	客户端请求创建房间 */
+		void ReqCreateRoom(const FString& Name);
+		/**	客户端请求选择房间进入游戏 */
+		void SelectRoomGame(uint64 RoomId);
 
 	public:
 

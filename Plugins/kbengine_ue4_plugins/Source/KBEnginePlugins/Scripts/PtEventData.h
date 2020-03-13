@@ -107,6 +107,69 @@ public:
 };
 
 
+
+/**	房间信息数据结构 */
+USTRUCT()
+struct FROOM_INFO 
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	uint64 RoomId;
+	UPROPERTY()
+	FString Name;
+
+	void InitData(uint64 InRoomId, const FString& InName) {
+		RoomId = InRoomId;
+		Name = InName;
+	}
+};
+
+
+/**	客户端请求创建房间事件的数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_ReqCreateRoom : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY()
+	FString RoomName;
+};
+
+/**	客户端请求选择房间进行游戏事件的数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SelectRoomGame : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY()
+	uint64 RoomId;
+};
+
+/**	客户端请求房间列表事件的数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnReqRoomList : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	房间信息数组 */
+	UPROPERTY()
+	TArray<FROOM_INFO> RoomList;
+};
+
+/**	客户端请求创建房间事件的数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnCreateRoom : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	房间信息数组 */
+	UPROPERTY()
+		FROOM_INFO RoomInfo;
+};
+
+
+
 /**
  * 实现各种注册事件参数类的地方，对应服务器定义的数据结构
  */

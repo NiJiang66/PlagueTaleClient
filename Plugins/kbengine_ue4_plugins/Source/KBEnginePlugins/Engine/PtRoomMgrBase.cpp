@@ -1,4 +1,4 @@
-#include "PtRoleBase.h"
+#include "PtRoomMgrBase.h"
 #include "KBVar.h"
 #include "EntityDef.h"
 #include "ScriptModule.h"
@@ -14,53 +14,53 @@ namespace KBEngine
 
 
 
-void PtRoleBase::onComponentsEnterworld()
+void PtRoomMgrBase::onComponentsEnterworld()
 {
 }
 
-void PtRoleBase::onComponentsLeaveworld()
+void PtRoomMgrBase::onComponentsLeaveworld()
 {
 }
 
-void PtRoleBase::onGetBase()
+void PtRoomMgrBase::onGetBase()
 {
 	if(pBaseEntityCall)
 		delete pBaseEntityCall;
 
-	pBaseEntityCall = new EntityBaseEntityCall_PtRoleBase(id(), className());
+	pBaseEntityCall = new EntityBaseEntityCall_PtRoomMgrBase(id(), className());
 }
 
-void PtRoleBase::onGetCell()
+void PtRoomMgrBase::onGetCell()
 {
 	if(pCellEntityCall)
 		delete pCellEntityCall;
 
-	pCellEntityCall = new EntityCellEntityCall_PtRoleBase(id(), className());
+	pCellEntityCall = new EntityCellEntityCall_PtRoomMgrBase(id(), className());
 }
 
-void PtRoleBase::onLoseCell()
+void PtRoomMgrBase::onLoseCell()
 {
 	delete pCellEntityCall;
 	pCellEntityCall = NULL;
 }
 
-EntityCall* PtRoleBase::getBaseEntityCall()
+EntityCall* PtRoomMgrBase::getBaseEntityCall()
 {
 	return pBaseEntityCall;
 }
 
-EntityCall* PtRoleBase::getCellEntityCall()
+EntityCall* PtRoomMgrBase::getCellEntityCall()
 {
 	return pCellEntityCall;
 }
 
-void PtRoleBase::onRemoteMethodCall(MemoryStream& stream)
+void PtRoomMgrBase::onRemoteMethodCall(MemoryStream& stream)
 {
 }
 
-void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
+void PtRoomMgrBase::onUpdatePropertys(MemoryStream& stream)
 {
-	ScriptModule* sm = *EntityDef::moduledefs.Find("PtRole");
+	ScriptModule* sm = *EntityDef::moduledefs.Find("PtRoomMgr");
 
 	while(stream.length() > 0)
 	{
@@ -89,42 +89,6 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 		switch(pProp->properUtype)
 		{
-			case 4:
-			{
-				FString oldval_Name = Name;
-				Name = stream.readUnicode();
-
-				if(pProp->isBase())
-				{
-					if(inited())
-						onNameChanged(oldval_Name);
-				}
-				else
-				{
-					if(inWorld())
-						onNameChanged(oldval_Name);
-				}
-
-				break;
-			}
-			case 5:
-			{
-				uint8 oldval_RoleType = RoleType;
-				RoleType = stream.readUint8();
-
-				if(pProp->isBase())
-				{
-					if(inited())
-						onRoleTypeChanged(oldval_RoleType);
-				}
-				else
-				{
-					if(inWorld())
-						onRoleTypeChanged(oldval_RoleType);
-				}
-
-				break;
-			}
 			case 40001:
 			{
 				FVector oldval_direction = direction;
@@ -172,52 +136,10 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 	}
 }
 
-void PtRoleBase::callPropertysSetMethods()
+void PtRoomMgrBase::callPropertysSetMethods()
 {
-	ScriptModule* sm = EntityDef::moduledefs["PtRole"];
+	ScriptModule* sm = EntityDef::moduledefs["PtRoomMgr"];
 	TMap<uint16, Property*>& pdatas = sm->idpropertys;
-
-	FString oldval_Name = Name;
-	Property* pProp_Name = pdatas[4];
-	if(pProp_Name->isBase())
-	{
-		if(inited() && !inWorld())
-			onNameChanged(oldval_Name);
-	}
-	else
-	{
-		if(inWorld())
-		{
-			if(pProp_Name->isOwnerOnly() && !isPlayer())
-			{
-			}
-			else
-			{
-				onNameChanged(oldval_Name);
-			}
-		}
-	}
-
-	uint8 oldval_RoleType = RoleType;
-	Property* pProp_RoleType = pdatas[5];
-	if(pProp_RoleType->isBase())
-	{
-		if(inited() && !inWorld())
-			onRoleTypeChanged(oldval_RoleType);
-	}
-	else
-	{
-		if(inWorld())
-		{
-			if(pProp_RoleType->isOwnerOnly() && !isPlayer())
-			{
-			}
-			else
-			{
-				onRoleTypeChanged(oldval_RoleType);
-			}
-		}
-	}
 
 	FVector oldval_direction = direction;
 	Property* pProp_direction = pdatas[2];
@@ -263,16 +185,14 @@ void PtRoleBase::callPropertysSetMethods()
 
 }
 
-PtRoleBase::PtRoleBase():
+PtRoomMgrBase::PtRoomMgrBase():
 	Entity(),
 	pBaseEntityCall(NULL),
-	pCellEntityCall(NULL),
-	Name(TEXT("")),
-	RoleType((uint8)FCString::Atoi64(TEXT("0")))
+	pCellEntityCall(NULL)
 {
 }
 
-PtRoleBase::~PtRoleBase()
+PtRoomMgrBase::~PtRoomMgrBase()
 {
 	if(pBaseEntityCall)
 		delete pBaseEntityCall;
@@ -282,11 +202,11 @@ PtRoleBase::~PtRoleBase()
 
 }
 
-void PtRoleBase::attachComponents()
+void PtRoomMgrBase::attachComponents()
 {
 }
 
-void PtRoleBase::detachComponents()
+void PtRoomMgrBase::detachComponents()
 {
 }
 

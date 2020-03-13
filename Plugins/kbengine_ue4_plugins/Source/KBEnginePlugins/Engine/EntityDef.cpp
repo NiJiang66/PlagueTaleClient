@@ -175,7 +175,7 @@ void EntityDef::initScriptModules()
 
 	Method* pPtAccount_OnCreateRoleResult = new Method();
 	pPtAccount_OnCreateRoleResult->name = TEXT("OnCreateRoleResult");
-	pPtAccount_OnCreateRoleResult->methodUtype = 6;
+	pPtAccount_OnCreateRoleResult->methodUtype = 9;
 	pPtAccount_OnCreateRoleResult->aliasID = 1;
 	pPtAccount_OnCreateRoleResult->args = PtAccount_OnCreateRoleResult_args;
 
@@ -183,37 +183,68 @@ void EntityDef::initScriptModules()
 	pPtAccountModule->useMethodDescrAlias = true;
 	pPtAccountModule->idmethods.Add((uint16)pPtAccount_OnCreateRoleResult->aliasID, pPtAccount_OnCreateRoleResult);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnCreateRoleResult / 6).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnCreateRoleResult / 9).");
+
+	TArray<DATATYPE_BASE*> PtAccount_OnCreateRoom_args;
+	PtAccount_OnCreateRoom_args.Add(EntityDef::id2datatypes[2]);
+	PtAccount_OnCreateRoom_args.Add(EntityDef::id2datatypes[26]);
+
+	Method* pPtAccount_OnCreateRoom = new Method();
+	pPtAccount_OnCreateRoom->name = TEXT("OnCreateRoom");
+	pPtAccount_OnCreateRoom->methodUtype = 13;
+	pPtAccount_OnCreateRoom->aliasID = 2;
+	pPtAccount_OnCreateRoom->args = PtAccount_OnCreateRoom_args;
+
+	pPtAccountModule->methods.Add(TEXT("OnCreateRoom"), pPtAccount_OnCreateRoom); 
+	pPtAccountModule->useMethodDescrAlias = true;
+	pPtAccountModule->idmethods.Add((uint16)pPtAccount_OnCreateRoom->aliasID, pPtAccount_OnCreateRoom);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnCreateRoom / 13).");
 
 	TArray<DATATYPE_BASE*> PtAccount_OnRemoveRole_args;
 	PtAccount_OnRemoveRole_args.Add(EntityDef::id2datatypes[5]);
 
 	Method* pPtAccount_OnRemoveRole = new Method();
 	pPtAccount_OnRemoveRole->name = TEXT("OnRemoveRole");
-	pPtAccount_OnRemoveRole->methodUtype = 7;
-	pPtAccount_OnRemoveRole->aliasID = 2;
+	pPtAccount_OnRemoveRole->methodUtype = 10;
+	pPtAccount_OnRemoveRole->aliasID = 3;
 	pPtAccount_OnRemoveRole->args = PtAccount_OnRemoveRole_args;
 
 	pPtAccountModule->methods.Add(TEXT("OnRemoveRole"), pPtAccount_OnRemoveRole); 
 	pPtAccountModule->useMethodDescrAlias = true;
 	pPtAccountModule->idmethods.Add((uint16)pPtAccount_OnRemoveRole->aliasID, pPtAccount_OnRemoveRole);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnRemoveRole / 7).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnRemoveRole / 10).");
 
 	TArray<DATATYPE_BASE*> PtAccount_OnReqRoleList_args;
 	PtAccount_OnReqRoleList_args.Add(EntityDef::id2datatypes[24]);
 
 	Method* pPtAccount_OnReqRoleList = new Method();
 	pPtAccount_OnReqRoleList->name = TEXT("OnReqRoleList");
-	pPtAccount_OnReqRoleList->methodUtype = 5;
-	pPtAccount_OnReqRoleList->aliasID = 3;
+	pPtAccount_OnReqRoleList->methodUtype = 8;
+	pPtAccount_OnReqRoleList->aliasID = 4;
 	pPtAccount_OnReqRoleList->args = PtAccount_OnReqRoleList_args;
 
 	pPtAccountModule->methods.Add(TEXT("OnReqRoleList"), pPtAccount_OnReqRoleList); 
 	pPtAccountModule->useMethodDescrAlias = true;
 	pPtAccountModule->idmethods.Add((uint16)pPtAccount_OnReqRoleList->aliasID, pPtAccount_OnReqRoleList);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnReqRoleList / 5).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnReqRoleList / 8).");
+
+	TArray<DATATYPE_BASE*> PtAccount_OnReqRoomList_args;
+	PtAccount_OnReqRoomList_args.Add(EntityDef::id2datatypes[27]);
+
+	Method* pPtAccount_OnReqRoomList = new Method();
+	pPtAccount_OnReqRoomList->name = TEXT("OnReqRoomList");
+	pPtAccount_OnReqRoomList->methodUtype = 12;
+	pPtAccount_OnReqRoomList->aliasID = 5;
+	pPtAccount_OnReqRoomList->args = PtAccount_OnReqRoomList_args;
+
+	pPtAccountModule->methods.Add(TEXT("OnReqRoomList"), pPtAccount_OnReqRoomList); 
+	pPtAccountModule->useMethodDescrAlias = true;
+	pPtAccountModule->idmethods.Add((uint16)pPtAccount_OnReqRoomList->aliasID, pPtAccount_OnReqRoomList);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnReqRoomList / 12).");
 
 	TArray<DATATYPE_BASE*> PtAccount_OnSelectRoleGame_args;
 	PtAccount_OnSelectRoleGame_args.Add(EntityDef::id2datatypes[2]);
@@ -221,15 +252,15 @@ void EntityDef::initScriptModules()
 
 	Method* pPtAccount_OnSelectRoleGame = new Method();
 	pPtAccount_OnSelectRoleGame->name = TEXT("OnSelectRoleGame");
-	pPtAccount_OnSelectRoleGame->methodUtype = 8;
-	pPtAccount_OnSelectRoleGame->aliasID = 4;
+	pPtAccount_OnSelectRoleGame->methodUtype = 11;
+	pPtAccount_OnSelectRoleGame->aliasID = 6;
 	pPtAccount_OnSelectRoleGame->args = PtAccount_OnSelectRoleGame_args;
 
 	pPtAccountModule->methods.Add(TEXT("OnSelectRoleGame"), pPtAccount_OnSelectRoleGame); 
 	pPtAccountModule->useMethodDescrAlias = true;
 	pPtAccountModule->idmethods.Add((uint16)pPtAccount_OnSelectRoleGame->aliasID, pPtAccount_OnSelectRoleGame);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnSelectRoleGame / 8).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(OnSelectRoleGame / 11).");
 
 	TArray<DATATYPE_BASE*> PtAccount_ReqCreateRole_args;
 	PtAccount_ReqCreateRole_args.Add(EntityDef::id2datatypes[2]);
@@ -247,6 +278,22 @@ void EntityDef::initScriptModules()
 	pPtAccountModule->idbase_methods.Add(pPtAccount_ReqCreateRole->methodUtype, pPtAccount_ReqCreateRole);
 
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(ReqCreateRole / 2).");
+
+	TArray<DATATYPE_BASE*> PtAccount_ReqCreateRoom_args;
+	PtAccount_ReqCreateRoom_args.Add(EntityDef::id2datatypes[12]);
+
+	Method* pPtAccount_ReqCreateRoom = new Method();
+	pPtAccount_ReqCreateRoom->name = TEXT("ReqCreateRoom");
+	pPtAccount_ReqCreateRoom->methodUtype = 6;
+	pPtAccount_ReqCreateRoom->aliasID = -1;
+	pPtAccount_ReqCreateRoom->args = PtAccount_ReqCreateRoom_args;
+
+	pPtAccountModule->methods.Add(TEXT("ReqCreateRoom"), pPtAccount_ReqCreateRoom); 
+	pPtAccountModule->base_methods.Add(TEXT("ReqCreateRoom"), pPtAccount_ReqCreateRoom);
+
+	pPtAccountModule->idbase_methods.Add(pPtAccount_ReqCreateRoom->methodUtype, pPtAccount_ReqCreateRoom);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(ReqCreateRoom / 6).");
 
 	TArray<DATATYPE_BASE*> PtAccount_ReqRemoveRole_args;
 	PtAccount_ReqRemoveRole_args.Add(EntityDef::id2datatypes[12]);
@@ -279,6 +326,21 @@ void EntityDef::initScriptModules()
 
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(ReqRoleList / 1).");
 
+	TArray<DATATYPE_BASE*> PtAccount_ReqRoomList_args;
+
+	Method* pPtAccount_ReqRoomList = new Method();
+	pPtAccount_ReqRoomList->name = TEXT("ReqRoomList");
+	pPtAccount_ReqRoomList->methodUtype = 5;
+	pPtAccount_ReqRoomList->aliasID = -1;
+	pPtAccount_ReqRoomList->args = PtAccount_ReqRoomList_args;
+
+	pPtAccountModule->methods.Add(TEXT("ReqRoomList"), pPtAccount_ReqRoomList); 
+	pPtAccountModule->base_methods.Add(TEXT("ReqRoomList"), pPtAccount_ReqRoomList);
+
+	pPtAccountModule->idbase_methods.Add(pPtAccount_ReqRoomList->methodUtype, pPtAccount_ReqRoomList);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(ReqRoomList / 5).");
+
 	TArray<DATATYPE_BASE*> PtAccount_ReqSelectRoleGame_args;
 	PtAccount_ReqSelectRoleGame_args.Add(EntityDef::id2datatypes[5]);
 
@@ -294,6 +356,22 @@ void EntityDef::initScriptModules()
 	pPtAccountModule->idbase_methods.Add(pPtAccount_ReqSelectRoleGame->methodUtype, pPtAccount_ReqSelectRoleGame);
 
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(ReqSelectRoleGame / 4).");
+
+	TArray<DATATYPE_BASE*> PtAccount_SelectRoomGame_args;
+	PtAccount_SelectRoomGame_args.Add(EntityDef::id2datatypes[5]);
+
+	Method* pPtAccount_SelectRoomGame = new Method();
+	pPtAccount_SelectRoomGame->name = TEXT("SelectRoomGame");
+	pPtAccount_SelectRoomGame->methodUtype = 7;
+	pPtAccount_SelectRoomGame->aliasID = -1;
+	pPtAccount_SelectRoomGame->args = PtAccount_SelectRoomGame_args;
+
+	pPtAccountModule->methods.Add(TEXT("SelectRoomGame"), pPtAccount_SelectRoomGame); 
+	pPtAccountModule->base_methods.Add(TEXT("SelectRoomGame"), pPtAccount_SelectRoomGame);
+
+	pPtAccountModule->idbase_methods.Add(pPtAccount_SelectRoomGame->methodUtype, pPtAccount_SelectRoomGame);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtAccount), method(SelectRoomGame / 7).");
 
 	ScriptModule* pPtRoleModule = new ScriptModule("PtRole", 2);
 	EntityDef::moduledefs.Add(TEXT("PtRole"), pPtRoleModule);
@@ -343,7 +421,7 @@ void EntityDef::initScriptModules()
 
 	Property* pPtRole_Name = new Property();
 	pPtRole_Name->name = TEXT("Name");
-	pPtRole_Name->properUtype = 3;
+	pPtRole_Name->properUtype = 4;
 	pPtRole_Name->properFlags = 4;
 	pPtRole_Name->aliasID = 4;
 	KBVar* pPtRole_Name_defval = new KBVar(FString());
@@ -353,11 +431,11 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_Name->aliasID, pPtRole_Name);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(Name / 3).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(Name / 4).");
 
 	Property* pPtRole_RoleType = new Property();
 	pPtRole_RoleType->name = TEXT("RoleType");
-	pPtRole_RoleType->properUtype = 4;
+	pPtRole_RoleType->properUtype = 5;
 	pPtRole_RoleType->properFlags = 4;
 	pPtRole_RoleType->aliasID = 5;
 	KBVar* pPtRole_RoleType_defval = new KBVar((uint8)FCString::Atoi64(TEXT("")));
@@ -367,7 +445,7 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_RoleType->aliasID, pPtRole_RoleType);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(RoleType / 4).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(RoleType / 5).");
 
 	pPtRoleModule->useMethodDescrAlias = true;
 }
@@ -627,6 +705,24 @@ void EntityDef::initDefTypes()
 		uint16 utype = 24;
 		FString typeName = TEXT("ROLE_LIST");
 		DATATYPE_ROLE_LIST* pDatatype = new DATATYPE_ROLE_LIST();
+		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
+		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
+		EntityDef::datatype2id.Add(typeName, utype);
+	}
+
+	{
+		uint16 utype = 26;
+		FString typeName = TEXT("ROOM_INFO");
+		DATATYPE_ROOM_INFO* pDatatype = new DATATYPE_ROOM_INFO();
+		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
+		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
+		EntityDef::datatype2id.Add(typeName, utype);
+	}
+
+	{
+		uint16 utype = 27;
+		FString typeName = TEXT("ROOM_LIST");
+		DATATYPE_ROOM_LIST* pDatatype = new DATATYPE_ROOM_LIST();
 		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
 		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
 		EntityDef::datatype2id.Add(typeName, utype);
