@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -6,8 +6,13 @@
 #include "GameFramework/HUD.h"
 #include "PtStartHUD.generated.h"
 
+class UPtStartUserWidget;
+class UPtLoginUserWidget;
+class UPtRegisterUserWidget;
+
+
 /**
- * ¿ªÊ¼HUD
+ * å¼€å§‹(ç™»å½•æ³¨å†Œ)ç•Œé¢HUD
  */
 UCLASS()
 class PLAGUETALE_API APtStartHUD : public AHUD
@@ -20,35 +25,41 @@ public:
 
 	virtual void BeginPlay() override;
 
-	/** ¿ªÊ¼ÓÎÏ·°´Å¥µã»÷ÊÂ¼ş */
+	/** å¼€å§‹æ¸¸æˆæŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 	UFUNCTION()
 	void StartBtnOnClickedEvent();
 
-	/** ×¢²áÕËºÅ°´Å¥µã»÷ÊÂ¼ş */
+	/** æ³¨å†Œè´¦å·æŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 	UFUNCTION()
 	void RegisterBtnOnClickedEvent();
 
-	/** µÇÂ¼Ò³Ãæ·µ»Ø°´Å¥µã»÷ÊÂ¼ş */
+	/** ç™»å½•é¡µé¢è¿”å›æŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 	UFUNCTION()
 	void LoginBackBtnOnClickedEvent();
 
-	/** ×¢²áÒ³Ãæ·µ»Ø°´Å¥µã»÷ÊÂ¼ş */
+	/** æ³¨å†Œé¡µé¢è¿”å›æŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 	UFUNCTION()
 	void RegisterBackBtnOnClickedEvent();
 
 public:
 
-	/** ÓÎÏ·¿ªÊ¼½çÃæ */
+	/** æ¸¸æˆå¼€å§‹ç•Œé¢ */
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPtStartUserWidget> StartWidgetClass;
 	UPROPERTY()
-	class UPtStartUserWidget* StartWidget;
+	UPtStartUserWidget* StartWidget;
 
-	/** ÓÎÏ·µÇÂ¼½çÃæ */
+	/** æ¸¸æˆç™»å½•ç•Œé¢ */
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPtLoginUserWidget> LoginWidgetClass;
 	UPROPERTY()
-	class UPtLoginUserWidget* LoginWidget;
+	UPtLoginUserWidget* LoginWidget;
 
-	/** ÓÎÏ·×¢²á½çÃæ */
+	/** æ¸¸æˆæ³¨å†Œç•Œé¢ */
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPtRegisterUserWidget> RegisterWidgetClass;
 	UPROPERTY()
-	class UPtRegisterUserWidget* RegisterWidget;
+	UPtRegisterUserWidget* RegisterWidget;
 
 
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+Ôªø// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtStartHUD.h"
@@ -6,83 +6,79 @@
 #include "PtRegisterUserWidget.h"
 #include "PtLoginUserWidget.h"
 #include "Button.h"
-#include "ConstructorHelpers.h"
-#include "Engine/Engine.h"
 
 
 APtStartHUD::APtStartHUD()
-{	
-	//º”‘ÿ”Œœ∑ø™ ºWidget
-	static ConstructorHelpers::FClassFinder<UPtStartUserWidget> PTStartUserWidget(
-		TEXT("WidgetBlueprint'/Game/UI/PTStartUserWidget_BP.PTStartUserWidget_BP_C'")
-	);
-	StartWidget = CreateWidget<UPtStartUserWidget>(GetWorld(), PTStartUserWidget.Class);
-
-	//º”‘ÿ”Œœ∑µ«¬ºWidget
-	static ConstructorHelpers::FClassFinder<UPtLoginUserWidget> PTLoginUserWidget(
-		TEXT("WidgetBlueprint'/Game/UI/PTLoginUserWidget_BP.PTLoginUserWidget_BP_C'")
-	);
-	LoginWidget = CreateWidget<UPtLoginUserWidget>(GetWorld(), PTLoginUserWidget.Class);
-
-	//º”‘ÿ◊¢≤·’À∫≈Widget
-	static ConstructorHelpers::FClassFinder<UPtRegisterUserWidget> PTRegisterUserWidget(
-		TEXT("WidgetBlueprint'/Game/UI/PTRegisterUserWidget_BP.PTRegisterUserWidget_BP_C'")
-	);
-	RegisterWidget = CreateWidget<UPtRegisterUserWidget>(GetWorld(), PTRegisterUserWidget.Class);
+{
 
 }
 
-/** ”Œœ∑ø™ ºµ˜”√µƒ∑Ω∑® */
+/** Ê∏∏ÊàèÂºÄÂßãË∞ÉÁî®ÁöÑÊñπÊ≥ï */
 void APtStartHUD::BeginPlay()
 {
 	Super::BeginPlay();	
-	//œ‘ æµΩ∆¡ƒª
-	StartWidget->AddToViewport();
 
-	//ø™ º”Œœ∑∞¥≈•µƒµ„ª˜ ¬º˛
-	StartWidget->StartBtn->OnClicked.AddDynamic(this, &APtStartHUD::StartBtnOnClickedEvent);
-	//◊¢≤·’À∫≈∞¥≈•µƒµ„ª˜ ¬º˛
-	StartWidget->RegisterBtn->OnClicked.AddDynamic(this, &APtStartHUD::RegisterBtnOnClickedEvent);
+	StartWidget = CreateWidget<UPtStartUserWidget>(GetWorld(), StartWidgetClass);
+	LoginWidget = CreateWidget<UPtLoginUserWidget>(GetWorld(), LoginWidgetClass);
+	RegisterWidget = CreateWidget<UPtRegisterUserWidget>(GetWorld(), RegisterWidgetClass);
 
-	//…Ë÷√µ«¬ºΩÁ√Ê∑µªÿ∞¥≈•µƒµ„ª˜ ¬º˛
-	LoginWidget->BackBtn->OnClicked.AddDynamic(this, &APtStartHUD::LoginBackBtnOnClickedEvent);
+	if (StartWidget&&LoginWidget&&RegisterWidget) {
+		//ÊòæÁ§∫Âà∞Â±èÂπï
+		StartWidget->AddToViewport();
 
-	//…Ë÷√◊¢≤·ΩÁ√Ê∑µªÿ∞¥≈•µƒµ„ª˜ ¬º˛
-	RegisterWidget->BackBtn->OnClicked.AddDynamic(this, &APtStartHUD::RegisterBackBtnOnClickedEvent);
+		//ÂºÄÂßãÊ∏∏ÊàèÊåâÈíÆÁöÑÁÇπÂáª‰∫ã‰ª∂
+		StartWidget->StartBtn->OnClicked.AddDynamic(this, &APtStartHUD::StartBtnOnClickedEvent);
+		//Ê≥®ÂÜåË¥¶Âè∑ÊåâÈíÆÁöÑÁÇπÂáª‰∫ã‰ª∂
+		StartWidget->RegisterBtn->OnClicked.AddDynamic(this, &APtStartHUD::RegisterBtnOnClickedEvent);
+
+		//ËÆæÁΩÆÁôªÂΩïÁïåÈù¢ËøîÂõûÊåâÈíÆÁöÑÁÇπÂáª‰∫ã‰ª∂
+		LoginWidget->BackBtn->OnClicked.AddDynamic(this, &APtStartHUD::LoginBackBtnOnClickedEvent);
+
+		//ËÆæÁΩÆÊ≥®ÂÜåÁïåÈù¢ËøîÂõûÊåâÈíÆÁöÑÁÇπÂáª‰∫ã‰ª∂
+		RegisterWidget->BackBtn->OnClicked.AddDynamic(this, &APtStartHUD::RegisterBackBtnOnClickedEvent);
+	}
 }
 
-/** ø™ º”Œœ∑∞¥≈•µ„ª˜ ¬º˛ */
+/** ÂºÄÂßãÊ∏∏ÊàèÊåâÈíÆÁÇπÂáª‰∫ã‰ª∂ */
 void APtStartHUD::StartBtnOnClickedEvent()
 {
-	//”Œœ∑ø™ ºΩÁ√Ê¥” ”ø⁄÷–“∆≥˝
-	StartWidget->RemoveFromViewport();
-	//µ«¬º”Œœ∑ΩÁ√ÊÃÌº”µΩ ”ø⁄
-	LoginWidget->AddToViewport();
+	if (StartWidget&&LoginWidget) {
+		//Ê∏∏ÊàèÂºÄÂßãÁïåÈù¢‰ªéËßÜÂè£‰∏≠ÁßªÈô§
+		StartWidget->RemoveFromViewport();
+		//ÁôªÂΩïÊ∏∏ÊàèÁïåÈù¢Ê∑ªÂä†Âà∞ËßÜÂè£
+		LoginWidget->AddToViewport();
+	}
 }
 
-/** ◊¢≤·’À∫≈∞¥≈•µ„ª˜ ¬º˛ */
+/** Ê≥®ÂÜåË¥¶Âè∑ÊåâÈíÆÁÇπÂáª‰∫ã‰ª∂ */
 void APtStartHUD::RegisterBtnOnClickedEvent()
 {
-	//”Œœ∑ø™ ºΩÁ√Ê¥” ”ø⁄÷–“∆≥˝
-	StartWidget->RemoveFromViewport();
-	//◊¢≤·’À∫≈ΩÁ√ÊÃÌº”µΩ ”ø⁄÷–
-	RegisterWidget->AddToViewport();
+	if (StartWidget&&LoginWidget) {
+		//Ê∏∏ÊàèÂºÄÂßãÁïåÈù¢‰ªéËßÜÂè£‰∏≠ÁßªÈô§
+		StartWidget->RemoveFromViewport();
+		//Ê≥®ÂÜåË¥¶Âè∑ÁïåÈù¢Ê∑ªÂä†Âà∞ËßÜÂè£‰∏≠
+		RegisterWidget->AddToViewport();
+	}
 }
 
-/** µ«¬º“≥√Ê∑µªÿ∞¥≈•µ„ª˜ ¬º˛ */
+/** ÁôªÂΩïÈ°µÈù¢ËøîÂõûÊåâÈíÆÁÇπÂáª‰∫ã‰ª∂ */
 void APtStartHUD::LoginBackBtnOnClickedEvent()
 {
-	//µ«¬º’À∫≈ΩÁ√Ê¥” ”ø⁄÷–“∆≥˝ 
-	LoginWidget->RemoveFromViewport();
-	//”Œœ∑ø™ ºΩÁ√ÊÃÌº”µΩ ”ø⁄µ±÷–
-	StartWidget->AddToViewport();
+	if (StartWidget&&LoginWidget) {
+		//ÁôªÂΩïË¥¶Âè∑ÁïåÈù¢‰ªéËßÜÂè£‰∏≠ÁßªÈô§ 
+		LoginWidget->RemoveFromViewport();
+		//Ê∏∏ÊàèÂºÄÂßãÁïåÈù¢Ê∑ªÂä†Âà∞ËßÜÂè£ÂΩì‰∏≠
+		StartWidget->AddToViewport();
+	}
 }
 
-/** ◊¢≤·“≥√Ê∑µªÿ∞¥≈•µ„ª˜ ¬º˛ */
+/** Ê≥®ÂÜåÈ°µÈù¢ËøîÂõûÊåâÈíÆÁÇπÂáª‰∫ã‰ª∂ */
 void APtStartHUD::RegisterBackBtnOnClickedEvent()
 {
-	//◊¢≤·’À∫≈ΩÁ√Ê¥” ”ø⁄÷–“∆≥˝
-	RegisterWidget->RemoveFromViewport();
-	//”Œœ∑ø™ ºΩÁ√ÊÃÌº”µΩ ”ø⁄µ±÷–
-	StartWidget->AddToViewport();
+	if (StartWidget&&LoginWidget) {
+		//Ê≥®ÂÜåË¥¶Âè∑ÁïåÈù¢‰ªéËßÜÂè£‰∏≠ÁßªÈô§
+		RegisterWidget->RemoveFromViewport();
+		//Ê∏∏ÊàèÂºÄÂßãÁïåÈù¢Ê∑ªÂä†Âà∞ËßÜÂè£ÂΩì‰∏≠
+		StartWidget->AddToViewport();
+	}
 }

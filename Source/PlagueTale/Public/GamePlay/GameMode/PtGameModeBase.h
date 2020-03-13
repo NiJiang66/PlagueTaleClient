@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -10,7 +10,7 @@
 class UKBEventData;
 
 /**
- * ÓÎÏ·Ä£Ê½»ùÀà
+ * æ¸¸æˆæ¨¡å¼åŸºç±»
  */
 UCLASS()
 class PLAGUETALE_API APtGameModeBase : public AGameModeBase
@@ -24,20 +24,20 @@ public:
 	/** Called once this actor has been deleted */
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason)override;
 
-	/**	°²×°µÇÂ½Ê±ĞèÒª¼àÌıµÄKBEÊÂ¼ş */
+	/**	å®‰è£…ç™»é™†æ—¶éœ€è¦ç›‘å¬çš„KBEäº‹ä»¶ */
 	virtual void InstallEvents();
-	/**	×¢Ïú½øÈë³¡¾°Ê±×¢²áµÄKBEÊÂ¼ş */
+	/**	æ³¨é”€è¿›å…¥åœºæ™¯æ—¶æ³¨å†Œçš„KBEäº‹ä»¶ */
 	virtual void UnInstallEvents();
 
-	/**	KBEÊÂ¼ş,Íæ¼Ò±»Ìß³ö·şÎñÆ÷ */
+	/**	KBEäº‹ä»¶,ç©å®¶è¢«è¸¢å‡ºæœåŠ¡å™¨ */
 	virtual void OnKicked(const UKBEventData* pEventData);
-	/**	KBEÊÂ¼ş,¶ÏÏßÊ± */
+	/**	KBEäº‹ä»¶,æ–­çº¿æ—¶ */
 	virtual void OnDisconnected(const UKBEventData* pEventData);
-	/**	KBEÊÂ¼ş,µ±Ç°Á¬½Ó×´Ì¬ */
+	/**	KBEäº‹ä»¶,å½“å‰è¿æ¥çŠ¶æ€ */
 	virtual void OnConnectionState(const UKBEventData* pEventData);
-	/**	KBEÊÂ¼ş,¶ÏÏßÖØÁ¬ */
+	/**	KBEäº‹ä»¶,æ–­çº¿é‡è¿ */
 	virtual void OnReloginBaseappSuccessfully(const UKBEventData* pEventData);
-	/**	KBEÊÂ¼ş,ÖØÁ¬Ê§°Ü */
+	/**	KBEäº‹ä»¶,é‡è¿å¤±è´¥ */
 	virtual void OnReloginBaseappFailed(const UKBEventData* pEventData);
 
 protected:
@@ -45,18 +45,18 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	/**	¿ªÊ¼ÖØĞÂµÇÂ¼Baseapp£¬²»ÊÇLoginapp£¬ÒòÎªµÇÂ¼Ö®ºó»á°ÑÊı¾İ×ªÒÆµ½Baseapp */
+	/**	å¼€å§‹é‡æ–°ç™»å½•Baseappï¼Œä¸æ˜¯Loginappï¼Œå› ä¸ºç™»å½•ä¹‹åä¼šæŠŠæ•°æ®è½¬ç§»åˆ°Baseapp */
 	void StartReloginBaseappTimer();
-	/**	Í£Ö¹ÖØĞÂµÇÂ¼Baseapp */
+	/**	åœæ­¢é‡æ–°ç™»å½•Baseapp */
 	void StopReloginBaseappTimer();
 
-	/**	ÖØµÇbaseappÏîÄ¿£¬°ó¶¨¸ø¶¨Ê±Æ÷µÄÊÂ¼ş */
+	/**	é‡ç™»baseappé¡¹ç›®ï¼Œç»‘å®šç»™å®šæ—¶å™¨çš„äº‹ä»¶ */
 	void OnReloginBaseappTimer();
 
 
 protected:
 
-	/**	¶¨Ê±Æ÷ */
+	/**	å®šæ—¶å™¨ */
 	FTimerHandle TimerHandle;
 
 	bool StartRelogin;

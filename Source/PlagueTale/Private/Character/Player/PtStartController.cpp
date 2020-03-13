@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtStartController.h"
@@ -8,7 +8,7 @@ void APtStartController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//ÃüÁîĞĞÉèÖÃÓÎÏ·´°¿Ú
+	//å‘½ä»¤è¡Œè®¾ç½®æ¸¸æˆçª—å£
 	ConsoleCommand("r.setres 960x540w");
 
 	bShowMouseCursor = true;

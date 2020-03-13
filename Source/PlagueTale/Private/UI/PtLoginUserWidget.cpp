@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtLoginUserWidget.h"
@@ -20,168 +20,168 @@
 #include "PtStartGameMode.h"
 
 
-/** ¿Ø¼ş´´½¨Íê³ÉµÄ³õÊ¼»¯·½·¨ */
+/** æ§ä»¶åˆ›å»ºå®Œæˆçš„åˆå§‹åŒ–æ–¹æ³• */
 bool UPtLoginUserWidget::Initialize()
 {
 	if (!Super::Initialize())return false;
 
-	//³õÊ¼»¯·µ»Ø°´Å¥
+	//åˆå§‹åŒ–è¿”å›æŒ‰é’®
 	BackBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Back")));
-	//³õÊ¼»¯êÇ³ÆÊäÈë¿ò
+	//åˆå§‹åŒ–æ˜µç§°è¾“å…¥æ¡†
 	NicknameInput = Cast<UEditableTextBox>(GetWidgetFromName(TEXT("EditableTextBox_Nickname")));
-	//³õÊ¼»¯ÃÜÂëÊäÈë¿ò
+	//åˆå§‹åŒ–å¯†ç è¾“å…¥æ¡†
 	PasswordInput = Cast<UEditableTextBox>(GetWidgetFromName(TEXT("EditableTextBox_Password")));
-	//³õÊ¼»¯µÇÂ¼°´Å¥
+	//åˆå§‹åŒ–ç™»å½•æŒ‰é’®
 	LoginBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Login")));
 
-	//×¢²áµÇÂ¼°´Å¥µã»÷ÊÂ¼ş
+	//æ³¨å†Œç™»å½•æŒ‰é’®ç‚¹å‡»äº‹ä»¶
 	LoginBtn->OnClicked.AddDynamic(this, &UPtLoginUserWidget::OnLoginBtnOnClicked);
 
-	//³õÊ¼»¯½ø¶ÈÌõ¿Ø¼ş
+	//åˆå§‹åŒ–è¿›åº¦æ¡æ§ä»¶
 	CircularThrobber = Cast<UCircularThrobber>(GetWidgetFromName(TEXT("CircularThrobber_Loading")));
-	//³õÊ¼»¯ĞÅÏ¢ÌáÊ¾¿ò
+	//åˆå§‹åŒ–ä¿¡æ¯æç¤ºæ¡†
 	MessageUserWidget = Cast<UPtMessageUserWidget>(GetWidgetFromName(TEXT("Message_Box")));
 
 	return true;
 }
 
-/** µÇÂ¼°´Å¥µã»÷ÊÂ¼ş */
+/** ç™»å½•æŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 void UPtLoginUserWidget::OnLoginBtnOnClicked()
 {
-	//»ñÈ¡ÓÃ»§ÊäÈëµÄêÇ³Æ
+	//è·å–ç”¨æˆ·è¾“å…¥çš„æ˜µç§°
 	FString Nickname = NicknameInput->GetText().ToString();
-	//»ñÈ¡ÓÃ»§ÊäÈëµÄÃÜÂë
+	//è·å–ç”¨æˆ·è¾“å…¥çš„å¯†ç 
 	FString Password = PasswordInput->GetText().ToString();
 
-	//Ğ£ÑéêÇ³ÆÊÇ·ñÎª¿Õ
+	//æ ¡éªŒæ˜µç§°æ˜¯å¦ä¸ºç©º
 	if (Nickname.IsEmpty())
 	{
-		//ÌáÊ¾ĞÅÏ¢
+		//æç¤ºä¿¡æ¯
 		MessageUserWidget->MsgBlock->SetText(FText::FromString("Nickname Is Empty"));
 		MessageUserWidget->SetVisibility(ESlateVisibility::Visible);
 
 		return;
 	}
 
-	//Ğ£ÑéÃÜÂëÊÇ·ñÎª¿Õ 
+	//æ ¡éªŒå¯†ç æ˜¯å¦ä¸ºç©º 
 	if (Password.IsEmpty())
 	{
-		//ÌáÊ¾ĞÅÏ¢
+		//æç¤ºä¿¡æ¯
 		MessageUserWidget->MsgBlock->SetText(FText::FromString("Password Is Empty"));
 		MessageUserWidget->SetVisibility(ESlateVisibility::Visible);
 
 		return;
 	}
 
-	//¿ÉÒÔÌîÈÎÒâ¶ş½øÖÆÊı¾İ
+	//å¯ä»¥å¡«ä»»æ„äºŒè¿›åˆ¶æ•°æ®
 	TArray<uint8> LoginData;
 	FString ProjectName("PlagueTale");
 	for (int i = 0; i < ProjectName.Len(); ++i) {
 		LoginData.Push((uint8)ProjectName[i]);
 	}
 
-	//ÓÃ»§µÇÂ¼
+	//ç”¨æˆ·ç™»å½•
 	APtStartGameMode* SGM = Cast<APtStartGameMode>(UGameplayStatics::GetGameMode(this));
 	if (SGM) {
 		SGM->KBEMain->login(Nickname, Password, LoginData);
 	}
 
-	//ÓÃ»§µÇÂ¼
+	//ç”¨æˆ·ç™»å½•
 	//AccountLoginFromServer(Nickname, Password);
 
-	//¼ÓÔØ½ø¶ÈÌõÏÔÊ¾
+	//åŠ è½½è¿›åº¦æ¡æ˜¾ç¤º
 	//CircularThrobber->SetVisibility(ESlateVisibility::Visible);
 
-	//µÇÂ¼°´Å¥ÉèÖÃ²»¿ÉÓÃ
+	//ç™»å½•æŒ‰é’®è®¾ç½®ä¸å¯ç”¨
 	LoginBtn->SetIsEnabled(false);
 }
 
-/** ÓÃ»§µÇÂ¼µÄ·½·¨ */
+/** ç”¨æˆ·ç™»å½•çš„æ–¹æ³• */
 void UPtLoginUserWidget::AccountLoginFromServer(FString Nickname, FString Password)
 {
 
-	//ÔİÊ±Ö±½Ó½øĞĞ¹Ø¿¨µÄÇĞ»» £¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡
+	//æš‚æ—¶ç›´æ¥è¿›è¡Œå…³å¡çš„åˆ‡æ¢ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
 	UGameplayStatics::OpenLevel(GetWorld(), TEXT("/Game/Map/Map_Main"));
 	return;
-	//£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡
+	//ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
 
 
-	//Ìá½»µÄJson
+	//æäº¤çš„Json
 	FString Data;
-	//´´½¨JsonĞ´ÈëÆ÷
+	//åˆ›å»ºJsonå†™å…¥å™¨
 	TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> JsonWriter = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Data);
-	//´ò¿ªĞ´Èë
+	//æ‰“å¼€å†™å…¥
 	JsonWriter->WriteObjectStart();
-	//Ğ´ÈëêÇ³Æ
+	//å†™å…¥æ˜µç§°
 	JsonWriter->WriteValue("nickname", Nickname);
-	//Ğ´ÈëÃÜÂë
+	//å†™å…¥å¯†ç 
 	JsonWriter->WriteValue("password", Password);
-	//¹Ø±ÕĞ´Èë
+	//å…³é—­å†™å…¥
 	JsonWriter->WriteObjectEnd();
-	//¹Ø±ÕJsonĞ´ÈëÆ÷
+	//å…³é—­Jsonå†™å…¥å™¨
 	JsonWriter->Close();
 
-	//´´½¨HTTPÇëÇó 
+	//åˆ›å»ºHTTPè¯·æ±‚ 
 	TSharedRef<IHttpRequest> Request = FHttpModule::Get().CreateRequest();
-	//ÉèÖÃÇëÇóÍ·
+	//è®¾ç½®è¯·æ±‚å¤´
 	Request->SetHeader("Content-Type", "application/json;charset=utf-8");
-	//ÉèÖÃÇëÇó·½Ê½
+	//è®¾ç½®è¯·æ±‚æ–¹å¼
 	Request->SetVerb("POST");
-	//ÉèÖÃÇëÇóµÄÄÚÈİ
+	//è®¾ç½®è¯·æ±‚çš„å†…å®¹
 	Request->SetContentAsString(Data);
-	//ÇëÇóµÄURL
+	//è¯·æ±‚çš„URL
 	Request->SetURL("http://www.xxx.com:7900/user/login-user");
-	//ÉèÖÃÇëÇó³É¹¦µÄ»Øµ÷·½·¨
+	//è®¾ç½®è¯·æ±‚æˆåŠŸçš„å›è°ƒæ–¹æ³•
 	Request->OnProcessRequestComplete().BindUObject(this, &UPtLoginUserWidget::RequestComplete);
-	//¿ªÊ¼´¦ÀíÇëÇó
+	//å¼€å§‹å¤„ç†è¯·æ±‚
 	Request->ProcessRequest();
 }
 
-/** ÇëÇóµÄÏìÓ¦·½·¨ */
+/** è¯·æ±‚çš„å“åº”æ–¹æ³• */
 void UPtLoginUserWidget::RequestComplete(FHttpRequestPtr RequestPtr, FHttpResponsePtr ResponsePtr, bool bIsSuccess)
 {
-	//¼ÓÔØ¿òÉèÖÃÒş²Ø
+	//åŠ è½½æ¡†è®¾ç½®éšè—
 	CircularThrobber->SetVisibility(ESlateVisibility::Hidden);
-	//ÉèÖÃµÇÂ¼°´Å¥¿ÉÓÃ×´Ì¬
+	//è®¾ç½®ç™»å½•æŒ‰é’®å¯ç”¨çŠ¶æ€
 	LoginBtn->SetIsEnabled(true);
 
-	//ÅĞ¶ÏÏìÓ¦µÄ×´Ì¬
+	//åˆ¤æ–­å“åº”çš„çŠ¶æ€
 	if (!ResponsePtr||!EHttpResponseCodes::IsOk(ResponsePtr->GetResponseCode()))
 	{
 		return;
 	}
 
-	//´´½¨Json½âÎöÆ÷
+	//åˆ›å»ºJsonè§£æå™¨
 	TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ResponsePtr->GetContentAsString());
-	//´´½¨Json¶ÔÏó
+	//åˆ›å»ºJsonå¯¹è±¡
 	TSharedPtr<FJsonObject> JsonObject;
-	//·´ĞòÁĞ»¯Json
+	//ååºåˆ—åŒ–Json
 	bool bIsOk = FJsonSerializer::Deserialize(JsonReader, JsonObject);
-	//ÅĞ¶ÏÊÇ·ñ·´ĞòÁĞ»¯³É¹¦
+	//åˆ¤æ–­æ˜¯å¦ååºåˆ—åŒ–æˆåŠŸ
 	if (bIsOk)
 	{
-		//»ñÈ¡·µ»ØÊı¾İµÄmsg
+		//è·å–è¿”å›æ•°æ®çš„msg
 		FString Msg = JsonObject->GetStringField("msg");
 
-		//»ñÈ¡·µ»ØµÄÊı¾İµÄdata
+		//è·å–è¿”å›çš„æ•°æ®çš„data
 		TSharedPtr<FJsonObject> JsonData = JsonObject->GetObjectField("data");
-		//´ÓdataÖĞ»ñÈ¡ÓÃ»§µÄid
+		//ä»dataä¸­è·å–ç”¨æˆ·çš„id
 		FString Id = JsonData->GetStringField("id");
-		//´ÓdataÖĞ»ñÈ¡ÓÃ»§µÄnickname
+		//ä»dataä¸­è·å–ç”¨æˆ·çš„nickname
 		FString Nickname = JsonData->GetStringField("nickname");
-		//ÅĞ¶ÏnicknameÊÇ·ñÎª¿Õ
+		//åˆ¤æ–­nicknameæ˜¯å¦ä¸ºç©º
 		if (!Nickname.IsEmpty())
 		{
-			//»ñÈ¡µ½×Ô¶¨ÒåµÄGameInstance
+			//è·å–åˆ°è‡ªå®šä¹‰çš„GameInstance
 			UPTGameInstance* GameInstace = Cast<UPTGameInstance>(GetWorld()->GetGameInstance());
-			//°Ñid±£´æµ½GameInstance
+			//æŠŠidä¿å­˜åˆ°GameInstance
 			GameInstace->ContextMap.Add("id", Id);
-			//¹Ø¿¨µÄÇĞ»»
+			//å…³å¡çš„åˆ‡æ¢
 			UGameplayStatics::OpenLevel(GetWorld(), TEXT("/Game/Map/Map_Main"));
 		}
 		else
 		{
-			//ÌáÊ¾ĞÅÏ¢
+			//æç¤ºä¿¡æ¯
 			MessageUserWidget->MsgBlock->SetText(FText::FromString(Msg));
 			MessageUserWidget->SetVisibility(ESlateVisibility::Visible);
 		}

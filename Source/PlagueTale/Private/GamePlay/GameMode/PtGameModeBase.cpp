@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtGameModeBase.h"
@@ -26,12 +26,12 @@ void APtGameModeBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void APtGameModeBase::InstallEvents()
 {
-	//×¢²á×î»ù±¾µÄ»Øµ÷ÊÂ¼ş,KBEventTypes.cpp
-	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onKicked, OnKicked);//±»Ìß³ö
-	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onDisconnected, OnDisconnected);//¶ÏÏß
-	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onConnectionState, OnConnectionState);//µ±Ç°Á¬½Ó×´Ì¬
-	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onReloginBaseappSuccessfully, OnReloginBaseappSuccessfully);//¶ÏÏßÖØÁ¬
-	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onReloginBaseappFailed, OnReloginBaseappFailed);//ÖØÁ¬Ê§°Ü
+	//æ³¨å†Œæœ€åŸºæœ¬çš„å›è°ƒäº‹ä»¶,KBEventTypes.cpp
+	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onKicked, OnKicked);//è¢«è¸¢å‡º
+	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onDisconnected, OnDisconnected);//æ–­çº¿
+	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onConnectionState, OnConnectionState);//å½“å‰è¿æ¥çŠ¶æ€
+	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onReloginBaseappSuccessfully, OnReloginBaseappSuccessfully);//æ–­çº¿é‡è¿
+	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onReloginBaseappFailed, OnReloginBaseappFailed);//é‡è¿å¤±è´¥
 }
 
 void APtGameModeBase::UnInstallEvents()
@@ -89,8 +89,8 @@ void APtGameModeBase::StopReloginBaseappTimer()
 
 void APtGameModeBase::OnReloginBaseappTimer()
 {
-	//ÖØµÇÂ¼µ½Íø¹Ø(baseapp)
-	//Ò»Ğ©ÒÆ¶¯ÀàÓ¦ÓÃÈİÒ×µôÏß£¬¿ÉÒÔÊ¹ÓÃ¸Ã¹¦ÄÜ¿ìËÙµÄÖØĞÂÓë·şÎñ¶Ë½¨Á¢Í¨ĞÅ
+	//é‡ç™»å½•åˆ°ç½‘å…³(baseapp)
+	//ä¸€äº›ç§»åŠ¨ç±»åº”ç”¨å®¹æ˜“æ‰çº¿ï¼Œå¯ä»¥ä½¿ç”¨è¯¥åŠŸèƒ½å¿«é€Ÿçš„é‡æ–°ä¸æœåŠ¡ç«¯å»ºç«‹é€šä¿¡
 	KBEngine::KBEngineApp::getSingleton().reloginBaseapp();
 
 	if (TimerHandle.IsValid()) {

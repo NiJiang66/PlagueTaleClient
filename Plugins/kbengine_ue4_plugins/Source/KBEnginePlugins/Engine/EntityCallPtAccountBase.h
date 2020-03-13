@@ -25,6 +25,10 @@ public:
 	EntityBaseEntityCall_PtAccountBase(int32 eid, const FString& ename);
 
 	virtual ~EntityBaseEntityCall_PtAccountBase();
+	void ReqCreateRole(uint8 arg1, const FString& arg2);
+	void ReqRemoveRole(const FString& arg1);
+	void ReqRoleList();
+	void ReqSelectRoleGame(uint64 arg1);
 };
 
 class KBENGINEPLUGINS_API EntityCellEntityCall_PtAccountBase : public EntityCall

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -19,7 +19,7 @@ class UPtMessageUserWidget;
 
 
 /**
- * ÓÎÏ·×¢²á½çÃæ
+ * æ¸¸æˆæ³¨å†Œç•Œé¢
  */
 UCLASS()
 class PLAGUETALE_API UPtRegisterUserWidget : public UUserWidget
@@ -28,45 +28,45 @@ class PLAGUETALE_API UPtRegisterUserWidget : public UUserWidget
 
 public:
 
-	/** ÅĞ¶Ï¿Ø¼ş±äÁ¿ÊÇ·ñ¼ÓÔØ³É¹¦ */
+	/** åˆ¤æ–­æ§ä»¶å˜é‡æ˜¯å¦åŠ è½½æˆåŠŸ */
 	virtual bool Initialize() override;
 
-	/** ×¢²á°´Å¥µã»÷ÊÂ¼ş */
+	/** æŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 	UFUNCTION()
 	void OnRegisterBtnOnClicked();
 
-	/** ÕËºÅ×¢²á·½·¨£¬²»ÔÙÊ¹ÓÃ2020.3.12 */
+	/** è´¦å·æ³¨å†Œæ–¹æ³•ï¼Œä¸å†ä½¿ç”¨2020.3.12 */
 	void AccountRegisterFromServer(FString&Nickname, FString&Password);
-	/** ÇëÇóÏìÓ¦·½·¨£¬²»ÔÙÊ¹ÓÃ2020.3.12 */
+	/** è¯·æ±‚å“åº”æ–¹æ³•ï¼Œä¸å†ä½¿ç”¨2020.3.12 */
 	void RequestComplete(FHttpRequestPtr RequestPtr, FHttpResponsePtr ResponsePtr, bool bIsSuccess);
 
 public:
 
-	/** ´´½¨»ØÍË°´Å¥±äÁ¿ */
+	/** åˆ›å»ºå›é€€æŒ‰é’®å˜é‡ */
 	UPROPERTY()
 	UButton* BackBtn;
 
-	/** ´´½¨×¢²áÕËºÅ°´Å¥±äÁ¿ */
+	/** åˆ›å»ºæ³¨å†Œè´¦å·æŒ‰é’®å˜é‡ */
 	UPROPERTY()
 	UButton* RegisterBtn;
 
-	/** ´´½¨êÇ³ÆÊäÈë¿ò±äÁ¿ */
+	/** åˆ›å»ºæ˜µç§°è¾“å…¥æ¡†å˜é‡ */
 	UPROPERTY()
 	UEditableTextBox* NicknameInput;
 
-	/** ´´½¨ÃÜÂëÊäÈë¿ò±äÁ¿ */
+	/** åˆ›å»ºå¯†ç è¾“å…¥æ¡†å˜é‡ */
 	UPROPERTY()
 	UEditableTextBox * PasswordInput;
 
-	/** ´´½¨ÔÙ´ÎÊäÈëÃÜÂëÊäÈë¿ò±äÁ¿ */
+	/** åˆ›å»ºå†æ¬¡è¾“å…¥å¯†ç è¾“å…¥æ¡†å˜é‡ */
 	UPROPERTY()
 	UEditableTextBox* RePasswordInput;
 
-	/** ´´½¨LoadingĞ§¹û */
+	/** åˆ›å»ºLoadingæ•ˆæœ */
 	UPROPERTY()
 	UCircularThrobber* CircularThrobber;
 
-	/* ³õÊ¼»¯Message¿ò*/
+	/* åˆå§‹åŒ–Messageæ¡†*/
 	UPROPERTY()
 	UPtMessageUserWidget* MessageUserWidget;
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -9,7 +9,7 @@
 class UKBEMain;
 
 /**
- *	KBE¿Í»§¶ËÈë¿ÚÀà£¬ÓÃÓÚ³ĞÔØKBEMain×é¼şµÄActor
+ *	KBEå®¢æˆ·ç«¯å…¥å£ç±»ï¼Œç”¨äºæ‰¿è½½KBEMainç»„ä»¶çš„Actor
  */
 UCLASS()
 class PLAGUETALE_API APtKBEClient : public AActor

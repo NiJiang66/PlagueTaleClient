@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,22 +15,22 @@ class PLAGUETALE_API UPTGameInstance : public UGameInstance
 	GENERATED_BODY()
 
 public:
-	/** ³õÊ¼»¯·½·¨ */
+	/** åˆå§‹åŒ–æ–¹æ³• */
 	virtual void Init() override;
-	/** µØÍ¼¼ÓÔØ¿ªÊ¼µÄ·½·¨ */
+	/** åœ°å›¾åŠ è½½å¼€å§‹çš„æ–¹æ³• */
 	UFUNCTION()
 		void PreLoadMap(const FString& Map);
-	/** µØÍ¼¼ÓÔØ½áÊøµÄ·½·¨ */
+	/** åœ°å›¾åŠ è½½ç»“æŸçš„æ–¹æ³• */
 	UFUNCTION()
 		void PostLoadMap(UWorld* World);
-	/** ÊÇ·ñ¼ÓÔØÍê³É */
+	/** æ˜¯å¦åŠ è½½å®Œæˆ */
 	UFUNCTION(BlueprintCallable, Category = LoadFunction)
 		bool GetLoadStatus();
 
 public:
-	/** ´æ´¢Êı¾İ¼¯ºÏ */
+	/** å­˜å‚¨æ•°æ®é›†åˆ */
 	TMap<FString, FString> ContextMap;
-	/** ¼ÓÔØµÄUI */
+	/** åŠ è½½çš„UI */
 	UPROPERTY()
 	class UPtLoadUserWidget* LoadWidget;
 

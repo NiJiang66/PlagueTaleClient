@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "PtStartController.generated.h"
 
 /**
- * ¿ªÊ¼¿ØÖÆÆ÷(µÇÂ¼ºÍÑ¡Ôñ½ÇÉ«½çÃæ)
+ * å¼€å§‹æ§åˆ¶å™¨(ç™»å½•å’Œé€‰æ‹©è§’è‰²ç•Œé¢)
  */
 UCLASS()
 class PLAGUETALE_API APtStartController : public APlayerController

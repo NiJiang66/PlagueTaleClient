@@ -7,5 +7,43 @@
 namespace KBEngine
 {
 
+void DATATYPE_ROLE_DATA::createFromStreamEx(MemoryStream& stream, ROLE_DATA& datas)
+{
+	datas.DataType = stream.readInt8();
+	datas.DataValue = stream.readBlob();
+}
+
+void DATATYPE_ROLE_DATA::addToStreamEx(Bundle& stream, const ROLE_DATA& v)
+{
+	stream.writeInt8(v.DataType);
+	stream.writeBlob(v.DataValue);
+}
+
+void DATATYPE_ROLE_INFO::createFromStreamEx(MemoryStream& stream, ROLE_INFO& datas)
+{
+	datas.Dbid = stream.readUint64();
+	datas.Name = stream.readUnicode();
+	datas.RoleType = stream.readUint8();
+	Data_DataType.createFromStreamEx(stream, datas.Data);
+}
+
+void DATATYPE_ROLE_INFO::addToStreamEx(Bundle& stream, const ROLE_INFO& v)
+{
+	stream.writeUint64(v.Dbid);
+	stream.writeUnicode(v.Name);
+	stream.writeUint8(v.RoleType);
+	Data_DataType.addToStreamEx(stream, v.Data);
+}
+
+void DATATYPE_ROLE_LIST::createFromStreamEx(MemoryStream& stream, ROLE_LIST& datas)
+{
+	Value_DataType.createFromStreamEx(stream, datas.Value);
+}
+
+void DATATYPE_ROLE_LIST::addToStreamEx(Bundle& stream, const ROLE_LIST& v)
+{
+	Value_DataType.addToStreamEx(stream, v.Value);
+}
+
 
 }

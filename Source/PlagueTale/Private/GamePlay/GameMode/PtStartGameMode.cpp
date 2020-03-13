@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtStartGameMode.h"
@@ -20,7 +20,7 @@ void APtStartGameMode::InstallEvents()
 {
 	Super::InstallEvents();
 
-	// login
+	// æ³¨å†Œç™»å½•ç›¸å…³äº‹ä»¶
 	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onCreateAccountResult, OnCreateAccountResult);
 	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onLoginFailed, OnLoginFailed);
 	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::onVersionNotMatch, OnVersionNotMatch);
@@ -74,7 +74,7 @@ void APtStartGameMode::OnLoginSuccessfully(const UKBEventData* pEventData)
 
 	PtH::Debug() << "OnLoginSuccessfully : entity_uuid --> " << ServerData->entity_uuid << " ; entity_id --> " << ServerData->entity_id << PtH::Endl();
 	
-	//µÇÂ¼³É¹¦Ö®ºó´ò¿ª½ÇÉ«Ñ¡Ôñ¹Ø¿¨
+	//ç™»å½•æˆåŠŸä¹‹åŽæ‰“å¼€è§’è‰²é€‰æ‹©å…³å¡
 	UGameplayStatics::OpenLevel(GetWorld(), FName("RoleMap"));
 }
 
@@ -108,7 +108,7 @@ void APtStartGameMode::Baseapp_importClientEntityDef(const UKBEventData* pEventD
 
 void APtStartGameMode::BeginPlay()
 {
-	//Ã¿´Î½øÈëµ½µÇÂ¼½çÃæÊ±ÏÈÇåÀíÒ»´ÎKBE£¬·ñÔòKBE²å¼þÄÚ»º´æµÄÄÚÈÝ½«Ò»Ö±´æÔÚ
+	//æ¯æ¬¡è¿›å…¥åˆ°ç™»å½•ç•Œé¢æ—¶å…ˆæ¸…ç†ä¸€æ¬¡KBEï¼Œå¦åˆ™KBEæ’ä»¶å†…ç¼“å­˜çš„å†…å®¹å°†ä¸€ç›´å­˜åœ¨
 	KBEngine::KBEngineApp::getSingleton().reset();
 
 	Super::BeginPlay();

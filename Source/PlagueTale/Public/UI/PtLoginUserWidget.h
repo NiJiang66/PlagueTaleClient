@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -17,7 +17,7 @@ class UEditableTextBox;
 
 
 /**
- * ÓÎÏ·µÇÂ¼½çÃæ
+ * æ¸¸æˆç™»å½•ç•Œé¢
  */
 UCLASS()
 class PLAGUETALE_API UPtLoginUserWidget : public UUserWidget
@@ -25,40 +25,40 @@ class PLAGUETALE_API UPtLoginUserWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	/** ¿Ø¼ş´´½¨Íê³ÉµÄ³õÊ¼»¯·½·¨ */
+	/** æ§ä»¶åˆ›å»ºå®Œæˆçš„åˆå§‹åŒ–æ–¹æ³• */
 	virtual bool Initialize() override;
 
-	/** µÇÂ¼°´Å¥µã»÷ÊÂ¼ş£¬²»ÔÙÊ¹ÓÃ2020.3.12 */
+	/** ç™»å½•æŒ‰é’®ç‚¹å‡»äº‹ä»¶ï¼Œä¸å†ä½¿ç”¨2020.3.12 */
 	UFUNCTION()
 	void OnLoginBtnOnClicked();
 
-	/** ÓÃ»§µÇÂ¼µÄ·½·¨£¬²»ÔÙÊ¹ÓÃ2020.3.12 */
+	/** ç”¨æˆ·ç™»å½•çš„æ–¹æ³•ï¼Œä¸å†ä½¿ç”¨2020.3.12 */
 	void AccountLoginFromServer(FString Nickname, FString Password);
-	/** ÇëÇóµÄÏìÓ¦·½·¨£¬²»ÔÙÊ¹ÓÃ2020.3.12 */
+	/** è¯·æ±‚çš„å“åº”æ–¹æ³•ï¼Œä¸å†ä½¿ç”¨2020.3.12 */
 	void RequestComplete(FHttpRequestPtr RequestPtr, FHttpResponsePtr ResponsePtr, bool bIsSuccess);
 	
 public:
-	/** ·µ»Ø°´Å¥ */
+	/** è¿”å›æŒ‰é’® */
 	UPROPERTY()
 	UButton* BackBtn;
 
-	/** êÇ³ÆÊäÈë¿ò */
+	/** æ˜µç§°è¾“å…¥æ¡† */
 	UPROPERTY()
 	UEditableTextBox* NicknameInput;
 
-	/** ÃÜÂëÊäÈë¿ò */
+	/** å¯†ç è¾“å…¥æ¡† */
 	UPROPERTY()
 	UEditableTextBox* PasswordInput;
 
-	/** µÇÂ¼°´Å¥ */
+	/** ç™»å½•æŒ‰é’® */
 	UPROPERTY()
 	UButton* LoginBtn;
 
-	/** ½ø¶ÈÌõ */
+	/** è¿›åº¦æ¡ */
 	UPROPERTY()
 	UCircularThrobber* CircularThrobber;
 
-	/** ĞÅÏ¢ÌáÊ¾¿ò */
+	/** ä¿¡æ¯æç¤ºæ¡† */
 	UPROPERTY()
 	class UPtMessageUserWidget* MessageUserWidget;
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtStartUserWidget.h"
@@ -9,31 +9,31 @@
 #include "Engine/KBEMain.h"
 
 
-/** ¿Ø¼ş´´½¨Íê³Éºó³õÊ¼»¯·½·¨ */
+/** æ§ä»¶åˆ›å»ºå®Œæˆååˆå§‹åŒ–æ–¹æ³• */
 bool UPtStartUserWidget::Initialize()
 {
 	if (!Super::Initialize())return false;
 
-	//³õÊ¼»¯¿ªÊ¼ÓÎÏ·°´Å¥
+	//åˆå§‹åŒ–å¼€å§‹æ¸¸æˆæŒ‰é’®
 	StartBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Start")));
-	//³õÊ¼»¯×¢²áÕËºÅ°´Å¥
+	//åˆå§‹åŒ–æ³¨å†Œè´¦å·æŒ‰é’®
 	RegisterBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Register")));
-	//³õÊ¼»¯ÍË³öÓÎÏ·°´Å¥
+	//åˆå§‹åŒ–é€€å‡ºæ¸¸æˆæŒ‰é’®
 	QuitBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Quit")));
 
-	//³õÊ¼»¯°æ±¾ĞÅÏ¢
+	//åˆå§‹åŒ–ç‰ˆæœ¬ä¿¡æ¯
 	clientVersionLabel->SetText(FText::FromString("client version:" + UKBEMain::getClientVersion()));
 	clientScriptVersionLabel->SetText(FText::FromString("client script version:" + UKBEMain::getClientScriptVersion()));
 	serverVerstionLabel->SetText(FText::FromString("server version:" + UKBEMain::getServerVersion()));
 	serverScriptVersionLabel->SetText(FText::FromString("server script version:" + UKBEMain::getServerScriptVersion()));
 
-	//ÍË³öÓÎÏ·°´Å¥µã»÷ÊÂ¼ş
+	//é€€å‡ºæ¸¸æˆæŒ‰é’®ç‚¹å‡»äº‹ä»¶
 	QuitBtn->OnClicked.AddDynamic(this, &UPtStartUserWidget::QuitBtnOnClickedEvent);
 
 	return true;
 }
 
-/** ÍË³öÓÎÏ·°´Å¥µã»÷ÊÂ¼ş */
+/** é€€å‡ºæ¸¸æˆæŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 void UPtStartUserWidget::QuitBtnOnClickedEvent()
 {
 	UKismetSystemLibrary::QuitGame(GetWorld(), nullptr, EQuitPreference::Quit, true);

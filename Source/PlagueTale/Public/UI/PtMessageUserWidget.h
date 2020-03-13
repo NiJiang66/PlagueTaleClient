@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "PtMessageUserWidget.generated.h"
 
 /**
- * ÌáÊ¾¿òUI
+ * æç¤ºæ¡†UI
  */
 UCLASS()
 class PLAGUETALE_API UPtMessageUserWidget : public UUserWidget
@@ -18,17 +18,17 @@ public:
 
 	virtual bool Initialize() override;
 
-	/* ÉèÖÃ¹Ø±Õ°´Å¥ÊÂ¼ş*/
+	/* è®¾ç½®å…³é—­æŒ‰é’®äº‹ä»¶*/
 	UFUNCTION()
 	void ClosButtonOnClickedEvent();
 	
 public:
 
-	/* ³õÊ¼»¯ÎÄ±¾¿ò*/
+	/* åˆå§‹åŒ–æ–‡æœ¬æ¡†*/
 	UPROPERTY()
 	class UTextBlock* MsgBlock;
 
-	/* ³õÊ¼»¯¹Ø±Õ°´Å¥*/
+	/* åˆå§‹åŒ–å…³é—­æŒ‰é’®*/
 	UPROPERTY()
 	class UButton* CloseBtn;
 

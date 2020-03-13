@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtLoadUserWidget.h"
@@ -7,16 +7,16 @@
 #include "Button.h"
 #include "PtGameInstance.h"
 
-/** ¿Ø¼ş´´½¨Íê³É³õÊ¼»¯·½·¨ */
+/** æ§ä»¶åˆ›å»ºå®Œæˆåˆå§‹åŒ–æ–¹æ³• */
 bool UPtLoadUserWidget::Initialize()
 {
 	if (!Super::Initialize())return false;
 
-	//³õÊ¼»¯½ø¶ÈÌõ
+	//åˆå§‹åŒ–è¿›åº¦æ¡
 	CircularThrobber = Cast<UCircularThrobber>(GetWidgetFromName(TEXT("CircularThrobber_Load")));
-	//³õÊ¼»¯¼ÓÔØÎÄ±¾
+	//åˆå§‹åŒ–åŠ è½½æ–‡æœ¬
 	LoadingText = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextBlock_Load")));
-	//³õÊ¼»¯¼ÌĞø°´Å¥
+	//åˆå§‹åŒ–ç»§ç»­æŒ‰é’®
 	NextButton = Cast<UButton>(GetWidgetFromName(TEXT("Button_Next")));
 
 	return true;

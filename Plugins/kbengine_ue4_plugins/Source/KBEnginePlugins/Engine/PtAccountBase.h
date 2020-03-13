@@ -26,7 +26,13 @@ public:
 	EntityBaseEntityCall_PtAccountBase* pBaseEntityCall;
 	EntityCellEntityCall_PtAccountBase* pCellEntityCall;
 
+	uint64 LastSelRole;
+	virtual void onLastSelRoleChanged(uint64 oldValue) {}
 
+	virtual void OnCreateRoleResult(uint8 arg1, const ROLE_INFO& arg2) = 0; 
+	virtual void OnRemoveRole(uint64 arg1) = 0; 
+	virtual void OnReqRoleList(const ROLE_LIST& arg1) = 0; 
+	virtual void OnSelectRoleGame(uint8 arg1, uint64 arg2) = 0; 
 
 	void onComponentsEnterworld() override;
 	void onComponentsLeaveworld() override;

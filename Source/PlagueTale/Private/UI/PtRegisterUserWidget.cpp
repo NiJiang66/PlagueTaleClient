@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtRegisterUserWidget.h"
@@ -19,60 +19,60 @@
 #include "PtStartGameMode.h"
 
 
-/** ÅĞ¶Ï¿Ø¼ş±äÁ¿ÊÇ·ñ¼ÓÔØ³É¹¦ */
+/** åˆ¤æ–­æ§ä»¶å˜é‡æ˜¯å¦åŠ è½½æˆåŠŸ */
 bool UPtRegisterUserWidget::Initialize()
 {
 	if (!Super::Initialize())return false;
 
-	/* ³õÊ¼»¯·µ»Ø°´Å¥*/
+	/* åˆå§‹åŒ–è¿”å›æŒ‰é’®*/
 	BackBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Back")));
-	/* ³õÊ¼»¯êÇ³ÆÊäÈë¿ò*/
+	/* åˆå§‹åŒ–æ˜µç§°è¾“å…¥æ¡†*/
 	NicknameInput = Cast<UEditableTextBox>(GetWidgetFromName(TEXT("EditableTextBox_Nickname")));
-	/* ³õÊ¼»¯ÃÜÂëÊäÈë¿ò*/
+	/* åˆå§‹åŒ–å¯†ç è¾“å…¥æ¡†*/
 	PasswordInput = Cast<UEditableTextBox>(GetWidgetFromName(TEXT("EditableTextBox_Password")));
-	/* ³õÊ¼»¯ÔÙ´ÎÊäÈëÃÜÂë¿ò*/
+	/* åˆå§‹åŒ–å†æ¬¡è¾“å…¥å¯†ç æ¡†*/
 	RePasswordInput = Cast<UEditableTextBox>(GetWidgetFromName(TEXT("EditableTextBox_Repassword")));
-	/* ³õÊ¼»¯×¢²á°´Å¥*/
+	/* åˆå§‹åŒ–æ³¨å†ŒæŒ‰é’®*/
 	RegisterBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_Register")));
-	/* ³õÊ¼»¯LoadingĞ§¹û*/
+	/* åˆå§‹åŒ–Loadingæ•ˆæœ*/
 	CircularThrobber = Cast<UCircularThrobber>(GetWidgetFromName(TEXT("CircularThrobber_Loading")));
-	/* ³õÊ¼»¯Message*/
+	/* åˆå§‹åŒ–Message*/
 	MessageUserWidget = Cast<UPtMessageUserWidget>(GetWidgetFromName(TEXT("Message_Box")));
 
-	//×¢²á°´Å¥µã»÷ÊÂ¼ş»Øµ÷
+	//æ³¨å†ŒæŒ‰é’®ç‚¹å‡»äº‹ä»¶å›è°ƒ
 	RegisterBtn->OnClicked.AddDynamic(this, &UPtRegisterUserWidget::OnRegisterBtnOnClicked);
 
 	return true;
 }
 
-/** ×¢²á°´Å¥µã»÷ÊÂ¼ş */
+/** æŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 void UPtRegisterUserWidget::OnRegisterBtnOnClicked()
 {
-	//»ñÈ¡êÇ³Æ
+	//è·å–æ˜µç§°
 	FString Nickname = NicknameInput->GetText().ToString();
-	//»ñÈ¡ÃÜÂë
+	//è·å–å¯†ç 
 	FString Password = PasswordInput->GetText().ToString();
-	//»ñÈ¡È·ÈÏÃÜÂë
+	//è·å–ç¡®è®¤å¯†ç 
 	FString RePassword = RePasswordInput->GetText().ToString();
 
-	//êÇ³ÆµÄ³¤¶ÈÊÇ·ñºÏ·¨2-6
+	//æ˜µç§°çš„é•¿åº¦æ˜¯å¦åˆæ³•2-6
 	if (Nickname.Len() < 2 || Nickname.Len() > 6)
 	{
-		//êÇ³Æ³¤¶ÈÊÇ·ñºÏ·¨
+		//æ˜µç§°é•¿åº¦æ˜¯å¦åˆæ³•
 		MessageUserWidget->SetVisibility(ESlateVisibility::Visible);
 		MessageUserWidget->MsgBlock->SetText(FText::FromString("NickName Is Not Right"));
 		return;
 	}
-	//Á½´ÎÊäÈëµÄÃÜÂëÊÇ·ñÒ»ÖÂ
+	//ä¸¤æ¬¡è¾“å…¥çš„å¯†ç æ˜¯å¦ä¸€è‡´
 	if (!Password.Equals(RePassword))
 	{
-		//ÃÜÂëÊÇ·ñÒ»ÖÂ
+		//å¯†ç æ˜¯å¦ä¸€è‡´
 		MessageUserWidget->SetVisibility(ESlateVisibility::Visible);
 		MessageUserWidget->MsgBlock->SetText(FText::FromString("Second Password Is Not Same"));
 		return;
 	}
 
-	//¿ÉÒÔÌîÈÎÒâ¶ş½øÖÆÊı¾İ
+	//å¯ä»¥å¡«ä»»æ„äºŒè¿›åˆ¶æ•°æ®
 	TArray<uint8> LoginData;
 	FString ProjectName("PlagueTale");
 	for (int i = 0; i < ProjectName.Len(); ++i) {
@@ -84,74 +84,74 @@ void UPtRegisterUserWidget::OnRegisterBtnOnClicked()
 		SGM->KBEMain->createAccount(Nickname, Password, LoginData);
 	}
 
-	//ÏÔÊ¾¼ÓÔØ¿ò
+	//æ˜¾ç¤ºåŠ è½½æ¡†
 	//CircularThrobber->SetVisibility(ESlateVisibility::Visible);
-	//ÉèÖÃ×¢²á°´Å¥²»¿ÉÓÃ
+	//è®¾ç½®æ³¨å†ŒæŒ‰é’®ä¸å¯ç”¨
 	RegisterBtn->SetIsEnabled(false);
-	//½øĞĞÕËºÅ×¢²á
+	//è¿›è¡Œè´¦å·æ³¨å†Œ
 	//AccountRegisterFromServer(Nickname, Password);
 }
 
-/** ÕËºÅ×¢²á·½·¨ */
+/** è´¦å·æ³¨å†Œæ–¹æ³• */
 void UPtRegisterUserWidget::AccountRegisterFromServer(FString&Nickname, FString&Password)
 {
-	//´´½¨ÒªÌá½»µÄJson×Ö·û´®
+	//åˆ›å»ºè¦æäº¤çš„Jsonå­—ç¬¦ä¸²
 	FString RegisterInfo;
-	//´´½¨¹²ÏíJsonĞ´ÈëÆ÷
+	//åˆ›å»ºå…±äº«Jsonå†™å…¥å™¨
 	TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> JsonWriter = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&RegisterInfo);
-	//¿ªÊ¼Ğ´ÈëÊı¾İ
+	//å¼€å§‹å†™å…¥æ•°æ®
 	JsonWriter->WriteObjectStart();
-	//Ğ´ÈëêÇ³Æµ½Json
+	//å†™å…¥æ˜µç§°åˆ°Json
 	JsonWriter->WriteValue("nickname", Nickname);
-	//Ğ´ÈëÃÜÂëµ½Json
+	//å†™å…¥å¯†ç åˆ°Json
 	JsonWriter->WriteValue("password", Password);
-	//¹Ø±ÕJsonĞ´Èë
+	//å…³é—­Jsonå†™å…¥
 	JsonWriter->WriteObjectEnd();
-	//¹Ø±ÕJsonĞ´ÈëÆ÷
+	//å…³é—­Jsonå†™å…¥å™¨
 	JsonWriter->Close();
 
-	//´´½¨HTTPÇëÇó
+	//åˆ›å»ºHTTPè¯·æ±‚
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
-	//ÉèÖÃÇëÇó·½Ê½
+	//è®¾ç½®è¯·æ±‚æ–¹å¼
 	HttpRequest->SetVerb("POST");
-	//ÉèÖÃÇëÇóÍ·
+	//è®¾ç½®è¯·æ±‚å¤´
 	HttpRequest->SetHeader("Content-Type", "application/json;charset=utf-8");
-	//ÉèÖÃÇëÇóµÄurl
+	//è®¾ç½®è¯·æ±‚çš„url
 	HttpRequest->SetURL("http://www.xxx.com:7900/user/register-user");
-	//ÉèÖÃÉÏ´«µÄÊı¾İ
+	//è®¾ç½®ä¸Šä¼ çš„æ•°æ®
 	HttpRequest->SetContentAsString(RegisterInfo);
-	//ÉèÖÃÇëÇó³É¹¦ºóÎ¯ÍĞ·½·¨
+	//è®¾ç½®è¯·æ±‚æˆåŠŸåå§”æ‰˜æ–¹æ³•
 	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UPtRegisterUserWidget::RequestComplete);
-	//ÇëÇó·şÎñÆ÷
+	//è¯·æ±‚æœåŠ¡å™¨
 	HttpRequest->ProcessRequest();
 }
 
-/** ÇëÇóÏìÓ¦·½·¨ */
+/** è¯·æ±‚å“åº”æ–¹æ³• */
 void UPtRegisterUserWidget::RequestComplete(FHttpRequestPtr RequestPtr, FHttpResponsePtr ResponsePtr, bool bIsSuccess)
 {
-	//Òş²Ø¼ÓÔØ¿ò
+	//éšè—åŠ è½½æ¡†
 	CircularThrobber->SetVisibility(ESlateVisibility::Hidden);
-	//ÉèÖÃ×¢²á°´Å¥¿ÉÓÃ
+	//è®¾ç½®æ³¨å†ŒæŒ‰é’®å¯ç”¨
 	RegisterBtn->SetIsEnabled(true);
-	//ÅĞ¶ÏÏìÓ¦×´Ì¬ÊÇ·ñÕı³£
+	//åˆ¤æ–­å“åº”çŠ¶æ€æ˜¯å¦æ­£å¸¸
 	if (!ResponsePtr || !EHttpResponseCodes::IsOk(ResponsePtr->GetResponseCode()))
 	{
 		return;
 	}
-	//»ñÈ¡·µ»ØµÄÖµ
+	//è·å–è¿”å›çš„å€¼
 	FString Data = ResponsePtr->GetContentAsString();
-	//´´½¨Ò»¸öJson¶ÔÏó
+	//åˆ›å»ºä¸€ä¸ªJsonå¯¹è±¡
 	TSharedPtr<FJsonObject> JsonObject;
-	//´´½¨Json½âÎöÆ÷
+	//åˆ›å»ºJsonè§£æå™¨
 	TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(Data);
-	//Json·´ĞòÁĞ»¯
+	//Jsonååºåˆ—åŒ–
 	bool bIsParse = FJsonSerializer::Deserialize(JsonReader, JsonObject);
-	//ÅĞ¶ÏÊÇ·ñ½âÎö³É¹¦
+	//åˆ¤æ–­æ˜¯å¦è§£ææˆåŠŸ
 	if (bIsParse)
 	{
-		//½âÎö·şÎñÆ÷·µ»ØµÄĞÅÏ¢
+		//è§£ææœåŠ¡å™¨è¿”å›çš„ä¿¡æ¯
 		FString Msg = JsonObject->GetStringField("msg");
-		//ÏÔÊ¾ÌáÊ¾ĞÅÏ¢
+		//æ˜¾ç¤ºæç¤ºä¿¡æ¯
 		MessageUserWidget->SetVisibility(ESlateVisibility::Visible);
 		MessageUserWidget->MsgBlock->SetText(FText::FromString(Msg));
 	}

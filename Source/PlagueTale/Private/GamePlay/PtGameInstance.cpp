@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtGameInstance.h"
@@ -11,48 +11,48 @@
 #include "Button.h"
 
 
-/** ³õÊ¼»¯·½·¨ */
+/** åˆå§‹åŒ–æ–¹æ³• */
 void UPTGameInstance::Init()
 {
 	UGameInstance::Init();
 
-	//¿ªÊ¼¼ÓÔØµØÍ¼µÄÎ¯ÍĞ
+	//å¼€å§‹åŠ è½½åœ°å›¾çš„å§”æ‰˜
 	FCoreUObjectDelegates::PreLoadMap.AddUObject(this, &UPTGameInstance::PreLoadMap);
-	//½áÊø¼ÓÔØµØÍ¼µÄÎ¯ÍĞ
+	//ç»“æŸåŠ è½½åœ°å›¾çš„å§”æ‰˜
 	FCoreUObjectDelegates::PostLoadMapWithWorld.AddUObject(this, &UPTGameInstance::PostLoadMap);
 
-	//³õÊ¼»¯¼ÓÔØWidget
+	//åˆå§‹åŒ–åŠ è½½Widget
 	LoadWidget = CreateWidget<UPtLoadUserWidget>(this, LoadClass<UPtLoadUserWidget>(this, TEXT("WidgetBlueprint'/Game/UI/PTLoadUserWidget_BP.PTLoadUserWidget_BP_C'")));
 }
 
-/** µØÍ¼¼ÓÔØ¿ªÊ¼µÄ·½·¨ */
+/** åœ°å›¾åŠ è½½å¼€å§‹çš„æ–¹æ³• */
 void UPTGameInstance::PreLoadMap(const FString& Map)
 {
-	//ÅĞ¶ÏÊÇ·ñÊÇ¼ÓÔØµÄÖ÷¹Ø¿¨//ÔİÊ±¼ÓÔØ¹Ø¿¨¶¼ÒªÏÔÊ¾load½çÃæ
+	//åˆ¤æ–­æ˜¯å¦æ˜¯åŠ è½½çš„ä¸»å…³å¡//æš‚æ—¶åŠ è½½å…³å¡éƒ½è¦æ˜¾ç¤ºloadç•Œé¢
 	//if (Map.Equals("/Game/Map/Map_Main"))
 	{
-		//´´½¨Ò»¸öÆÁÄ»¼ÓÔØÊôĞÔ¶ÔÏó
+		//åˆ›å»ºä¸€ä¸ªå±å¹•åŠ è½½å±æ€§å¯¹è±¡
 		FLoadingScreenAttributes LoadingAttr;
-		//ÊÖ¶¯µÄµã»÷Ìø¹ı¼ÓÔØ
+		//æ‰‹åŠ¨çš„ç‚¹å‡»è·³è¿‡åŠ è½½
 		LoadingAttr.bWaitForManualStop = true;
-		//ÉèÖÃ¼ÓÔØµÄWidget
+		//è®¾ç½®åŠ è½½çš„Widget
 		LoadingAttr.WidgetLoadingScreen = LoadWidget->TakeWidget();
-		//ÉèÖÃ¿ªÊ¼¼ÓÔØ
+		//è®¾ç½®å¼€å§‹åŠ è½½
 		LoadWidget->SetStartLoad();
-		//ÉèÖÃ¼ÓÔØÆÁÄ»
+		//è®¾ç½®åŠ è½½å±å¹•
 		GetMoviePlayer()->SetupLoadingScreen(LoadingAttr);
 	}
 }
 
-/** µØÍ¼¼ÓÔØ½áÊøµÄ·½·¨ */
+/** åœ°å›¾åŠ è½½ç»“æŸçš„æ–¹æ³• */
 void UPTGameInstance::PostLoadMap(UWorld* World)
 {
 }
 
-/** ÊÇ·ñ¼ÓÔØÍê³É */
+/** æ˜¯å¦åŠ è½½å®Œæˆ */
 bool UPTGameInstance::GetLoadStatus()
 {
-	//·µ»ØÊÇ·ñÒÑ¾­¼ÓÔØÍê³É
+	//è¿”å›æ˜¯å¦å·²ç»åŠ è½½å®Œæˆ
 	return GetMoviePlayer()->IsLoadingFinished();
 }
 

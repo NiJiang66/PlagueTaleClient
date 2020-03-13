@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtPlayerCharacter.h"
@@ -7,16 +7,16 @@
 
 APtPlayerCharacter::APtPlayerCharacter()
 {
-	/** ÉèÖÃ½ÇÉ«ÒÆ¶¯µÄ³¯Ïò */
+	/** è®¾ç½®è§’è‰²ç§»åŠ¨çš„æœå‘ */
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	/** ÉèÖÃ½ÇÉ«¿ØÖÆÆ÷ÊÇ·ñ¿ØÖÆ³¯Ïò */
+	/** è®¾ç½®è§’è‰²æ§åˆ¶å™¨æ˜¯å¦æ§åˆ¶æœå‘ */
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
-	/** ³õÊ¼»¯Ïà»ú×é¼ş */
+	/** åˆå§‹åŒ–ç›¸æœºç»„ä»¶ */
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CamerComponent");
-	/** Ïà»ú×é¼ş°ó¶¨¸¸×é¼ş */
+	/** ç›¸æœºç»„ä»¶ç»‘å®šçˆ¶ç»„ä»¶ */
 	CameraComponent->SetupAttachment(RootComponent);
-	/** Ïà»ú½ÇÉ«¿ØÖÆÆ÷¿ØÖÆ³¯Ïò */
+	/** ç›¸æœºè§’è‰²æ§åˆ¶å™¨æ§åˆ¶æœå‘ */
 	CameraComponent->bUsePawnControlRotation = false;
 }

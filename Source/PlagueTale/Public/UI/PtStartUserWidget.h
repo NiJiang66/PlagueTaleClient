@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -10,7 +10,7 @@ class UButton;
 class UTextBlock;
 
 /**
- * ÓÎÏ·¿ªÊ¼½çÃæ
+ * æ¸¸æˆå¼€å§‹ç•Œé¢
  */
 UCLASS()
 class PLAGUETALE_API UPtStartUserWidget : public UUserWidget
@@ -19,24 +19,24 @@ class PLAGUETALE_API UPtStartUserWidget : public UUserWidget
 
 public:
 
-	/** ÖØĞ´¿Ø¼ş´´½¨Íê³Éºó³õÊ¼»¯·½·¨ */
+	/** é‡å†™æ§ä»¶åˆ›å»ºå®Œæˆååˆå§‹åŒ–æ–¹æ³• */
 	virtual bool Initialize() override;
 
-	/** ÍË³öÓÎÏ·°´Å¥µã»÷ÊÂ¼ş */
+	/** é€€å‡ºæ¸¸æˆæŒ‰é’®ç‚¹å‡»äº‹ä»¶ */
 	UFUNCTION()
 	void QuitBtnOnClickedEvent();
 	
 public:
 
-	/** ¿ªÊ¼ÓÎÏ·°´Å¥ */
+	/** å¼€å§‹æ¸¸æˆæŒ‰é’® */
 	UPROPERTY()
 	UButton* StartBtn;
 
-	/** ×¢²áÕËºÅ°´Å¥ */
+	/** æ³¨å†Œè´¦å·æŒ‰é’® */
 	UPROPERTY()
 	UButton* RegisterBtn;
 
-	/** ÍË³öÓÎÏ·°´Å¥ */
+	/** é€€å‡ºæ¸¸æˆæŒ‰é’® */
 	UPROPERTY()
 	UButton* QuitBtn;
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PtMessageUserWidget.h"
@@ -10,18 +10,18 @@ bool UPtMessageUserWidget::Initialize()
 {
 	if (!Super::Initialize())return false;
 
-	//´´½¨ÎÄ±¾¿ò
+	//åˆ›å»ºæ–‡æœ¬æ¡†
 	MsgBlock = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextBlock_Message")));
 
-	//´´½¨¹Ø±Õ°´Å¥
+	//åˆ›å»ºå…³é—­æŒ‰é’®
 	CloseBtn = Cast<UButton>(GetWidgetFromName(TEXT("Button_MessageClose")));
-	//ÉèÖÃ¹Ø±Õ°´Å¥µÃ»Øµ÷
+	//è®¾ç½®å…³é—­æŒ‰é’®å¾—å›žè°ƒ
 	CloseBtn->OnClicked.AddDynamic(this, &UPtMessageUserWidget::ClosButtonOnClickedEvent);
 
 	return true;
 }
 
-/* ÉèÖÃ¹Ø±Õ°´Å¥ÊÂ¼þ*/
+/* è®¾ç½®å…³é—­æŒ‰é’®äº‹ä»¶*/
 void UPtMessageUserWidget::ClosButtonOnClickedEvent()
 {
 	this->SetVisibility(ESlateVisibility::Hidden);

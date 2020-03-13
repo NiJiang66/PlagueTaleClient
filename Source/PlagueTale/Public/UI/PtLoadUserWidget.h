@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "PtLoadUserWidget.generated.h"
 
 /**
- * ÓÎÏ·¼ÓÔØ½çÃæ
+ * æ¸¸æˆåŠ è½½ç•Œé¢
  */
 UCLASS()
 class PLAGUETALE_API UPtLoadUserWidget : public UUserWidget
@@ -16,35 +16,35 @@ class PLAGUETALE_API UPtLoadUserWidget : public UUserWidget
 
 public:
 
-	/** ¿Ø¼ş´´½¨Íê³É³õÊ¼»¯·½·¨ */
+	/** æ§ä»¶åˆ›å»ºå®Œæˆåˆå§‹åŒ–æ–¹æ³• */
 	virtual bool Initialize() override;
 
-	/** ÖØĞ´Tick */
+	/** é‡å†™Tick */
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime)override;
 
-	/** ÉèÖÃ¿ªÊ¼¼ÓÔØ */
+	/** è®¾ç½®å¼€å§‹åŠ è½½ */
 	void SetStartLoad();
 
-	/** ½áÊø¼ÓÔØ */
+	/** ç»“æŸåŠ è½½ */
 	void SetEndLoad();
 	
 public:
 
-	/** ¼ÓÔØ½ø¶ÈÌõ */
+	/** åŠ è½½è¿›åº¦æ¡ */
 	UPROPERTY()
 	class UCircularThrobber* CircularThrobber;
 
-	/** ¼ÓÔØÎÄ±¾ */
+	/** åŠ è½½æ–‡æœ¬ */
 	UPROPERTY()
 	class UTextBlock* LoadingText;
 
-	/** ¼ÌĞø°´Å¥ */
+	/** ç»§ç»­æŒ‰é’® */
 	UPROPERTY()
 	class UButton* NextButton;
 
 private:
 
-	/** ±£´æÓÎÏ·ÊµÀı */
+	/** ä¿å­˜æ¸¸æˆå®ä¾‹ */
 	class UPTGameInstance* PtGameInstance = nullptr;
 
 };
