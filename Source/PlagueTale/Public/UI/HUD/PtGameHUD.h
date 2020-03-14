@@ -6,6 +6,8 @@
 #include "GameFramework/HUD.h"
 #include "PtGameHUD.generated.h"
 
+class UPtMainGameWidget;
+
 /**
  * 游戏HUD
  */
@@ -13,5 +15,16 @@ UCLASS()
 class PLAGUETALE_API APtGameHUD : public AHUD
 {
 	GENERATED_BODY()
-	
+public:
+	virtual void BeginPlay() override;
+
+	void InitUI();
+
+public:
+
+	/** 主游戏关卡界面的类型和指针 */
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPtMainGameWidget> RoleWidgetClass;
+	UPROPERTY()
+	UPtMainGameWidget* RoleWidget;
 };

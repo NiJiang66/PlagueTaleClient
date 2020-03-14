@@ -34,4 +34,8 @@ public:
 	UPROPERTY()
 	class UPtLoadUserWidget* LoadWidget;
 
+	/**	保存房间名字 */
+	UPROPERTY()
+	FText RoomName;
+
 };

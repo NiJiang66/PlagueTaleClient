@@ -111,4 +111,12 @@ public:
 };
 
 
+class KBENGINEPLUGINS_API DATATYPE_ANIM_INFO : DATATYPE_BASE
+{
+public:
+	void createFromStreamEx(MemoryStream& stream, ANIM_INFO& datas);
+	void addToStreamEx(Bundle& stream, const ANIM_INFO& v);
+};
+
+
 }

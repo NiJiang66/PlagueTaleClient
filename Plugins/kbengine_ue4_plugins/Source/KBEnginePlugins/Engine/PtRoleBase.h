@@ -26,11 +26,24 @@ public:
 	EntityBaseEntityCall_PtRoleBase* pBaseEntityCall;
 	EntityCellEntityCall_PtRoleBase* pCellEntityCall;
 
+	int16 BaseHP;
+	virtual void onBaseHPChanged(int16 oldValue) {}
+	int16 Defense;
+	virtual void onDefenseChanged(int16 oldValue) {}
+	int16 HP;
+	virtual void onHPChanged(int16 oldValue) {}
 	FString Name;
 	virtual void onNameChanged(const FString& oldValue) {}
+	float PowerRatio;
+	virtual void onPowerRatioChanged(float oldValue) {}
 	uint8 RoleType;
 	virtual void onRoleTypeChanged(uint8 oldValue) {}
+	FVector SpawnPoint;
+	virtual void onSpawnPointChanged(const FVector& oldValue) {}
+	float SpeedRatio;
+	virtual void onSpeedRatioChanged(float oldValue) {}
 
+	virtual void OnAnimUpdate(const ANIM_INFO& arg1) = 0; 
 
 	void onComponentsEnterworld() override;
 	void onComponentsLeaveworld() override;

@@ -67,5 +67,17 @@ void DATATYPE_ROOM_LIST::addToStreamEx(Bundle& stream, const ROOM_LIST& v)
 	Value_DataType.addToStreamEx(stream, v.Value);
 }
 
+void DATATYPE_ANIM_INFO::createFromStreamEx(MemoryStream& stream, ANIM_INFO& datas)
+{
+	datas.Speed = stream.readFloat();
+	datas.Direction = stream.readFloat();
+}
+
+void DATATYPE_ANIM_INFO::addToStreamEx(Bundle& stream, const ANIM_INFO& v)
+{
+	stream.writeFloat(v.Speed);
+	stream.writeFloat(v.Direction);
+}
+
 
 }

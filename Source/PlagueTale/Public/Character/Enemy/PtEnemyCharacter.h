@@ -7,11 +7,14 @@
 #include "PtEnemyCharacter.generated.h"
 
 /**
- * 
+ * 怪物角色类（敌人）
  */
 UCLASS()
 class PLAGUETALE_API APtEnemyCharacter : public APtBaseCharacter
 {
 	GENERATED_BODY()
-	
+public:
+	APtEnemyCharacter();
+
+	virtual void Tick(float DeltaTime) override;
 };

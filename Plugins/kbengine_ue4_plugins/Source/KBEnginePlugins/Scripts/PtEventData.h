@@ -30,7 +30,7 @@ struct FROLE_INFO
 	}
 };
 
-/**	请求角色列表回调事件的数据类 */
+/**	请求角色列表回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnReqRoleList : public UKBEventData 
 {
@@ -40,7 +40,7 @@ public:
 	TArray<FROLE_INFO> RoleList;
 };
 
-/**	请求创建角色回调事件的数据类 */
+/**	请求创建角色回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnCreateRoleResult : public UKBEventData
 {
@@ -54,7 +54,7 @@ public:
 	FROLE_INFO RoleInfo;
 };
 
-/**	请求删除角色回调事件的数据类 */
+/**	请求删除角色回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnRemoveRole : public UKBEventData
 {
@@ -64,7 +64,7 @@ public:
 	FROLE_INFO RoleInfo;
 };
 
-/**	请求选择角色进行游戏回调事件的数据类 */
+/**	请求选择角色进行游戏回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnSelectRoleGame : public UKBEventData
 {
@@ -74,7 +74,7 @@ public:
 	uint64 Dbid;
 };
 
-/**	客户端请求创建角色事件的数据类 */
+/**	客户端请求服务端创建角色的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_ReqCreateRole : public UKBEventData
 {
@@ -86,7 +86,7 @@ public:
 	FString Name;
 };
 
-/**	客户端请求删除角色事件的数据类 */
+/**	客户端请求服务端删除角色的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_ReqRemoveRole : public UKBEventData
 {
@@ -96,7 +96,7 @@ public:
 	FROLE_INFO RoleInfo;
 };
 
-/**	客户端请求选择角色进行游戏事件的数据类 */
+/**	客户端请求服务端选择角色进行游戏的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_SelectRoleGame : public UKBEventData
 {
@@ -126,7 +126,7 @@ struct FROOM_INFO
 };
 
 
-/**	客户端请求创建房间事件的数据类 */
+/**	客户端请求服务端创建房间的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_ReqCreateRoom : public UKBEventData
 {
@@ -136,7 +136,7 @@ public:
 	FString RoomName;
 };
 
-/**	客户端请求选择房间进行游戏事件的数据类 */
+/**	客户端请求服务端选择房间进行游戏的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_SelectRoomGame : public UKBEventData
 {
@@ -146,7 +146,7 @@ public:
 	uint64 RoomId;
 };
 
-/**	客户端请求房间列表事件的数据类 */
+/**	请求房间列表回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnReqRoomList : public UKBEventData
 {
@@ -157,7 +157,7 @@ public:
 	TArray<FROOM_INFO> RoomList;
 };
 
-/**	客户端请求创建房间事件的数据类 */
+/**	请求创建房间回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnCreateRoom : public UKBEventData
 {
@@ -165,7 +165,73 @@ class KBENGINEPLUGINS_API UKBEventData_OnCreateRoom : public UKBEventData
 public:
 	/**	房间信息数组 */
 	UPROPERTY()
-		FROOM_INFO RoomInfo;
+	FROOM_INFO RoomInfo;
+};
+
+
+/**	请求更新动画回调的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnAnimUpdate : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	实体Id */
+	UPROPERTY()
+	int32 EntityId;
+	/**	速度 */
+	UPROPERTY()
+	float Speed;
+	/**	方向 */
+	UPROPERTY()
+	float Direction;
+};
+
+/**	客户端请求服务端更新动画的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_AnimUpdate : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	速度 */
+	UPROPERTY()
+	float Speed;
+	/**	方向 */
+	UPROPERTY()
+	float Direction;
+};
+
+/**	客户端请求服务端设置基础血量的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SetBaseHP : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	实体Id */
+	UPROPERTY()
+	int32 EntityId;
+	/**	是否是玩家 */
+	UPROPERTY()
+	bool IsPlayer;
+	/**	基础血量 */
+	UPROPERTY()
+	int32 BaseHP;
+};
+
+/**	客户端请求服务端设置当前血量的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SetHP : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	实体Id */
+	UPROPERTY()
+	int32 EntityId;
+	/**	是否是玩家 */
+	UPROPERTY()
+	bool IsPlayer;
+	/**	当前血量 */
+	UPROPERTY()
+	int32 HP;
 };
 
 

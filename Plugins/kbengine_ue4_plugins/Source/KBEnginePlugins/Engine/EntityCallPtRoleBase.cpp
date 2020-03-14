@@ -24,5 +24,24 @@ EntityCellEntityCall_PtRoleBase::~EntityCellEntityCall_PtRoleBase()
 {
 }
 
+void EntityCellEntityCall_PtRoleBase::AnimUpdate(const ANIM_INFO& arg1)
+{
+	Bundle* pBundleRet = newCall("AnimUpdate", 0);
+	if(!pBundleRet)
+		return;
+
+	((DATATYPE_ANIM_INFO*)EntityDef::id2datatypes[29])->addToStreamEx(*pBundleRet, arg1);
+	sendCall(NULL);
+}
+
+void EntityCellEntityCall_PtRoleBase::Relive()
+{
+	Bundle* pBundleRet = newCall("Relive", 0);
+	if(!pBundleRet)
+		return;
+
+	sendCall(NULL);
+}
+
 
 }

@@ -34,6 +34,8 @@ public:
 	EntityCellEntityCall_PtRoleBase(int32 eid, const FString& ename);
 
 	virtual ~EntityCellEntityCall_PtRoleBase();
+	void AnimUpdate(const ANIM_INFO& arg1);
+	void Relive();
 };
 
 }

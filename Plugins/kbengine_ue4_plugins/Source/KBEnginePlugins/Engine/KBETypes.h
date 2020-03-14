@@ -58,6 +58,8 @@ typedef FVector4 VECTOR4;
 
 typedef uint64 DBID;
 
+typedef uint8 BOOL;
+
 class KBENGINEPLUGINS_API ROLE_DATA
 {
 public:
@@ -123,6 +125,20 @@ public:
 
 	ROOM_LIST():
 	Value()
+	{
+	}
+
+};
+
+class KBENGINEPLUGINS_API ANIM_INFO
+{
+public:
+	float Speed;
+	float Direction;
+
+	ANIM_INFO():
+	Speed(0.0f),
+	Direction(0.0f)
 	{
 	}
 

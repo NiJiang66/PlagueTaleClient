@@ -12,6 +12,8 @@
 #include "PtRoomItem.h"
 #include "Engine/KBEngine.h"
 #include "Scripts/PtCommon.h"
+#include "PTGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
 
 
@@ -31,6 +33,11 @@ void UPtRoomWidget::EnterGameEvent()
 	for (int i = 0; i < RoomItemGroup.Num(); ++i) {
 		if (RoomItemGroup[i]->IsSelected)
 		{
+			//保存选中的房间名称到GameInstance
+			UPTGameInstance* GameInstance = Cast<UPTGameInstance>(UGameplayStatics::GetGameInstance(this));
+			GameInstance->RoomName = FText::FromString(RoomItemGroup[i]->RoomInfo.Name);
+
+			//通知服务器
 			UKBEventData_SelectRoomGame* EventData = NewObject<UKBEventData_SelectRoomGame>();
 			EventData->RoomId = RoomItemGroup[i]->RoomInfo.RoomId;
 			KBENGINE_EVENT_FIRE("SelectRoomGame", EventData);
