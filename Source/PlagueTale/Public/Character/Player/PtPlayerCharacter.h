@@ -26,8 +26,9 @@ public:
 	/**	设置输入组件，当被Controller Possess时的回调 */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	/**	设置基础血量 */
 	virtual void SetBaseHP(int32 InBaseHP) override;
-
+	/**	设置当前血量 */
 	virtual void SetHP(int32 InHP) override;
 
 

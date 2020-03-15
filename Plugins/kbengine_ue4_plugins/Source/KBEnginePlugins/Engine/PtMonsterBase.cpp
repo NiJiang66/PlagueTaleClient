@@ -89,11 +89,16 @@ void PtMonsterBase::onRemoteMethodCall(MemoryStream& stream)
 
 	switch(pMethod->methodUtype)
 	{
-		case 19:
+		case 25:
 		{
 			ANIM_INFO OnAnimUpdate_arg1;
 			((DATATYPE_ANIM_INFO*)pMethod->args[0])->createFromStreamEx(stream, OnAnimUpdate_arg1);
 			OnAnimUpdate(OnAnimUpdate_arg1);
+			break;
+		}
+		case 23:
+		{
+			OnAttack();
 			break;
 		}
 		default:
@@ -132,7 +137,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 		switch(pProp->properUtype)
 		{
-			case 18:
+			case 19:
 			{
 				int16 oldval_BaseHP = BaseHP;
 				BaseHP = stream.readInt16();
@@ -150,7 +155,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 20:
+			case 21:
 			{
 				int16 oldval_Defense = Defense;
 				Defense = stream.readInt16();
@@ -168,7 +173,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 19:
+			case 20:
 			{
 				int16 oldval_HP = HP;
 				HP = stream.readInt16();
@@ -186,7 +191,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 16:
+			case 17:
 			{
 				FString oldval_Name = Name;
 				Name = stream.readUnicode();
@@ -204,7 +209,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 21:
+			case 22:
 			{
 				float oldval_PowerRatio = PowerRatio;
 				PowerRatio = stream.readFloat();
@@ -222,7 +227,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 17:
+			case 18:
 			{
 				uint8 oldval_RoleType = RoleType;
 				RoleType = stream.readUint8();
@@ -240,7 +245,7 @@ void PtMonsterBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 22:
+			case 23:
 			{
 				float oldval_SpeedRatio = SpeedRatio;
 				SpeedRatio = stream.readFloat();

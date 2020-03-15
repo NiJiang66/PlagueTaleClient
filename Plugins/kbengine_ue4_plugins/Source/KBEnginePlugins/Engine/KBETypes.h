@@ -60,6 +60,18 @@ typedef uint64 DBID;
 
 typedef uint8 BOOL;
 
+typedef int32 ENTITY_ID;
+
+class KBENGINEPLUGINS_API ENTITYID_LIST : public TArray<int32>
+{
+public:
+
+	ENTITYID_LIST()
+	{
+	}
+
+};
+
 class KBENGINEPLUGINS_API ROLE_DATA
 {
 public:

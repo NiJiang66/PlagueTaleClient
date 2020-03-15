@@ -31,27 +31,29 @@ protected:
 	virtual void BeginPlay() override;
 
 protected:
-
+	
 	void OnEnterWorld(const UKBEventData* EventData);
-
 	void OnLeaveWorld(const UKBEventData* EventData);
-
 	void OnEnterSpace(const UKBEventData* EventData);
-
 	void OnLeaveSpace(const UKBEventData* EventData);
+
 	/**	设置非本地角色位置 */
 	void SetPosition(const UKBEventData* EventData);
 	/**	设置非本地角色旋转 */
 	void SetDirection(const UKBEventData* EventData);
-
+	/**	更新非本地角色位置 */
 	void UpdatePosition(const UKBEventData* EventData);
 
-
+	/**	更新移动动画的回调 */
 	void OnAnimUpdate(const UKBEventData* EventData);
+	/**	播放攻击动画的回调 */
+	void OnAttack(const UKBEventData* EventData);
 
+	/**	设置基础血量 */
 	void SetBaseHP(const UKBEventData* EventData);
-
+	/**	设置当前血量 */
 	void SetHP(const UKBEventData* EventData);
+
 
 public:
 

@@ -20,6 +20,8 @@ namespace KBEngine
 		//virtual void onDefenseChanged(int16 oldValue) override;
 		virtual void onHPChanged(int16 oldValue) override;
 		//virtual void onPowerRatioChanged(float oldValue) override;
+
+		virtual void OnAttack() override;
 	};
 
 

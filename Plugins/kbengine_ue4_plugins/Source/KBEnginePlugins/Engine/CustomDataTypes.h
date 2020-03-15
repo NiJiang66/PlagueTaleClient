@@ -14,6 +14,14 @@ namespace KBEngine
 {
 
 
+class KBENGINEPLUGINS_API DATATYPE_ENTITYID_LIST : DATATYPE_BASE
+{
+public:
+	void createFromStreamEx(MemoryStream& stream, ENTITYID_LIST& datas);
+	void addToStreamEx(Bundle& stream, const ENTITYID_LIST& v);
+};
+
+
 class KBENGINEPLUGINS_API DATATYPE_ROLE_DATA : DATATYPE_BASE
 {
 public:

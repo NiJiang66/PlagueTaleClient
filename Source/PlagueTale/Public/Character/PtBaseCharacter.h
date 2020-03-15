@@ -36,6 +36,8 @@ public:
 	virtual void SetBaseHP(int32 InBaseHP) {}
 	virtual void SetHP(int32 InHP) {}
 
+	/**	播放攻击动画 */
+	void OnAttack();
 
 protected:
 	virtual void BeginPlay() override;

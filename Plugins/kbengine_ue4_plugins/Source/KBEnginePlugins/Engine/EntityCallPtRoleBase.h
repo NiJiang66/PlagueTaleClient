@@ -35,6 +35,7 @@ public:
 
 	virtual ~EntityCellEntityCall_PtRoleBase();
 	void AnimUpdate(const ANIM_INFO& arg1);
+	void Attack();
 	void Relive();
 };
 

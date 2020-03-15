@@ -234,6 +234,17 @@ public:
 	int32 HP;
 };
 
+/**	客户端攻击的回调的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnAttack : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	角色实体id */
+	UPROPERTY()
+	int32 EntityId;
+};
+
 
 
 /**

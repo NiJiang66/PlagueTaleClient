@@ -30,7 +30,16 @@ void EntityCellEntityCall_PtMonsterBase::AnimUpdate(const ANIM_INFO& arg1)
 	if(!pBundleRet)
 		return;
 
-	((DATATYPE_ANIM_INFO*)EntityDef::id2datatypes[29])->addToStreamEx(*pBundleRet, arg1);
+	((DATATYPE_ANIM_INFO*)EntityDef::id2datatypes[30])->addToStreamEx(*pBundleRet, arg1);
+	sendCall(NULL);
+}
+
+void EntityCellEntityCall_PtMonsterBase::Attack()
+{
+	Bundle* pBundleRet = newCall("Attack", 0);
+	if(!pBundleRet)
+		return;
+
 	sendCall(NULL);
 }
 

@@ -89,11 +89,16 @@ void PtRoleBase::onRemoteMethodCall(MemoryStream& stream)
 
 	switch(pMethod->methodUtype)
 	{
-		case 16:
+		case 19:
 		{
 			ANIM_INFO OnAnimUpdate_arg1;
 			((DATATYPE_ANIM_INFO*)pMethod->args[0])->createFromStreamEx(stream, OnAnimUpdate_arg1);
 			OnAnimUpdate(OnAnimUpdate_arg1);
+			break;
+		}
+		case 17:
+		{
+			OnAttack();
 			break;
 		}
 		default:

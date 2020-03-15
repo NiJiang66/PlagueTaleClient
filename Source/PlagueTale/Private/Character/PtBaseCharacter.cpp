@@ -6,6 +6,7 @@
 #include "Engine/KBEngine.h"
 #include "Engine/Entity.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Animation/AnimInstance.h"
 
 
 // Sets default values
@@ -82,5 +83,12 @@ void APtBaseCharacter::SetTargetAnim(float Speed, float Direction)
 	RemainAnimSpaceTime = UpdateAnimSpaceTime;
 	//保留上一次更新的时间
 	LastUpdateAnimTime = GetWorld()->TimeSeconds;
+}
+
+void APtBaseCharacter::OnAttack()
+{
+	if (CharacterAnim) {
+		CharacterAnim->Montage_Play(AttackMontage);
+	}		
 }
 

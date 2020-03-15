@@ -7,6 +7,26 @@
 namespace KBEngine
 {
 
+void DATATYPE_ENTITYID_LIST::createFromStreamEx(MemoryStream& stream, ENTITYID_LIST& datas)
+{
+	uint32 size = stream.readUint32();
+	while(size > 0)
+	{
+		--size;
+		datas.Add(stream.readInt32());
+	};
+
+}
+
+void DATATYPE_ENTITYID_LIST::addToStreamEx(Bundle& stream, const ENTITYID_LIST& v)
+{
+	stream.writeUint32((uint32)v.Num());
+	for(int i=0; i<v.Num(); ++i)
+	{
+		stream.writeInt32(v[i]);
+	};
+}
+
 void DATATYPE_ROLE_DATA::createFromStreamEx(MemoryStream& stream, ROLE_DATA& datas)
 {
 	datas.DataType = stream.readInt8();
