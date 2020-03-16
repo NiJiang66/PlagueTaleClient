@@ -30,7 +30,8 @@ public:
 	virtual void SetBaseHP(int32 InBaseHP) override;
 	/**	设置当前血量 */
 	virtual void SetHP(int32 InHP) override;
-
+	/**	设置速度 */
+	virtual void SetSpeedRatio(float InSpeedRatio) override;
 
 protected:
 	void DoJump();

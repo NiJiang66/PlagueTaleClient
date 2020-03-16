@@ -127,4 +127,48 @@ public:
 };
 
 
+class KBENGINEPLUGINS_API DATATYPE_GOOD_INFO : DATATYPE_BASE
+{
+public:
+	void createFromStreamEx(MemoryStream& stream, GOOD_INFO& datas);
+	void addToStreamEx(Bundle& stream, const GOOD_INFO& v);
+};
+
+
+class KBENGINEPLUGINS_API DATATYPE_BAG_INFO : DATATYPE_BASE
+{
+public:
+	class KBENGINEPLUGINS_API DATATYPE__BAG_INFO_Value_ArrayType_ChildArray : public DATATYPE_BASE
+	{
+	public:
+		DATATYPE_GOOD_INFO itemType;
+
+		void createFromStreamEx(MemoryStream& stream, TArray<GOOD_INFO>& datas)
+		{
+			uint32 size = stream.readUint32();
+			while(size > 0)
+			{
+				--size;
+				itemType.createFromStreamEx(stream, datas.EmplaceAt_GetRef(datas.Num()));
+			};
+
+		}
+
+		void addToStreamEx(Bundle& stream, const TArray<GOOD_INFO>& v)
+		{
+			stream.writeUint32((uint32)v.Num());
+			for(int i=0; i<v.Num(); ++i)
+			{
+				itemType.addToStreamEx(stream, v[i]);
+			};
+		}
+	};
+
+	DATATYPE__BAG_INFO_Value_ArrayType_ChildArray Value_DataType;
+
+	void createFromStreamEx(MemoryStream& stream, BAG_INFO& datas);
+	void addToStreamEx(Bundle& stream, const BAG_INFO& v);
+};
+
+
 }

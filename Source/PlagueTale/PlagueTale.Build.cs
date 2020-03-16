@@ -20,7 +20,9 @@ public class PlagueTale : ModuleRules
             "Json",
             "UMG",
             "HTTP",
-            "MoviePlayer"
+            "MoviePlayer",
+            "Slate",
+            "SlateCore"
         });
 
 		// Uncomment if you are using Slate UI

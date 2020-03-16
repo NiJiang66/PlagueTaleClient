@@ -30,6 +30,29 @@ struct FROLE_INFO
 	}
 };
 
+/**	物品信息结构体 */
+USTRUCT()
+struct FGOOD_INFO
+{
+	GENERATED_BODY()
+public:
+	/**	格子id */
+	UPROPERTY()
+	uint8 BlockId;
+	/**	物品id */
+	UPROPERTY()
+	uint8 GoodId;
+	/**	数量 */
+	UPROPERTY()
+	uint8 Number;
+
+	void InitInfo(uint8 InBlockId, uint8 InGoodId, uint8 InNumber) {
+		BlockId = InBlockId;
+		GoodId = InGoodId;
+		Number = InNumber;
+	}
+};
+
 /**	请求角色列表回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnReqRoleList : public UKBEventData 
@@ -215,6 +238,20 @@ public:
 	/**	基础血量 */
 	UPROPERTY()
 	int32 BaseHP;
+}; 
+
+/**	客户端请求服务端设置防御力的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SetDefense : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	实体Id */
+	UPROPERTY()
+	int32 EntityId;
+	/**	防御力 */
+	UPROPERTY()
+	int32 Defense;	
 };
 
 /**	客户端请求服务端设置当前血量的事件数据类 */
@@ -232,6 +269,34 @@ public:
 	/**	当前血量 */
 	UPROPERTY()
 	int32 HP;
+}; 
+
+/**	客户端请求服务端设置当前力量加成的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SetPowerRatio : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	实体Id */
+	UPROPERTY()
+	int32 EntityId;
+	/**	力量加成 */
+	UPROPERTY()
+	float PowerRatio;
+}; 
+
+/**	客户端请求服务端设置当前速度加成的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SetSpeedRatio : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	实体Id */
+	UPROPERTY()
+	int32 EntityId;
+	/**	速度加成 */
+	UPROPERTY()
+	float SpeedRatio;
 };
 
 /**	客户端攻击的回调的事件数据类 */
@@ -244,6 +309,110 @@ public:
 	UPROPERTY()
 	int32 EntityId;
 };
+
+/**	客户端请求服务端使用物品的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_ReduceGood : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	背包类型 */
+	UPROPERTY()
+	uint8 BagType;
+	/**	格子id */
+	UPROPERTY()
+	uint8 BlockId;
+}; 
+/**	客户端使用物品的回调的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnReduceGood : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	使用结果 */
+	UPROPERTY()
+	uint8 ReduceRes;
+	/**	背包类型 */
+	UPROPERTY()
+	uint8 BagType;
+	/**	物品信息 */
+	UPROPERTY()
+	FGOOD_INFO GoodInfo;
+};
+
+/**	客户端请求服务端移动物品的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_PassGood : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	移出背包的物品类型 */
+	UPROPERTY()
+	uint8 ArcBagType;
+	/**	移出背包的格子id */
+	UPROPERTY()
+	uint8 ArcBlockId;
+	/**	放入背包的物品类型 */
+	UPROPERTY()
+	uint8 DesBagType;
+	/**	放入背包的格子id */
+	UPROPERTY()
+	uint8 DesBlockId;
+};
+/**	客户端移动物品的的回调的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnPassGood : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	移出背包的类型 */
+	UPROPERTY()
+	uint8 ArcBagType;
+	/**	移出的物品信息 */
+	UPROPERTY()
+	FGOOD_INFO ArcGoodInfo;
+	/**	放入的背包类型 */
+	UPROPERTY()
+	uint8 DesBagType;
+	/**	放入的物品信息 */
+	UPROPERTY()
+	FGOOD_INFO DesGoodInfo;
+};
+
+/**	添加物品的回调的事件数据类(添加物品的逻辑在服务端) */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnIncreaseGood : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	背包类型 */
+	UPROPERTY()
+	uint8 BagType;
+	/**	物品信息 */
+	UPROPERTY()
+	FGOOD_INFO GoodInfo;
+};
+
+/**	请求背包列表的回调的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnReqBagList : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	主背包数据 */
+	UPROPERTY()
+	TArray<FGOOD_INFO> MainBag;
+	/**	技能背包数据 */
+	UPROPERTY()
+	TArray<FGOOD_INFO> SkillBag;
+	/**	buff背包数据 */
+	UPROPERTY()
+	TArray<FGOOD_INFO> BuffBag;
+	/**	装备背包数据 */
+	UPROPERTY()
+	TArray<FGOOD_INFO> EquipBag;
+};
+
 
 
 

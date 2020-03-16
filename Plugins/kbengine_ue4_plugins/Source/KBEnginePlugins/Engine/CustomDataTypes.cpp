@@ -99,5 +99,29 @@ void DATATYPE_ANIM_INFO::addToStreamEx(Bundle& stream, const ANIM_INFO& v)
 	stream.writeFloat(v.Direction);
 }
 
+void DATATYPE_GOOD_INFO::createFromStreamEx(MemoryStream& stream, GOOD_INFO& datas)
+{
+	datas.BlockId = stream.readUint8();
+	datas.GoodId = stream.readUint8();
+	datas.Number = stream.readUint8();
+}
+
+void DATATYPE_GOOD_INFO::addToStreamEx(Bundle& stream, const GOOD_INFO& v)
+{
+	stream.writeUint8(v.BlockId);
+	stream.writeUint8(v.GoodId);
+	stream.writeUint8(v.Number);
+}
+
+void DATATYPE_BAG_INFO::createFromStreamEx(MemoryStream& stream, BAG_INFO& datas)
+{
+	Value_DataType.createFromStreamEx(stream, datas.Value);
+}
+
+void DATATYPE_BAG_INFO::addToStreamEx(Bundle& stream, const BAG_INFO& v)
+{
+	Value_DataType.addToStreamEx(stream, v.Value);
+}
+
 
 }

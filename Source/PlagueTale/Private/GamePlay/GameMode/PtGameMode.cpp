@@ -38,10 +38,15 @@ void APtGameMode::InstallEvents()
 	KBENGINE_REGISTER_EVENT(KBEngine::KBEventTypes::updatePosition, UpdatePosition);
 
 	KBENGINE_REGISTER_EVENT("OnAnimUpdate", OnAnimUpdate);
+	KBENGINE_REGISTER_EVENT("OnAttack", OnAttack);
+
 	KBENGINE_REGISTER_EVENT("SetBaseHP", SetBaseHP);
 	KBENGINE_REGISTER_EVENT("SetHP", SetHP);
+	KBENGINE_REGISTER_EVENT("SetDefense", SetDefense);
+	KBENGINE_REGISTER_EVENT("SetPowerRatio", SetPowerRatio);
+	KBENGINE_REGISTER_EVENT("SetSpeedRatio", SetSpeedRatio);
 
-	KBENGINE_REGISTER_EVENT("OnAttack", OnAttack);
+
 
 }
 
@@ -260,6 +265,42 @@ void APtGameMode::SetHP(const UKBEventData* EventData)
 	}
 	else {
 
+	}
+}
+
+void APtGameMode::SetDefense(const UKBEventData* EventData)
+{
+	//防御值只有玩家会更新, 防御力只更新UI显示
+	const UKBEventData_SetDefense* ServerData = Cast<UKBEventData_SetDefense>(EventData);
+
+	if (RoleWidget) {
+		RoleWidget->SetDefense(ServerData->Defense);
+	}		
+}
+
+void APtGameMode::SetPowerRatio(const UKBEventData* EventData)
+{
+	//力量加成只有玩家会更新, 力量加成只更新UI显示
+	const UKBEventData_SetPowerRatio* ServerData = Cast<UKBEventData_SetPowerRatio>(EventData);
+
+	if (RoleWidget) {
+		RoleWidget->SetPowerRatio(ServerData->PowerRatio);
+	}
+}
+
+void APtGameMode::SetSpeedRatio(const UKBEventData* EventData)
+{
+	//速度加成只有玩家会更新
+	const UKBEventData_SetSpeedRatio* ServerData = Cast<UKBEventData_SetSpeedRatio>(EventData);
+
+	//更新到玩家
+	if (PlayerCharacter) {
+		PlayerCharacter->SetSpeedRatio(ServerData->SpeedRatio);
+	}
+
+	//更新到UI
+	if (RoleWidget) {
+		RoleWidget->SetSpeedRatio(ServerData->SpeedRatio);
 	}
 }
 

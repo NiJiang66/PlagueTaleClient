@@ -13,6 +13,39 @@ EntityBaseEntityCall_PtRoleBase::~EntityBaseEntityCall_PtRoleBase()
 {
 }
 
+void EntityBaseEntityCall_PtRoleBase::PassGood(uint8 arg1, uint8 arg2, uint8 arg3, uint8 arg4)
+{
+	Bundle* pBundleRet = newCall("PassGood", 0);
+	if(!pBundleRet)
+		return;
+
+	pBundleRet->writeUint8(arg1);
+	pBundleRet->writeUint8(arg2);
+	pBundleRet->writeUint8(arg3);
+	pBundleRet->writeUint8(arg4);
+	sendCall(NULL);
+}
+
+void EntityBaseEntityCall_PtRoleBase::ReduceGood(uint8 arg1, uint8 arg2)
+{
+	Bundle* pBundleRet = newCall("ReduceGood", 0);
+	if(!pBundleRet)
+		return;
+
+	pBundleRet->writeUint8(arg1);
+	pBundleRet->writeUint8(arg2);
+	sendCall(NULL);
+}
+
+void EntityBaseEntityCall_PtRoleBase::ReqBagList()
+{
+	Bundle* pBundleRet = newCall("ReqBagList", 0);
+	if(!pBundleRet)
+		return;
+
+	sendCall(NULL);
+}
+
 
 
 EntityCellEntityCall_PtRoleBase::EntityCellEntityCall_PtRoleBase(int32 eid, const FString& ename) : EntityCall(eid, ename)

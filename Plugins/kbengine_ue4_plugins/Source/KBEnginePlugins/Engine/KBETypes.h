@@ -72,6 +72,18 @@ public:
 
 };
 
+typedef uint8 GOOD_TYPE;
+
+typedef uint8 GOOD_ID;
+
+typedef uint8 KIND_ID;
+
+typedef uint8 BAG_TYPE;
+
+typedef uint8 BLOCK_ID;
+
+typedef uint8 REDUCE_RES;
+
 class KBENGINEPLUGINS_API ROLE_DATA
 {
 public:
@@ -151,6 +163,34 @@ public:
 	ANIM_INFO():
 	Speed(0.0f),
 	Direction(0.0f)
+	{
+	}
+
+};
+
+class KBENGINEPLUGINS_API GOOD_INFO
+{
+public:
+	uint8 BlockId;
+	uint8 GoodId;
+	uint8 Number;
+
+	GOOD_INFO():
+	BlockId(0),
+	GoodId(0),
+	Number(0)
+	{
+	}
+
+};
+
+class KBENGINEPLUGINS_API BAG_INFO
+{
+public:
+	TArray<GOOD_INFO> Value;
+
+	BAG_INFO():
+	Value()
 	{
 	}
 

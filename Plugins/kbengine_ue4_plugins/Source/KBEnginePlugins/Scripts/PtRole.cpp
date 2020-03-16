@@ -31,6 +31,27 @@ void KBEngine::PtRole::__init__()
 		{
 			pCellEntityCall->Relive();
 		});
+
+		//注册请求背包数据事件
+		KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("ReqBagList", "ReqBagList", [this](const UKBEventData* EventData)
+		{
+			pBaseEntityCall->ReqBagList();
+		});
+		//注册使用物品事件
+		KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("ReduceGood", "ReduceGood", [this](const UKBEventData* EventData)
+		{
+			const UKBEventData_ReduceGood* ServerData = Cast<UKBEventData_ReduceGood>(EventData);
+			pBaseEntityCall->ReduceGood(ServerData->BagType, ServerData->BlockId);
+		});
+		//注册移动物品事件
+		KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("PassGood", "PassGood", [this](const UKBEventData* EventData)
+		{
+			const UKBEventData_PassGood* ServerData = Cast<UKBEventData_PassGood>(EventData);
+			pBaseEntityCall->PassGood(ServerData->ArcBagType, ServerData->ArcBlockId, ServerData->DesBagType, ServerData->DesBlockId);
+		});
+
+
+
 	}
 }
 
@@ -52,6 +73,8 @@ void KBEngine::PtRole::OnAnimUpdate(const ANIM_INFO& arg1)
 
 void KBEngine::PtRole::onBaseHPChanged(int16 oldValue)
 {
+	PtRoleBase::onBaseHPChanged(oldValue);
+
 	UKBEventData_SetBaseHP* EventData = NewObject<UKBEventData_SetBaseHP>();
 	EventData->EntityId = id();
 	EventData->IsPlayer = isPlayer();
@@ -60,8 +83,21 @@ void KBEngine::PtRole::onBaseHPChanged(int16 oldValue)
 	KBENGINE_EVENT_FIRE("SetBaseHP", EventData);
 }
 
+void KBEngine::PtRole::onDefenseChanged(int16 oldValue)
+{
+	PtRoleBase::onDefenseChanged(oldValue);
+
+	UKBEventData_SetDefense* EventData = NewObject<UKBEventData_SetDefense>();
+	EventData->EntityId = id();
+	EventData->Defense = Defense;
+	//告诉UE4客户端的APtGameMode
+	KBENGINE_EVENT_FIRE("SetDefense", EventData);
+}
+
 void KBEngine::PtRole::onHPChanged(int16 oldValue)
 {
+	PtRoleBase::onHPChanged(oldValue);
+
 	UKBEventData_SetHP* EventData = NewObject<UKBEventData_SetHP>();
 	EventData->EntityId = id();
 	EventData->IsPlayer = isPlayer();
@@ -70,11 +106,56 @@ void KBEngine::PtRole::onHPChanged(int16 oldValue)
 	KBENGINE_EVENT_FIRE("SetHP", EventData);
 }
 
+void KBEngine::PtRole::onPowerRatioChanged(float oldValue)
+{
+	PtRoleBase::onPowerRatioChanged(oldValue);
+
+	UKBEventData_SetPowerRatio* EventData = NewObject<UKBEventData_SetPowerRatio>();
+	EventData->EntityId = id();
+	EventData->PowerRatio = PowerRatio;
+	//告诉UE4客户端的APtGameMode
+	KBENGINE_EVENT_FIRE("SetPowerRatio", EventData);
+}
+
+void KBEngine::PtRole::onSpeedRatioChanged(float oldValue)
+{
+	PtRoleBase::onSpeedRatioChanged(oldValue);
+
+	UKBEventData_SetSpeedRatio* EventData = NewObject<UKBEventData_SetSpeedRatio>();
+	EventData->EntityId = id();
+	EventData->SpeedRatio = SpeedRatio;
+	//告诉UE4客户端的APtGameMode
+	KBENGINE_EVENT_FIRE("SetSpeedRatio", EventData);
+}
+
 void KBEngine::PtRole::OnAttack()
 {
 	UKBEventData_OnAttack* EventData = NewObject<UKBEventData_OnAttack>();
 	EventData->EntityId = id();
 	//告诉UE4客户端的APtGameMode,可以播放攻击动画了
 	KBENGINE_EVENT_FIRE("OnAttack", EventData);
+}
+
+void KBEngine::PtRole::OnIncreaseGood(uint8 arg1, const GOOD_INFO& arg2)
+{
+	UKBEventData_OnIncreaseGood* EventData = NewObject<UKBEventData_OnIncreaseGood>();
+	EventData->BagType = arg1;
+	EventData->GoodInfo.InitInfo(arg2.BlockId, arg2.GoodId, arg2.Number);
+	KBENGINE_EVENT_FIRE("OnIncreaseGood", EventData);
+}
+
+void KBEngine::PtRole::OnPassGood(uint8 arg1, const GOOD_INFO& arg2, uint8 arg3, const GOOD_INFO& arg4)
+{
+
+}
+
+void KBEngine::PtRole::OnReduceGood(uint8 arg1, uint8 arg2, const GOOD_INFO& arg3)
+{
+
+}
+
+void KBEngine::PtRole::OnReqBagList(const BAG_INFO& arg1, const BAG_INFO& arg2, const BAG_INFO& arg3, const BAG_INFO& arg4)
+{
+
 }
 

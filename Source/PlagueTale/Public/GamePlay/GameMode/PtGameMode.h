@@ -53,7 +53,12 @@ protected:
 	void SetBaseHP(const UKBEventData* EventData);
 	/**	设置当前血量 */
 	void SetHP(const UKBEventData* EventData);
-
+	/**	设置防御力 */
+	void SetDefense(const UKBEventData* EventData);
+	/**	设置力量加成 */
+	void SetPowerRatio(const UKBEventData* EventData);
+	/**	设置速度加成 */
+	void SetSpeedRatio(const UKBEventData* EventData);
 
 public:
 

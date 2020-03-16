@@ -25,6 +25,9 @@ public:
 	EntityBaseEntityCall_PtRoleBase(int32 eid, const FString& ename);
 
 	virtual ~EntityBaseEntityCall_PtRoleBase();
+	void PassGood(uint8 arg1, uint8 arg2, uint8 arg3, uint8 arg4);
+	void ReduceGood(uint8 arg1, uint8 arg2);
+	void ReqBagList();
 };
 
 class KBENGINEPLUGINS_API EntityCellEntityCall_PtRoleBase : public EntityCall

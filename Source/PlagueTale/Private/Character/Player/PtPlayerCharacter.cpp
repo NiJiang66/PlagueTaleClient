@@ -27,7 +27,7 @@ APtPlayerCharacter::APtPlayerCharacter()
 
 	//设置角色控制器是否控制朝向
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;//true
 	bUseControllerRotationRoll = false;
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -35,13 +35,13 @@ APtPlayerCharacter::APtPlayerCharacter()
 	CameraBoom->TargetArmLength = 600.0f; // The camera follows at this distance behind the character	
 	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 	CameraBoom->SetRelativeLocation(FVector(0.f, 0.f, 120.f));
-	// 取消手臂遮挡
-	CameraBoom->bDoCollisionTest = false;
+	// 防止手臂遮挡
+	CameraBoom->bDoCollisionTest = true;
 	
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	//相机角色控制器控制朝向
-	FollowCamera->bUsePawnControlRotation = false;
+	FollowCamera->bUsePawnControlRotation = true;
 }
 
 void APtPlayerCharacter::Tick(float DeltaSeconds)
@@ -104,6 +104,11 @@ void APtPlayerCharacter::SetHP(int32 InHP)
 
 	//保存血值
 	HP = InHP;
+}
+
+void APtPlayerCharacter::SetSpeedRatio(float InSpeedRatio)
+{
+	GetCharacterMovement()->MaxWalkSpeed = 600 * InSpeedRatio;
 }
 
 void APtPlayerCharacter::DoJump()

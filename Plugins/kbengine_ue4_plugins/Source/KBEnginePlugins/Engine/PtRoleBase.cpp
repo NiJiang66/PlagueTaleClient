@@ -89,16 +89,57 @@ void PtRoleBase::onRemoteMethodCall(MemoryStream& stream)
 
 	switch(pMethod->methodUtype)
 	{
-		case 19:
+		case 30:
 		{
 			ANIM_INFO OnAnimUpdate_arg1;
 			((DATATYPE_ANIM_INFO*)pMethod->args[0])->createFromStreamEx(stream, OnAnimUpdate_arg1);
 			OnAnimUpdate(OnAnimUpdate_arg1);
 			break;
 		}
-		case 17:
+		case 28:
 		{
 			OnAttack();
+			break;
+		}
+		case 19:
+		{
+			uint8 OnIncreaseGood_arg1 = stream.readUint8();
+			GOOD_INFO OnIncreaseGood_arg2;
+			((DATATYPE_GOOD_INFO*)pMethod->args[1])->createFromStreamEx(stream, OnIncreaseGood_arg2);
+			OnIncreaseGood(OnIncreaseGood_arg1, OnIncreaseGood_arg2);
+			break;
+		}
+		case 21:
+		{
+			uint8 OnPassGood_arg1 = stream.readUint8();
+			GOOD_INFO OnPassGood_arg2;
+			((DATATYPE_GOOD_INFO*)pMethod->args[1])->createFromStreamEx(stream, OnPassGood_arg2);
+			uint8 OnPassGood_arg3 = stream.readUint8();
+			GOOD_INFO OnPassGood_arg4;
+			((DATATYPE_GOOD_INFO*)pMethod->args[3])->createFromStreamEx(stream, OnPassGood_arg4);
+			OnPassGood(OnPassGood_arg1, OnPassGood_arg2, OnPassGood_arg3, OnPassGood_arg4);
+			break;
+		}
+		case 20:
+		{
+			uint8 OnReduceGood_arg1 = stream.readUint8();
+			uint8 OnReduceGood_arg2 = stream.readUint8();
+			GOOD_INFO OnReduceGood_arg3;
+			((DATATYPE_GOOD_INFO*)pMethod->args[2])->createFromStreamEx(stream, OnReduceGood_arg3);
+			OnReduceGood(OnReduceGood_arg1, OnReduceGood_arg2, OnReduceGood_arg3);
+			break;
+		}
+		case 18:
+		{
+			BAG_INFO OnReqBagList_arg1;
+			((DATATYPE_BAG_INFO*)pMethod->args[0])->createFromStreamEx(stream, OnReqBagList_arg1);
+			BAG_INFO OnReqBagList_arg2;
+			((DATATYPE_BAG_INFO*)pMethod->args[1])->createFromStreamEx(stream, OnReqBagList_arg2);
+			BAG_INFO OnReqBagList_arg3;
+			((DATATYPE_BAG_INFO*)pMethod->args[2])->createFromStreamEx(stream, OnReqBagList_arg3);
+			BAG_INFO OnReqBagList_arg4;
+			((DATATYPE_BAG_INFO*)pMethod->args[3])->createFromStreamEx(stream, OnReqBagList_arg4);
+			OnReqBagList(OnReqBagList_arg1, OnReqBagList_arg2, OnReqBagList_arg3, OnReqBagList_arg4);
 			break;
 		}
 		default:
@@ -137,7 +178,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 		switch(pProp->properUtype)
 		{
-			case 7:
+			case 11:
 			{
 				int16 oldval_BaseHP = BaseHP;
 				BaseHP = stream.readInt16();
@@ -155,7 +196,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 9:
+			case 13:
 			{
 				int16 oldval_Defense = Defense;
 				Defense = stream.readInt16();
@@ -173,7 +214,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 8:
+			case 12:
 			{
 				int16 oldval_HP = HP;
 				HP = stream.readInt16();
@@ -191,7 +232,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 5:
+			case 9:
 			{
 				FString oldval_Name = Name;
 				Name = stream.readUnicode();
@@ -209,7 +250,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 10:
+			case 14:
 			{
 				float oldval_PowerRatio = PowerRatio;
 				PowerRatio = stream.readFloat();
@@ -227,7 +268,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 6:
+			case 10:
 			{
 				uint8 oldval_RoleType = RoleType;
 				RoleType = stream.readUint8();
@@ -263,7 +304,7 @@ void PtRoleBase::onUpdatePropertys(MemoryStream& stream)
 
 				break;
 			}
-			case 11:
+			case 15:
 			{
 				float oldval_SpeedRatio = SpeedRatio;
 				SpeedRatio = stream.readFloat();
