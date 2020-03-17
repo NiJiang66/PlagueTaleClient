@@ -18,7 +18,7 @@ class PLAGUETALE_API APtGameHUD : public AHUD
 public:
 	virtual void BeginPlay() override;
 
-	void InitUI();
+	void InitActorAndUI();
 
 public:
 
@@ -26,5 +26,5 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UPtMainGameWidget> RoleWidgetClass;
 	UPROPERTY()
-	UPtMainGameWidget* RoleWidget;
+	UPtMainGameWidget* MainGameWidget;
 };

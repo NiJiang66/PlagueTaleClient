@@ -9,6 +9,7 @@
 class APtPlayerController;
 class UCameraComponent;
 class USpringArmComponent;
+class UPtMainGameWidget;
 
 /**
  * 游戏场景的玩家角色
@@ -43,6 +44,28 @@ protected:
 
 	void AnimUpdate();
 
+	/**	操作背包 */
+	void OperateBag();
+
+	/**	请求普通攻击 */
+	void RequestNormalAttack();
+
+	/**	四个技能的触发事件 */
+	void SkillOne();
+	void SkillTwo();
+	void SkillThree();
+	void SkillFour();
+
+	/**	请求使用技能 */
+	void RequestSkill(uint8 BlockId);
+
+	/**	三个Buff的触发事件 */
+	void BuffOne();
+	void BuffTwo();
+	void BuffThree();
+	/**	请求使用BUff */
+	void RequestBuff(uint8 BlockId);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -50,6 +73,10 @@ protected:
 public:
 	/**	游戏场景玩家控制器 */
 	APtPlayerController* MainController;
+
+	/**	游戏主界面 */
+	UPROPERTY()
+	UPtMainGameWidget* MainGameWidget;
 
 	UPROPERTY(EditAnywhere)
 	float TurnRate;
@@ -62,6 +89,11 @@ protected:
 	UPROPERTY(EditAnywhere)
 	USpringArmComponent* CameraBoom;
 
-	//更新动画到服务端定时器句柄
+	/**	更新动画到服务端定时器句柄 */
 	FTimerHandle AnimUpdateHandle;
+
+	/**	是否显示背包 */
+	UPROPERTY()
+	bool IsShowBag;
+
 };

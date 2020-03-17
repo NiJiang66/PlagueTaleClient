@@ -118,7 +118,7 @@ public:
 	/**	返回拖拽中的物品信息，如果没有则返回空信息 */
 	FGoodInfo GetHandGoodInfo() const;
 
-	/**	请求将拖拽中的物品放置回拖拽处 */
+	/**	释放拖拽物，请求将拖拽中的物品放置到拖拽处 */
 	void ReviseHandGood();
 
 	/**	清空背包数据 */

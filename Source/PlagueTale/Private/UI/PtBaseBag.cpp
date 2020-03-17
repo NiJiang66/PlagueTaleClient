@@ -3,8 +3,20 @@
 
 #include "PtBaseBag.h"
 #include "PtBagBlock.h"
+#include "Scripts/PtCommon.h"
 
 void UPtBaseBag::UpdateBlock(uint8 BlockId)
 {
-	BlockGroup[BlockId]->UpdateBlock();
+	TArray<UPtBagBlock*> Tmp;
+	for (int i = 0; i < BlockGroup.Num(); ++i) {
+		if (BlockGroup.IsValidIndex(i) && BlockGroup[i]) {
+			Tmp.Add(BlockGroup[i]);
+		}
+	}
+	BlockGroup.Emplace();
+	BlockGroup = Tmp;
+	if (BlockGroup.IsValidIndex(BlockId) && BlockGroup[BlockId]) {
+		BlockGroup[BlockId]->UpdateBlock();
+		PtH::Debug() << "UPtBaseBag::UpdateBlock!!!!!!!!``````" << PtH::Endl();
+	}
 }

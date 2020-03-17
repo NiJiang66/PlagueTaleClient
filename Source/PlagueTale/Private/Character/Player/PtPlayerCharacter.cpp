@@ -11,7 +11,10 @@
 #include "Scripts/PtEventData.h"
 #include "Animation/AnimInstance.h"
 #include "PTBaseCharacter.h"
-
+#include "PtMainGameWidget.h"
+#include "TimerManager.h"
+#include "PtDataMgr.h"
+#include "Scripts/PtCommon.h"
 
 APtPlayerCharacter::APtPlayerCharacter()
 {
@@ -73,6 +76,20 @@ void APtPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 
 	PlayerInputComponent->BindAxis("Turn", this, &APtPlayerCharacter::Turn);
 	PlayerInputComponent->BindAxis("LookUp", this, &APtPlayerCharacter::LookUp);
+
+	PlayerInputComponent->BindAction("OperateBag", IE_Pressed, this, &APtPlayerCharacter::OperateBag);
+
+	PlayerInputComponent->BindAction("NormalAttack", IE_Released, this, &APtPlayerCharacter::RequestNormalAttack);
+
+	PlayerInputComponent->BindAction("SkillOne", IE_Pressed, this, &APtPlayerCharacter::SkillOne);
+	PlayerInputComponent->BindAction("SkillTwo", IE_Pressed, this, &APtPlayerCharacter::SkillTwo);
+	PlayerInputComponent->BindAction("SkillThree", IE_Pressed, this, &APtPlayerCharacter::SkillThree);
+	PlayerInputComponent->BindAction("SkillFour", IE_Pressed, this, &APtPlayerCharacter::SkillFour);
+
+	PlayerInputComponent->BindAction("BuffOne", IE_Pressed, this, &APtPlayerCharacter::BuffOne);
+	PlayerInputComponent->BindAction("BuffTwo", IE_Pressed, this, &APtPlayerCharacter::BuffTwo);
+	PlayerInputComponent->BindAction("BuffThree", IE_Pressed, this, &APtPlayerCharacter::BuffThree);
+
 }
 
 void APtPlayerCharacter::SetBaseHP(int32 InBaseHP)
@@ -157,6 +174,101 @@ void APtPlayerCharacter::AnimUpdate()
 	//通知服务端更新动画
 	KBENGINE_EVENT_FIRE("AnimUpdate", EventData);
 }
+
+void APtPlayerCharacter::OperateBag()
+{
+	//如果血值为0, 不允许操作
+	if (HP == 0) {
+		return;
+	}		
+
+	IsShowBag = !IsShowBag;
+	//切换输入模式
+	if (MainController) {
+		MainController->SwitchInputMode(IsShowBag);
+	}
+	//通知MainGameWidget显示隐藏背包UI
+	if (MainGameWidget) {
+		MainGameWidget->OpenOrCloseBag(IsShowBag);
+	}
+}
+
+void APtPlayerCharacter::RequestNormalAttack()
+{
+
+	PtH::Debug() << "APtPlayerCharacter::RequestNormalAttack " << PtH::Endl();
+}
+
+void APtPlayerCharacter::SkillOne()
+{
+	RequestSkill(0);
+}
+
+void APtPlayerCharacter::SkillTwo()
+{
+	RequestSkill(1);
+}
+
+void APtPlayerCharacter::SkillThree()
+{
+	RequestSkill(2);
+}
+
+void APtPlayerCharacter::SkillFour()
+{
+	RequestSkill(3);
+}
+
+void APtPlayerCharacter::RequestSkill(uint8 BlockId)
+{
+	//如果正在操作UI或者已经死亡, 不触发攻击
+	if (IsShowBag || HP == 0) {
+		return;
+	}
+
+	//如果当前被选中的技能框不存在技能, 直接返回
+	if (!UPtDataMgr::Get()->IsGoodExit(EBagType::SkillBag, BlockId)) {
+		return;
+	}		
+
+	//告诉服务器减少物品
+	UKBEventData_ReduceGood* EventData = NewObject<UKBEventData_ReduceGood>();
+	EventData->BagType = (uint8)EBagType::SkillBag;
+	EventData->BlockId = BlockId;
+	KBENGINE_EVENT_FIRE("ReduceGood", EventData);
+	PtH::Debug() << "APtPlayerCharacter::RequestAttack: " << BlockId << PtH::Endl();
+}
+
+void APtPlayerCharacter::BuffOne()
+{
+	RequestBuff(0);
+}
+
+void APtPlayerCharacter::BuffTwo()
+{
+	RequestBuff(1);
+}
+
+void APtPlayerCharacter::BuffThree()
+{
+	RequestBuff(2);
+}
+
+void APtPlayerCharacter::RequestBuff(uint8 BlockId)
+{
+	//先判断是否有物品
+	if (!UPtDataMgr::Get()->IsGoodExit(EBagType::BuffBag, BlockId)) {
+		return;
+	}		
+
+	//告诉服务器减少物品
+	UKBEventData_ReduceGood* EventData = NewObject<UKBEventData_ReduceGood>();
+	EventData->BagType = (uint8)EBagType::BuffBag;
+	EventData->BlockId = BlockId;
+	KBENGINE_EVENT_FIRE("ReduceGood", EventData);
+	PtH::Debug() << "APtPlayerCharacter::RequestBuff: " << BlockId << PtH::Endl();
+}
+
 
 void APtPlayerCharacter::BeginPlay()
 {

@@ -173,7 +173,7 @@ void UPtLoginUserWidget::RequestComplete(FHttpRequestPtr RequestPtr, FHttpRespon
 		if (!Nickname.IsEmpty())
 		{
 			//获取到自定义的GameInstance
-			UPTGameInstance* GameInstace = Cast<UPTGameInstance>(GetWorld()->GetGameInstance());
+			UPtGameInstance* GameInstace = Cast<UPtGameInstance>(GetWorld()->GetGameInstance());
 			//把id保存到GameInstance
 			GameInstace->ContextMap.Add("id", Id);
 			//关卡的切换

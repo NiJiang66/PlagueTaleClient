@@ -35,7 +35,7 @@ void UPtLoadUserWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 	}
 	else
 	{
-		PtGameInstance = Cast<UPTGameInstance>(GetGameInstance());
+		PtGameInstance = Cast<UPtGameInstance>(GetGameInstance());
 	}
 }
 

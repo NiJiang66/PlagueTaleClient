@@ -10,6 +10,8 @@ class APtPlayerCharacter;
 class APtRemotePlayerCharacter;
 class APtBaseCharacter;
 class APtEnemyCharacter;
+class APtSkillActor;
+class APtFlobActor;
 
 /**
  * 主游戏场景的游戏模式
@@ -60,6 +62,12 @@ protected:
 	/**	设置速度加成 */
 	void SetSpeedRatio(const UKBEventData* EventData);
 
+	/**	离开房间返回大厅 */
+	void OnLeaveRoom(const UKBEventData* EventData);
+
+	/**	玩家进入游戏场景 */
+	void AddSpaceGeometryMapping(const UKBEventData* EventData);
+
 public:
 
 	/**	玩家角色类型列表 */
@@ -79,8 +87,22 @@ public:
 	UPROPERTY()
 	TMap<int32, APtBaseCharacter*> OtherCharacters;
 
+	/**	技能类型列表 */
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<APtSkillActor>> SkillClassList;
 
+	/**	保存释放出来的技能 */
+	UPROPERTY()
+	TMap<int32, APtSkillActor*> SkillMap;
+
+	/**	掉落物类型列表 */
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<APtFlobActor>> FlobClassList;
+
+	/**	保存掉落物 */
+	UPROPERTY()
+	TMap<int32, APtFlobActor*> FlobMap;
 
 	/** 保存主游戏关卡界面 */
-	class UPtMainGameWidget* RoleWidget;
+	class UPtMainGameWidget* MainGameWidget;
 };

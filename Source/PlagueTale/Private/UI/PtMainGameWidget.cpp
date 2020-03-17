@@ -23,6 +23,8 @@ void UPtMainGameWidget::InstallEvents(FText RoomName)
 	//设置房间名字
 	RoomText->SetText(RoomName);
 
+	//先重置背包数据
+	UPtDataMgr::Get()->ClearBagData();
 	//绑定更新背包格子委托, 这样子修改数据的背包格子物品就可以直接更新UI了
 	UPtDataMgr::Get()->UpdateBagBlockDel.BindUObject(this, &UPtMainGameWidget::UpdateBagBlock);
 
@@ -65,19 +67,58 @@ void UPtMainGameWidget::SetHPPercent(float InPercent)
 	}
 }
 
+void UPtMainGameWidget::SetBaseHP(int32 InBaseHP)
+{
+	EquipBag->SetBaseHP(InBaseHP);
+}
+
 void UPtMainGameWidget::SetDefense(int32 InDefense)
 {
-	//待补充
+	EquipBag->SetDefense(InDefense);
 }
 
 void UPtMainGameWidget::SetPowerRatio(float InPowerRatio)
 {
-
+	EquipBag->SetPowerRatio(InPowerRatio);
 }
 
 void UPtMainGameWidget::SetSpeedRatio(float InSpeedRatio)
 {
+	EquipBag->SetSpeedRatio(InSpeedRatio);
+}
 
+void UPtMainGameWidget::OpenOrCloseBag(bool IsOpen)
+{
+	if (IsOpen) {
+		MainBag->SetVisibility(ESlateVisibility::Visible);
+		EquipBag->SetVisibility(ESlateVisibility::Visible);
+	}
+	else {
+		MainBag->SetVisibility(ESlateVisibility::Hidden);
+		EquipBag->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void UPtMainGameWidget::OnPlayerDead()
+{
+	//保存背包数据, 如果当前手上有物品
+	UPtDataMgr::Get()->ReviseHandGood();
+	//隐藏背包
+	OpenOrCloseBag(false);
+
+	//显示复活按钮
+	ReliveBox->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UPtMainGameWidget::OnPlayerRelive()
+{
+	//隐藏复活按钮
+	ReliveBox->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UPtMainGameWidget::ReviseDragGood()
+{
+	UPtDataMgr::Get()->ReviseHandGood();
 }
 
 void UPtMainGameWidget::ReliveEvent()

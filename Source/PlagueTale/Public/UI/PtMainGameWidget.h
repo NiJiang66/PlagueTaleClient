@@ -40,12 +40,26 @@ public:
 	void SetName(FString InName);
 	/**	设置血量百分比显示 */
 	void SetHPPercent(float InPercent);
+
+	/**	设置基础生命值显示 */
+	void SetBaseHP(int32 InBaseHP);
 	/**	设置防御值显示 */
 	void SetDefense(int32 InDefense);
 	/**	设置力量值显示 */
 	void SetPowerRatio(float InPowerRatio);
 	/**	设置速度值显示 */
 	void SetSpeedRatio(float InSpeedRatio);
+
+	/**	显示与关闭背包界面 */
+	void OpenOrCloseBag(bool IsOpen);
+	/**	玩家死亡时 */
+	void OnPlayerDead();
+	/**	玩家复活时 */
+	void OnPlayerRelive();
+
+	/**	释放拖拽物，请求将拖拽中的物品放置到拖拽处 */
+	UFUNCTION(BlueprintCallable)
+	void ReviseDragGood();
 
 public:
 

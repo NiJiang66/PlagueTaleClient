@@ -141,21 +141,56 @@ void KBEngine::PtRole::OnIncreaseGood(uint8 arg1, const GOOD_INFO& arg2)
 	UKBEventData_OnIncreaseGood* EventData = NewObject<UKBEventData_OnIncreaseGood>();
 	EventData->BagType = arg1;
 	EventData->GoodInfo.InitInfo(arg2.BlockId, arg2.GoodId, arg2.Number);
+	//告诉UE4客户端的APtGameWidget
 	KBENGINE_EVENT_FIRE("OnIncreaseGood", EventData);
 }
 
 void KBEngine::PtRole::OnPassGood(uint8 arg1, const GOOD_INFO& arg2, uint8 arg3, const GOOD_INFO& arg4)
 {
-
+	UKBEventData_OnPassGood* EventData = NewObject<UKBEventData_OnPassGood>();
+	EventData->ArcBagType = arg1;
+	EventData->ArcGoodInfo.InitInfo(arg2.BlockId, arg2.GoodId, arg2.Number);
+	EventData->DesBagType = arg3;
+	EventData->DesGoodInfo.InitInfo(arg4.BlockId, arg4.GoodId, arg4.Number);
+	//告诉UE4客户端的APtGameWidget
+	KBENGINE_EVENT_FIRE("OnPassGood", EventData);
 }
 
 void KBEngine::PtRole::OnReduceGood(uint8 arg1, uint8 arg2, const GOOD_INFO& arg3)
 {
-
+	UKBEventData_OnReduceGood* EventData = NewObject<UKBEventData_OnReduceGood>();
+	EventData->ReduceRes = arg1;
+	EventData->BagType = arg2;
+	EventData->GoodInfo.InitInfo(arg3.BlockId, arg3.GoodId, arg3.Number);
+	//告诉UE4客户端的APtGameWidget
+	KBENGINE_EVENT_FIRE("OnReduceGood", EventData);
 }
 
 void KBEngine::PtRole::OnReqBagList(const BAG_INFO& arg1, const BAG_INFO& arg2, const BAG_INFO& arg3, const BAG_INFO& arg4)
 {
+	UKBEventData_OnReqBagList* EventData = NewObject<UKBEventData_OnReqBagList>();
 
+	for (auto Info : arg1.Value) {
+		FGOOD_INFO GoodInfo;
+		GoodInfo.InitInfo(Info.BlockId, Info.GoodId, Info.Number);
+		EventData->MainBag.Add(GoodInfo);
+	}
+	for (auto Info : arg2.Value) {
+		FGOOD_INFO GoodInfo;
+		GoodInfo.InitInfo(Info.BlockId, Info.GoodId, Info.Number);
+		EventData->SkillBag.Add(GoodInfo);
+	}
+	for (auto Info : arg3.Value) {
+		FGOOD_INFO GoodInfo;
+		GoodInfo.InitInfo(Info.BlockId, Info.GoodId, Info.Number);
+		EventData->BuffBag.Add(GoodInfo);
+	}
+	for (auto Info : arg4.Value) {
+		FGOOD_INFO GoodInfo;
+		GoodInfo.InitInfo(Info.BlockId, Info.GoodId, Info.Number);
+		EventData->EquipBag.Add(GoodInfo);
+	}
+
+	KBENGINE_EVENT_FIRE("OnReqBagList", EventData);
 }
 

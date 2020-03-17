@@ -12,21 +12,21 @@
 
 
 /** 初始化方法 */
-void UPTGameInstance::Init()
+void UPtGameInstance::Init()
 {
 	UGameInstance::Init();
 
 	//开始加载地图的委托
-	FCoreUObjectDelegates::PreLoadMap.AddUObject(this, &UPTGameInstance::PreLoadMap);
+	FCoreUObjectDelegates::PreLoadMap.AddUObject(this, &UPtGameInstance::PreLoadMap);
 	//结束加载地图的委托
-	FCoreUObjectDelegates::PostLoadMapWithWorld.AddUObject(this, &UPTGameInstance::PostLoadMap);
+	FCoreUObjectDelegates::PostLoadMapWithWorld.AddUObject(this, &UPtGameInstance::PostLoadMap);
 
 	//初始化加载Widget
 	LoadWidget = CreateWidget<UPtLoadUserWidget>(this, LoadClass<UPtLoadUserWidget>(this, TEXT("WidgetBlueprint'/Game/UI/PTLoadUserWidget_BP.PTLoadUserWidget_BP_C'")));
 }
 
 /** 地图加载开始的方法 */
-void UPTGameInstance::PreLoadMap(const FString& Map)
+void UPtGameInstance::PreLoadMap(const FString& Map)
 {
 	//判断是否是加载的主关卡//暂时加载关卡都要显示load界面
 	//if (Map.Equals("/Game/Map/Map_Main"))
@@ -34,7 +34,7 @@ void UPTGameInstance::PreLoadMap(const FString& Map)
 		//创建一个屏幕加载属性对象
 		FLoadingScreenAttributes LoadingAttr;
 		//手动的点击跳过加载
-		LoadingAttr.bWaitForManualStop = true;
+		LoadingAttr.bWaitForManualStop = false;
 		//设置加载的Widget
 		LoadingAttr.WidgetLoadingScreen = LoadWidget->TakeWidget();
 		//设置开始加载
@@ -45,12 +45,12 @@ void UPTGameInstance::PreLoadMap(const FString& Map)
 }
 
 /** 地图加载结束的方法 */
-void UPTGameInstance::PostLoadMap(UWorld* World)
+void UPtGameInstance::PostLoadMap(UWorld* World)
 {
 }
 
 /** 是否加载完成 */
-bool UPTGameInstance::GetLoadStatus()
+bool UPtGameInstance::GetLoadStatus()
 {
 	//返回是否已经加载完成
 	return GetMoviePlayer()->IsLoadingFinished();

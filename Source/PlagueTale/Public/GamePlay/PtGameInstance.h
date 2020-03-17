@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
-#include "PTGameInstance.generated.h"
+#include "PtGameInstance.generated.h"
 
 /**
- * 
+ * 游戏实例
  */
 UCLASS()
-class PLAGUETALE_API UPTGameInstance : public UGameInstance
+class PLAGUETALE_API UPtGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 

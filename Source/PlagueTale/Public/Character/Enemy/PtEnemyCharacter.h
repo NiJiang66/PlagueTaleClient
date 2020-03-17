@@ -6,6 +6,10 @@
 #include "Character/PTBaseCharacter.h"
 #include "PtEnemyCharacter.generated.h"
 
+
+class UPtBloodBar;
+class UWidgetComponent;
+
 /**
  * 怪物角色类（敌人）
  */
@@ -17,4 +21,27 @@ public:
 	APtEnemyCharacter();
 
 	virtual void Tick(float DeltaTime) override;
+
+	/**	设置hp */
+	virtual void SetHP(int32 InHP) override;
+
+	/**	播放死亡动画 */
+	void PlayDeath();
+
+protected:
+	virtual void BeginPlay() override;
+
+	/**	销毁怪物 */
+	void MonsterDestroy();
+
+public:
+	/**	血条UIComponent */
+	UPROPERTY(EditAnywhere)
+	UWidgetComponent* BloodBarComponent;
+
+protected:
+	/**	血量Var */
+	UPtBloodBar* BloodBar;
+	/**	计时器 */
+	FTimerHandle DestroyHandle;
 };

@@ -45,6 +45,6 @@ public:
 private:
 
 	/** 保存游戏实例 */
-	class UPTGameInstance* PtGameInstance = nullptr;
+	class UPtGameInstance* PtGameInstance = nullptr;
 
 };

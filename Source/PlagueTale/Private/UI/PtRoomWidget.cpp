@@ -34,7 +34,7 @@ void UPtRoomWidget::EnterGameEvent()
 		if (RoomItemGroup[i]->IsSelected)
 		{
 			//保存选中的房间名称到GameInstance
-			UPTGameInstance* GameInstance = Cast<UPTGameInstance>(UGameplayStatics::GetGameInstance(this));
+			UPtGameInstance* GameInstance = Cast<UPtGameInstance>(UGameplayStatics::GetGameInstance(this));
 			GameInstance->RoomName = FText::FromString(RoomItemGroup[i]->RoomInfo.Name);
 
 			//通知服务器

@@ -29,7 +29,7 @@ UPtDataMgr* UPtDataMgr::Get()
 void UPtDataMgr::LoadTotalData()
 {
 	TotalData = LoadObject<UPtDataAsset>(NULL, TEXT("PtDataAsset'/Game/Blueprint/Data/TotalData.TotalData'"));
-
+	
 	GoodDatas.Empty();
 	GoodDatas.Add(0, FGoodData(EGoodType::Skill, 0));
 	GoodDatas.Add(1, FGoodData(EGoodType::Skill, 1));
@@ -102,7 +102,8 @@ void UPtDataMgr::ChangeGoodInfo(EBagType BagType, FGoodInfo GoodInfo)
 			MainBag.Remove(GoodInfo.BlockId);
 			break;
 		case EBagType::SkillBag:
-			SkillBag.Remove(GoodInfo.BlockId);
+			//技能不消耗，只进行冷却，ToDo
+			//SkillBag.Remove(GoodInfo.BlockId);
 			break;
 		case EBagType::BuffBag:
 			BuffBag.Remove(GoodInfo.BlockId);

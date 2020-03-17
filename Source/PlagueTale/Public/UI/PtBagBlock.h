@@ -54,7 +54,7 @@ public:
 	uint8 BlockId;
 
 	/**	物品Item的UserWidget类型 */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TSubclassOf<UPtGoodItem> GoodItemClass;
 
 	/**	保存物品Item的UserWidget */

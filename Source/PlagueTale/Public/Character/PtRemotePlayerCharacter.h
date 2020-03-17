@@ -21,6 +21,10 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void SetBaseHP(int32 InBaseHP) override;
+
+	virtual void SetHP(int32 InHP) override;
+
 protected:
 	/**	用于更新动画的检测跳跃 */
 	UFUNCTION()
@@ -32,9 +36,13 @@ public:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* GroundBox;
 
+	UPROPERTY(EditAnywhere)
+	class UWidgetComponent* BloodBarComponent;
+
 protected:
 	/**	地面名称，这里直接与地图里的地面mesh名称要相同，也就是地面mesh取名为"Ground" ，
 		同时要开始地面MeshActor的GenerateOverlapEvents */
 	static FName GroundName;
 
+	class UPtBloodBar* BloodBar;
 };

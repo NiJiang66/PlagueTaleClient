@@ -4,6 +4,9 @@
 #include "PtRemotePlayerCharacter.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/WidgetComponent.h"
+#include "PtBloodBar.h"
+#include "Animation/AnimInstance.h"
 
 FName APtRemotePlayerCharacter::GroundName(TEXT("Ground"));
 
@@ -24,6 +27,9 @@ APtRemotePlayerCharacter::APtRemotePlayerCharacter()
 	FScriptDelegate OverlapEnd;
 	OverlapEnd.BindUFunction(this, "OnOverlapEnd");
 	GroundBox->OnComponentEndOverlap.Add(OverlapEnd);
+
+	BloodBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("BloodBar"));
+	BloodBarComponent->SetupAttachment(RootComponent);
 }
 
 void APtRemotePlayerCharacter::Tick(float DeltaTime)
@@ -57,6 +63,41 @@ void APtRemotePlayerCharacter::Tick(float DeltaTime)
 	Speed_Anim = FMath::Lerp(TargetSpeed, LastSpeed, AnimLerpPercent);
 	Direction_Anim = FMath::Lerp(TargetDirection, LastDirection, AnimLerpPercent);
 
+}
+
+void APtRemotePlayerCharacter::SetBaseHP(int32 InBaseHP)
+{
+	//增加血值上限
+	if (InBaseHP > BaseHP) {
+		//直接保存到本地, 不进行血值的修改
+		BaseHP = InBaseHP;
+	}
+	else if (InBaseHP < BaseHP) {
+		//判断是否当前血值比新血值小
+		if (HP > InBaseHP) {
+			HP = InBaseHP;
+			BaseHP = InBaseHP;
+		}
+	}
+
+	//远端玩家要更新血条
+	float HPPercent = FMath::Clamp((float)HP / (float)BaseHP, 0.f, 1.f);
+	if (BloodBar) {
+		BloodBar->SetHPPercent(HPPercent);
+	}		
+}
+
+void APtRemotePlayerCharacter::SetHP(int32 InHP)
+{
+	if (InHP > 0 && InHP < BaseHP && HP != 0 && InHP != HP && CharacterAnim) {
+		//播放受伤动画
+		CharacterAnim->Montage_Play(HurtMontage);
+	}
+
+	HP = InHP;
+
+	float HPPercent = FMath::Clamp((float)HP / (float)BaseHP, 0.f, 1.f);
+	if (BloodBar){ BloodBar->SetHPPercent(HPPercent); }		
 }
 
 void APtRemotePlayerCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
