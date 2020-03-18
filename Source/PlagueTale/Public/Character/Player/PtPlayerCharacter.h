@@ -52,6 +52,8 @@ protected:
 
 	/**	操作背包 */
 	void OperateBag();
+	/**	开始在聊天框输入 */
+	void StartWriteMessage();
 
 	/**	请求普通攻击 */
 	void RequestNormalAttack();

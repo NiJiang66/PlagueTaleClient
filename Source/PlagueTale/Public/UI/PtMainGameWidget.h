@@ -15,6 +15,7 @@ class UPtSkillBag;
 class UPtBuffBag;
 class UPtEquipBag;
 class UPtMainBag;
+class UPtChatRoom;
 class APtPlayerCharacter;
 
 /**
@@ -52,6 +53,9 @@ public:
 
 	/**	显示与关闭背包界面 */
 	void OpenOrCloseBag(bool IsOpen);
+	/**	显示聊天框并开始输入 */
+	void StartWriteMessage();
+
 	/**	玩家死亡时 */
 	void OnPlayerDead();
 	/**	玩家复活时 */
@@ -102,4 +106,8 @@ public:
 
 	UPROPERTY(Meta = (BindWidget))
 	UPtMainBag* MainBag;
+
+	UPROPERTY(Meta = (BindWidget))
+	UPtChatRoom* ChatRoom;
+
 };

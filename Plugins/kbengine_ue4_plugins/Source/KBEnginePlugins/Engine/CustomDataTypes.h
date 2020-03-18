@@ -179,4 +179,48 @@ public:
 };
 
 
+class KBENGINEPLUGINS_API DATATYPE_CHAT_INFO : DATATYPE_BASE
+{
+public:
+	void createFromStreamEx(MemoryStream& stream, CHAT_INFO& datas);
+	void addToStreamEx(Bundle& stream, const CHAT_INFO& v);
+};
+
+
+class KBENGINEPLUGINS_API DATATYPE_CHAT_LIST : DATATYPE_BASE
+{
+public:
+	class KBENGINEPLUGINS_API DATATYPE__CHAT_LIST_Value_ArrayType_ChildArray : public DATATYPE_BASE
+	{
+	public:
+		DATATYPE_CHAT_INFO itemType;
+
+		void createFromStreamEx(MemoryStream& stream, TArray<CHAT_INFO>& datas)
+		{
+			uint32 size = stream.readUint32();
+			while(size > 0)
+			{
+				--size;
+				itemType.createFromStreamEx(stream, datas.EmplaceAt_GetRef(datas.Num()));
+			};
+
+		}
+
+		void addToStreamEx(Bundle& stream, const TArray<CHAT_INFO>& v)
+		{
+			stream.writeUint32((uint32)v.Num());
+			for(int i=0; i<v.Num(); ++i)
+			{
+				itemType.addToStreamEx(stream, v[i]);
+			};
+		}
+	};
+
+	DATATYPE__CHAT_LIST_Value_ArrayType_ChildArray Value_DataType;
+
+	void createFromStreamEx(MemoryStream& stream, CHAT_LIST& datas);
+	void addToStreamEx(Bundle& stream, const CHAT_LIST& v);
+};
+
+
 }

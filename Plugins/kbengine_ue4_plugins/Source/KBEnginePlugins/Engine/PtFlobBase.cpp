@@ -89,7 +89,7 @@ void PtFlobBase::onUpdatePropertys(MemoryStream& stream)
 
 		switch(pProp->properUtype)
 		{
-			case 36:
+			case 37:
 			{
 				uint8 oldval_GoodId = GoodId;
 				GoodId = stream.readUint8();

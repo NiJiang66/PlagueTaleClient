@@ -41,6 +41,10 @@ namespace KBEngine
 		/**	请求所有背包数据					，服务器对客户端的回调 */
 		virtual void OnReqBagList(const BAG_INFO& arg1, const BAG_INFO& arg2, const BAG_INFO& arg3, const BAG_INFO& arg4) override;
 
+
+		/** 接受服务端更新过来的聊天信息 */
+		virtual void OnAcceptChatList(const CHAT_LIST& arg1) override;
+
 	protected:
 		void Attack(uint8 SkillId, FVector SpawnPos, FVector TargetPos);
 	};

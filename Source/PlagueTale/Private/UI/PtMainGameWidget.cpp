@@ -16,7 +16,7 @@
 #include "PtBuffBag.h"
 #include "PtEquipBag.h"
 #include "PtMainBag.h"
-
+#include "PtChatRoom.h"
 
 void UPtMainGameWidget::InstallEvents(FText RoomName)
 {
@@ -34,7 +34,8 @@ void UPtMainGameWidget::InstallEvents(FText RoomName)
 	KBENGINE_REGISTER_EVENT("OnPassGood", OnPassGood);
 	KBENGINE_REGISTER_EVENT("OnReduceGood", OnReduceGood);
 
-
+	//注册接受聊天消息事件
+	ChatRoom->InstallEvent();
 }
 
 void UPtMainGameWidget::UnInstallEvents()
@@ -97,6 +98,11 @@ void UPtMainGameWidget::OpenOrCloseBag(bool IsOpen)
 		MainBag->SetVisibility(ESlateVisibility::Hidden);
 		EquipBag->SetVisibility(ESlateVisibility::Hidden);
 	}
+}
+
+void UPtMainGameWidget::StartWriteMessage()
+{
+	ChatRoom->ShowOrHideInput(true, true);
 }
 
 void UPtMainGameWidget::OnPlayerDead()

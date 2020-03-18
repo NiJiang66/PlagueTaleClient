@@ -89,7 +89,7 @@ void PtSkillBase::onUpdatePropertys(MemoryStream& stream)
 
 		switch(pProp->properUtype)
 		{
-			case 40:
+			case 41:
 			{
 				uint8 oldval_SkillId = SkillId;
 				SkillId = stream.readUint8();

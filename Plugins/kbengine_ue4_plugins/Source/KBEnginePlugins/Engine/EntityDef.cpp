@@ -433,7 +433,7 @@ void EntityDef::initScriptModules()
 
 	Property* pPtRole_BaseHP = new Property();
 	pPtRole_BaseHP->name = TEXT("BaseHP");
-	pPtRole_BaseHP->properUtype = 11;
+	pPtRole_BaseHP->properUtype = 12;
 	pPtRole_BaseHP->properFlags = 4;
 	pPtRole_BaseHP->aliasID = 4;
 	KBVar* pPtRole_BaseHP_defval = new KBVar((int16)FCString::Atoi64(TEXT("500")));
@@ -443,11 +443,11 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_BaseHP->aliasID, pPtRole_BaseHP);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(BaseHP / 11).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(BaseHP / 12).");
 
 	Property* pPtRole_Defense = new Property();
 	pPtRole_Defense->name = TEXT("Defense");
-	pPtRole_Defense->properUtype = 13;
+	pPtRole_Defense->properUtype = 14;
 	pPtRole_Defense->properFlags = 16;
 	pPtRole_Defense->aliasID = 5;
 	KBVar* pPtRole_Defense_defval = new KBVar((int16)FCString::Atoi64(TEXT("10")));
@@ -457,11 +457,11 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_Defense->aliasID, pPtRole_Defense);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(Defense / 13).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(Defense / 14).");
 
 	Property* pPtRole_HP = new Property();
 	pPtRole_HP->name = TEXT("HP");
-	pPtRole_HP->properUtype = 12;
+	pPtRole_HP->properUtype = 13;
 	pPtRole_HP->properFlags = 4;
 	pPtRole_HP->aliasID = 6;
 	KBVar* pPtRole_HP_defval = new KBVar((int16)FCString::Atoi64(TEXT("500")));
@@ -471,11 +471,11 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_HP->aliasID, pPtRole_HP);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(HP / 12).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(HP / 13).");
 
 	Property* pPtRole_Name = new Property();
 	pPtRole_Name->name = TEXT("Name");
-	pPtRole_Name->properUtype = 9;
+	pPtRole_Name->properUtype = 10;
 	pPtRole_Name->properFlags = 4;
 	pPtRole_Name->aliasID = 7;
 	KBVar* pPtRole_Name_defval = new KBVar(FString());
@@ -485,11 +485,11 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_Name->aliasID, pPtRole_Name);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(Name / 9).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(Name / 10).");
 
 	Property* pPtRole_PowerRatio = new Property();
 	pPtRole_PowerRatio->name = TEXT("PowerRatio");
-	pPtRole_PowerRatio->properUtype = 14;
+	pPtRole_PowerRatio->properUtype = 15;
 	pPtRole_PowerRatio->properFlags = 16;
 	pPtRole_PowerRatio->aliasID = 8;
 	KBVar* pPtRole_PowerRatio_defval = new KBVar(FCString::Atof(TEXT("1.0")));
@@ -499,11 +499,11 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_PowerRatio->aliasID, pPtRole_PowerRatio);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(PowerRatio / 14).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(PowerRatio / 15).");
 
 	Property* pPtRole_RoleType = new Property();
 	pPtRole_RoleType->name = TEXT("RoleType");
-	pPtRole_RoleType->properUtype = 10;
+	pPtRole_RoleType->properUtype = 11;
 	pPtRole_RoleType->properFlags = 4;
 	pPtRole_RoleType->aliasID = 9;
 	KBVar* pPtRole_RoleType_defval = new KBVar((uint8)FCString::Atoi64(TEXT("")));
@@ -513,7 +513,7 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_RoleType->aliasID, pPtRole_RoleType);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(RoleType / 10).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(RoleType / 11).");
 
 	Property* pPtRole_SpawnPoint = new Property();
 	pPtRole_SpawnPoint->name = TEXT("SpawnPoint");
@@ -531,7 +531,7 @@ void EntityDef::initScriptModules()
 
 	Property* pPtRole_SpeedRatio = new Property();
 	pPtRole_SpeedRatio->name = TEXT("SpeedRatio");
-	pPtRole_SpeedRatio->properUtype = 15;
+	pPtRole_SpeedRatio->properUtype = 16;
 	pPtRole_SpeedRatio->properFlags = 16;
 	pPtRole_SpeedRatio->aliasID = 11;
 	KBVar* pPtRole_SpeedRatio_defval = new KBVar(FCString::Atof(TEXT("1.0")));
@@ -541,37 +541,52 @@ void EntityDef::initScriptModules()
 	pPtRoleModule->usePropertyDescrAlias = true;
 	pPtRoleModule->idpropertys.Add((uint16)pPtRole_SpeedRatio->aliasID, pPtRole_SpeedRatio);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(SpeedRatio / 15).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), property(SpeedRatio / 16).");
+
+	TArray<DATATYPE_BASE*> PtRole_OnAcceptChatList_args;
+	PtRole_OnAcceptChatList_args.Add(EntityDef::id2datatypes[36]);
+
+	Method* pPtRole_OnAcceptChatList = new Method();
+	pPtRole_OnAcceptChatList->name = TEXT("OnAcceptChatList");
+	pPtRole_OnAcceptChatList->methodUtype = 23;
+	pPtRole_OnAcceptChatList->aliasID = 1;
+	pPtRole_OnAcceptChatList->args = PtRole_OnAcceptChatList_args;
+
+	pPtRoleModule->methods.Add(TEXT("OnAcceptChatList"), pPtRole_OnAcceptChatList); 
+	pPtRoleModule->useMethodDescrAlias = true;
+	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnAcceptChatList->aliasID, pPtRole_OnAcceptChatList);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnAcceptChatList / 23).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnAnimUpdate_args;
 	PtRole_OnAnimUpdate_args.Add(EntityDef::id2datatypes[30]);
 
 	Method* pPtRole_OnAnimUpdate = new Method();
 	pPtRole_OnAnimUpdate->name = TEXT("OnAnimUpdate");
-	pPtRole_OnAnimUpdate->methodUtype = 30;
-	pPtRole_OnAnimUpdate->aliasID = 1;
+	pPtRole_OnAnimUpdate->methodUtype = 32;
+	pPtRole_OnAnimUpdate->aliasID = 2;
 	pPtRole_OnAnimUpdate->args = PtRole_OnAnimUpdate_args;
 
 	pPtRoleModule->methods.Add(TEXT("OnAnimUpdate"), pPtRole_OnAnimUpdate); 
 	pPtRoleModule->useMethodDescrAlias = true;
 	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnAnimUpdate->aliasID, pPtRole_OnAnimUpdate);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnAnimUpdate / 30).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnAnimUpdate / 32).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnAttack_args;
 	PtRole_OnAttack_args.Add(EntityDef::id2datatypes[2]);
 
 	Method* pPtRole_OnAttack = new Method();
 	pPtRole_OnAttack->name = TEXT("OnAttack");
-	pPtRole_OnAttack->methodUtype = 28;
-	pPtRole_OnAttack->aliasID = 2;
+	pPtRole_OnAttack->methodUtype = 30;
+	pPtRole_OnAttack->aliasID = 3;
 	pPtRole_OnAttack->args = PtRole_OnAttack_args;
 
 	pPtRoleModule->methods.Add(TEXT("OnAttack"), pPtRole_OnAttack); 
 	pPtRoleModule->useMethodDescrAlias = true;
 	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnAttack->aliasID, pPtRole_OnAttack);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnAttack / 28).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnAttack / 30).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnIncreaseGood_args;
 	PtRole_OnIncreaseGood_args.Add(EntityDef::id2datatypes[2]);
@@ -579,15 +594,15 @@ void EntityDef::initScriptModules()
 
 	Method* pPtRole_OnIncreaseGood = new Method();
 	pPtRole_OnIncreaseGood->name = TEXT("OnIncreaseGood");
-	pPtRole_OnIncreaseGood->methodUtype = 19;
-	pPtRole_OnIncreaseGood->aliasID = 3;
+	pPtRole_OnIncreaseGood->methodUtype = 20;
+	pPtRole_OnIncreaseGood->aliasID = 4;
 	pPtRole_OnIncreaseGood->args = PtRole_OnIncreaseGood_args;
 
 	pPtRoleModule->methods.Add(TEXT("OnIncreaseGood"), pPtRole_OnIncreaseGood); 
 	pPtRoleModule->useMethodDescrAlias = true;
 	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnIncreaseGood->aliasID, pPtRole_OnIncreaseGood);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnIncreaseGood / 19).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnIncreaseGood / 20).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnPassGood_args;
 	PtRole_OnPassGood_args.Add(EntityDef::id2datatypes[2]);
@@ -597,15 +612,15 @@ void EntityDef::initScriptModules()
 
 	Method* pPtRole_OnPassGood = new Method();
 	pPtRole_OnPassGood->name = TEXT("OnPassGood");
-	pPtRole_OnPassGood->methodUtype = 21;
-	pPtRole_OnPassGood->aliasID = 4;
+	pPtRole_OnPassGood->methodUtype = 22;
+	pPtRole_OnPassGood->aliasID = 5;
 	pPtRole_OnPassGood->args = PtRole_OnPassGood_args;
 
 	pPtRoleModule->methods.Add(TEXT("OnPassGood"), pPtRole_OnPassGood); 
 	pPtRoleModule->useMethodDescrAlias = true;
 	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnPassGood->aliasID, pPtRole_OnPassGood);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnPassGood / 21).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnPassGood / 22).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnReduceGood_args;
 	PtRole_OnReduceGood_args.Add(EntityDef::id2datatypes[2]);
@@ -614,15 +629,15 @@ void EntityDef::initScriptModules()
 
 	Method* pPtRole_OnReduceGood = new Method();
 	pPtRole_OnReduceGood->name = TEXT("OnReduceGood");
-	pPtRole_OnReduceGood->methodUtype = 20;
-	pPtRole_OnReduceGood->aliasID = 5;
+	pPtRole_OnReduceGood->methodUtype = 21;
+	pPtRole_OnReduceGood->aliasID = 6;
 	pPtRole_OnReduceGood->args = PtRole_OnReduceGood_args;
 
 	pPtRoleModule->methods.Add(TEXT("OnReduceGood"), pPtRole_OnReduceGood); 
 	pPtRoleModule->useMethodDescrAlias = true;
 	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnReduceGood->aliasID, pPtRole_OnReduceGood);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnReduceGood / 20).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnReduceGood / 21).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnReqBagList_args;
 	PtRole_OnReqBagList_args.Add(EntityDef::id2datatypes[32]);
@@ -632,15 +647,15 @@ void EntityDef::initScriptModules()
 
 	Method* pPtRole_OnReqBagList = new Method();
 	pPtRole_OnReqBagList->name = TEXT("OnReqBagList");
-	pPtRole_OnReqBagList->methodUtype = 18;
-	pPtRole_OnReqBagList->aliasID = 6;
+	pPtRole_OnReqBagList->methodUtype = 19;
+	pPtRole_OnReqBagList->aliasID = 7;
 	pPtRole_OnReqBagList->args = PtRole_OnReqBagList_args;
 
 	pPtRoleModule->methods.Add(TEXT("OnReqBagList"), pPtRole_OnReqBagList); 
 	pPtRoleModule->useMethodDescrAlias = true;
 	pPtRoleModule->idmethods.Add((uint16)pPtRole_OnReqBagList->aliasID, pPtRole_OnReqBagList);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnReqBagList / 18).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnReqBagList / 19).");
 
 	TArray<DATATYPE_BASE*> PtRole_PassGood_args;
 	PtRole_PassGood_args.Add(EntityDef::id2datatypes[2]);
@@ -693,12 +708,28 @@ void EntityDef::initScriptModules()
 
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(ReqBagList / 14).");
 
+	TArray<DATATYPE_BASE*> PtRole_SendChatInfo_args;
+	PtRole_SendChatInfo_args.Add(EntityDef::id2datatypes[12]);
+
+	Method* pPtRole_SendChatInfo = new Method();
+	pPtRole_SendChatInfo->name = TEXT("SendChatInfo");
+	pPtRole_SendChatInfo->methodUtype = 18;
+	pPtRole_SendChatInfo->aliasID = -1;
+	pPtRole_SendChatInfo->args = PtRole_SendChatInfo_args;
+
+	pPtRoleModule->methods.Add(TEXT("SendChatInfo"), pPtRole_SendChatInfo); 
+	pPtRoleModule->base_methods.Add(TEXT("SendChatInfo"), pPtRole_SendChatInfo);
+
+	pPtRoleModule->idbase_methods.Add(pPtRole_SendChatInfo->methodUtype, pPtRole_SendChatInfo);
+
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(SendChatInfo / 18).");
+
 	TArray<DATATYPE_BASE*> PtRole_AnimUpdate_args;
 	PtRole_AnimUpdate_args.Add(EntityDef::id2datatypes[30]);
 
 	Method* pPtRole_AnimUpdate = new Method();
 	pPtRole_AnimUpdate->name = TEXT("AnimUpdate");
-	pPtRole_AnimUpdate->methodUtype = 29;
+	pPtRole_AnimUpdate->methodUtype = 31;
 	pPtRole_AnimUpdate->aliasID = -1;
 	pPtRole_AnimUpdate->args = PtRole_AnimUpdate_args;
 
@@ -707,14 +738,14 @@ void EntityDef::initScriptModules()
 
 	pPtRoleModule->idcell_methods.Add(pPtRole_AnimUpdate->methodUtype, pPtRole_AnimUpdate);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(AnimUpdate / 29).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(AnimUpdate / 31).");
 
 	TArray<DATATYPE_BASE*> PtRole_Attack_args;
 	PtRole_Attack_args.Add(EntityDef::id2datatypes[34]);
 
 	Method* pPtRole_Attack = new Method();
 	pPtRole_Attack->name = TEXT("Attack");
-	pPtRole_Attack->methodUtype = 23;
+	pPtRole_Attack->methodUtype = 25;
 	pPtRole_Attack->aliasID = -1;
 	pPtRole_Attack->args = PtRole_Attack_args;
 
@@ -723,13 +754,13 @@ void EntityDef::initScriptModules()
 
 	pPtRoleModule->idcell_methods.Add(pPtRole_Attack->methodUtype, pPtRole_Attack);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(Attack / 23).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(Attack / 25).");
 
 	TArray<DATATYPE_BASE*> PtRole_Relive_args;
 
 	Method* pPtRole_Relive = new Method();
 	pPtRole_Relive->name = TEXT("Relive");
-	pPtRole_Relive->methodUtype = 22;
+	pPtRole_Relive->methodUtype = 24;
 	pPtRole_Relive->aliasID = -1;
 	pPtRole_Relive->args = PtRole_Relive_args;
 
@@ -738,7 +769,7 @@ void EntityDef::initScriptModules()
 
 	pPtRoleModule->idcell_methods.Add(pPtRole_Relive->methodUtype, pPtRole_Relive);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(Relive / 22).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(Relive / 24).");
 
 	ScriptModule* pPtMonsterModule = new ScriptModule("PtMonster", 5);
 	EntityDef::moduledefs.Add(TEXT("PtMonster"), pPtMonsterModule);
@@ -788,7 +819,7 @@ void EntityDef::initScriptModules()
 
 	Property* pPtMonster_BaseHP = new Property();
 	pPtMonster_BaseHP->name = TEXT("BaseHP");
-	pPtMonster_BaseHP->properUtype = 23;
+	pPtMonster_BaseHP->properUtype = 24;
 	pPtMonster_BaseHP->properFlags = 4;
 	pPtMonster_BaseHP->aliasID = 4;
 	KBVar* pPtMonster_BaseHP_defval = new KBVar((int16)FCString::Atoi64(TEXT("500")));
@@ -798,11 +829,11 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_BaseHP->aliasID, pPtMonster_BaseHP);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(BaseHP / 23).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(BaseHP / 24).");
 
 	Property* pPtMonster_Defense = new Property();
 	pPtMonster_Defense->name = TEXT("Defense");
-	pPtMonster_Defense->properUtype = 25;
+	pPtMonster_Defense->properUtype = 26;
 	pPtMonster_Defense->properFlags = 16;
 	pPtMonster_Defense->aliasID = 5;
 	KBVar* pPtMonster_Defense_defval = new KBVar((int16)FCString::Atoi64(TEXT("10")));
@@ -812,11 +843,11 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_Defense->aliasID, pPtMonster_Defense);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(Defense / 25).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(Defense / 26).");
 
 	Property* pPtMonster_HP = new Property();
 	pPtMonster_HP->name = TEXT("HP");
-	pPtMonster_HP->properUtype = 24;
+	pPtMonster_HP->properUtype = 25;
 	pPtMonster_HP->properFlags = 4;
 	pPtMonster_HP->aliasID = 6;
 	KBVar* pPtMonster_HP_defval = new KBVar((int16)FCString::Atoi64(TEXT("500")));
@@ -826,11 +857,11 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_HP->aliasID, pPtMonster_HP);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(HP / 24).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(HP / 25).");
 
 	Property* pPtMonster_Name = new Property();
 	pPtMonster_Name->name = TEXT("Name");
-	pPtMonster_Name->properUtype = 21;
+	pPtMonster_Name->properUtype = 22;
 	pPtMonster_Name->properFlags = 4;
 	pPtMonster_Name->aliasID = 7;
 	KBVar* pPtMonster_Name_defval = new KBVar(FString());
@@ -840,11 +871,11 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_Name->aliasID, pPtMonster_Name);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(Name / 21).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(Name / 22).");
 
 	Property* pPtMonster_PowerRatio = new Property();
 	pPtMonster_PowerRatio->name = TEXT("PowerRatio");
-	pPtMonster_PowerRatio->properUtype = 26;
+	pPtMonster_PowerRatio->properUtype = 27;
 	pPtMonster_PowerRatio->properFlags = 16;
 	pPtMonster_PowerRatio->aliasID = 8;
 	KBVar* pPtMonster_PowerRatio_defval = new KBVar(FCString::Atof(TEXT("1.0")));
@@ -854,11 +885,11 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_PowerRatio->aliasID, pPtMonster_PowerRatio);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(PowerRatio / 26).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(PowerRatio / 27).");
 
 	Property* pPtMonster_RoleType = new Property();
 	pPtMonster_RoleType->name = TEXT("RoleType");
-	pPtMonster_RoleType->properUtype = 22;
+	pPtMonster_RoleType->properUtype = 23;
 	pPtMonster_RoleType->properFlags = 4;
 	pPtMonster_RoleType->aliasID = 9;
 	KBVar* pPtMonster_RoleType_defval = new KBVar((uint8)FCString::Atoi64(TEXT("")));
@@ -868,11 +899,11 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_RoleType->aliasID, pPtMonster_RoleType);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(RoleType / 22).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(RoleType / 23).");
 
 	Property* pPtMonster_SpeedRatio = new Property();
 	pPtMonster_SpeedRatio->name = TEXT("SpeedRatio");
-	pPtMonster_SpeedRatio->properUtype = 27;
+	pPtMonster_SpeedRatio->properUtype = 28;
 	pPtMonster_SpeedRatio->properFlags = 16;
 	pPtMonster_SpeedRatio->aliasID = 10;
 	KBVar* pPtMonster_SpeedRatio_defval = new KBVar(FCString::Atof(TEXT("1.0")));
@@ -882,14 +913,14 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->usePropertyDescrAlias = true;
 	pPtMonsterModule->idpropertys.Add((uint16)pPtMonster_SpeedRatio->aliasID, pPtMonster_SpeedRatio);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(SpeedRatio / 27).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), property(SpeedRatio / 28).");
 
 	TArray<DATATYPE_BASE*> PtMonster_OnAnimUpdate_args;
 	PtMonster_OnAnimUpdate_args.Add(EntityDef::id2datatypes[30]);
 
 	Method* pPtMonster_OnAnimUpdate = new Method();
 	pPtMonster_OnAnimUpdate->name = TEXT("OnAnimUpdate");
-	pPtMonster_OnAnimUpdate->methodUtype = 39;
+	pPtMonster_OnAnimUpdate->methodUtype = 41;
 	pPtMonster_OnAnimUpdate->aliasID = 1;
 	pPtMonster_OnAnimUpdate->args = PtMonster_OnAnimUpdate_args;
 
@@ -897,14 +928,14 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->useMethodDescrAlias = true;
 	pPtMonsterModule->idmethods.Add((uint16)pPtMonster_OnAnimUpdate->aliasID, pPtMonster_OnAnimUpdate);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(OnAnimUpdate / 39).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(OnAnimUpdate / 41).");
 
 	TArray<DATATYPE_BASE*> PtMonster_OnAttack_args;
 	PtMonster_OnAttack_args.Add(EntityDef::id2datatypes[2]);
 
 	Method* pPtMonster_OnAttack = new Method();
 	pPtMonster_OnAttack->name = TEXT("OnAttack");
-	pPtMonster_OnAttack->methodUtype = 37;
+	pPtMonster_OnAttack->methodUtype = 39;
 	pPtMonster_OnAttack->aliasID = 2;
 	pPtMonster_OnAttack->args = PtMonster_OnAttack_args;
 
@@ -912,14 +943,14 @@ void EntityDef::initScriptModules()
 	pPtMonsterModule->useMethodDescrAlias = true;
 	pPtMonsterModule->idmethods.Add((uint16)pPtMonster_OnAttack->aliasID, pPtMonster_OnAttack);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(OnAttack / 37).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(OnAttack / 39).");
 
 	TArray<DATATYPE_BASE*> PtMonster_AnimUpdate_args;
 	PtMonster_AnimUpdate_args.Add(EntityDef::id2datatypes[30]);
 
 	Method* pPtMonster_AnimUpdate = new Method();
 	pPtMonster_AnimUpdate->name = TEXT("AnimUpdate");
-	pPtMonster_AnimUpdate->methodUtype = 38;
+	pPtMonster_AnimUpdate->methodUtype = 40;
 	pPtMonster_AnimUpdate->aliasID = -1;
 	pPtMonster_AnimUpdate->args = PtMonster_AnimUpdate_args;
 
@@ -928,14 +959,14 @@ void EntityDef::initScriptModules()
 
 	pPtMonsterModule->idcell_methods.Add(pPtMonster_AnimUpdate->methodUtype, pPtMonster_AnimUpdate);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(AnimUpdate / 38).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(AnimUpdate / 40).");
 
 	TArray<DATATYPE_BASE*> PtMonster_Attack_args;
 	PtMonster_Attack_args.Add(EntityDef::id2datatypes[34]);
 
 	Method* pPtMonster_Attack = new Method();
 	pPtMonster_Attack->name = TEXT("Attack");
-	pPtMonster_Attack->methodUtype = 32;
+	pPtMonster_Attack->methodUtype = 34;
 	pPtMonster_Attack->aliasID = -1;
 	pPtMonster_Attack->args = PtMonster_Attack_args;
 
@@ -944,13 +975,13 @@ void EntityDef::initScriptModules()
 
 	pPtMonsterModule->idcell_methods.Add(pPtMonster_Attack->methodUtype, pPtMonster_Attack);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(Attack / 32).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(Attack / 34).");
 
 	TArray<DATATYPE_BASE*> PtMonster_Relive_args;
 
 	Method* pPtMonster_Relive = new Method();
 	pPtMonster_Relive->name = TEXT("Relive");
-	pPtMonster_Relive->methodUtype = 31;
+	pPtMonster_Relive->methodUtype = 33;
 	pPtMonster_Relive->aliasID = -1;
 	pPtMonster_Relive->args = PtMonster_Relive_args;
 
@@ -959,7 +990,7 @@ void EntityDef::initScriptModules()
 
 	pPtMonsterModule->idcell_methods.Add(pPtMonster_Relive->methodUtype, pPtMonster_Relive);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(Relive / 31).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(Relive / 33).");
 
 	ScriptModule* pPtFlobModule = new ScriptModule("PtFlob", 6);
 	EntityDef::moduledefs.Add(TEXT("PtFlob"), pPtFlobModule);
@@ -1009,7 +1040,7 @@ void EntityDef::initScriptModules()
 
 	Property* pPtFlob_GoodId = new Property();
 	pPtFlob_GoodId->name = TEXT("GoodId");
-	pPtFlob_GoodId->properUtype = 36;
+	pPtFlob_GoodId->properUtype = 37;
 	pPtFlob_GoodId->properFlags = 4;
 	pPtFlob_GoodId->aliasID = 4;
 	KBVar* pPtFlob_GoodId_defval = new KBVar((uint8)FCString::Atoi64(TEXT("")));
@@ -1019,7 +1050,7 @@ void EntityDef::initScriptModules()
 	pPtFlobModule->usePropertyDescrAlias = true;
 	pPtFlobModule->idpropertys.Add((uint16)pPtFlob_GoodId->aliasID, pPtFlob_GoodId);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtFlob), property(GoodId / 36).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtFlob), property(GoodId / 37).");
 
 	pPtFlobModule->useMethodDescrAlias = true;
 	ScriptModule* pPtSkillModule = new ScriptModule("PtSkill", 7);
@@ -1070,7 +1101,7 @@ void EntityDef::initScriptModules()
 
 	Property* pPtSkill_SkillId = new Property();
 	pPtSkill_SkillId->name = TEXT("SkillId");
-	pPtSkill_SkillId->properUtype = 40;
+	pPtSkill_SkillId->properUtype = 41;
 	pPtSkill_SkillId->properFlags = 4;
 	pPtSkill_SkillId->aliasID = 4;
 	KBVar* pPtSkill_SkillId_defval = new KBVar((uint8)FCString::Atoi64(TEXT("")));
@@ -1080,7 +1111,7 @@ void EntityDef::initScriptModules()
 	pPtSkillModule->usePropertyDescrAlias = true;
 	pPtSkillModule->idpropertys.Add((uint16)pPtSkill_SkillId->aliasID, pPtSkill_SkillId);
 
-	//DEBUG_MSG("EntityDef::initScriptModules: add(PtSkill), property(SkillId / 40).");
+	//DEBUG_MSG("EntityDef::initScriptModules: add(PtSkill), property(SkillId / 41).");
 
 	pPtSkillModule->useMethodDescrAlias = true;
 }
@@ -1403,6 +1434,24 @@ void EntityDef::initDefTypes()
 		uint16 utype = 34;
 		FString typeName = TEXT("SKILL_INFO");
 		DATATYPE_SKILL_INFO* pDatatype = new DATATYPE_SKILL_INFO();
+		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
+		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
+		EntityDef::datatype2id.Add(typeName, utype);
+	}
+
+	{
+		uint16 utype = 35;
+		FString typeName = TEXT("CHAT_INFO");
+		DATATYPE_CHAT_INFO* pDatatype = new DATATYPE_CHAT_INFO();
+		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
+		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
+		EntityDef::datatype2id.Add(typeName, utype);
+	}
+
+	{
+		uint16 utype = 36;
+		FString typeName = TEXT("CHAT_LIST");
+		DATATYPE_CHAT_LIST* pDatatype = new DATATYPE_CHAT_LIST();
 		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
 		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
 		EntityDef::datatype2id.Add(typeName, utype);

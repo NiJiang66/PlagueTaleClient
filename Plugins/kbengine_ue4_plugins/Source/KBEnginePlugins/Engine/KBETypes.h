@@ -212,5 +212,35 @@ public:
 
 };
 
+class KBENGINEPLUGINS_API CHAT_INFO
+{
+public:
+	uint32 Index;
+	FString Name;
+	FString Date;
+	FString Message;
+
+	CHAT_INFO():
+	Index(0),
+	Name(),
+	Date(),
+	Message()
+	{
+	}
+
+};
+
+class KBENGINEPLUGINS_API CHAT_LIST
+{
+public:
+	TArray<CHAT_INFO> Value;
+
+	CHAT_LIST():
+	Value()
+	{
+	}
+
+};
+
 
 }

@@ -82,6 +82,7 @@ void APtPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 	PlayerInputComponent->BindAxis("LookUp", this, &APtPlayerCharacter::LookUp);
 
 	PlayerInputComponent->BindAction("OperateBag", IE_Pressed, this, &APtPlayerCharacter::OperateBag);
+	PlayerInputComponent->BindAction("WriteMessage", IE_Pressed, this, &APtPlayerCharacter::StartWriteMessage);
 
 	PlayerInputComponent->BindAction("NormalAttack", IE_Released, this, &APtPlayerCharacter::RequestNormalAttack);
 
@@ -145,7 +146,7 @@ void APtPlayerCharacter::Attack(uint8 SkillId)
 		//获取射线起始点和方向
 		FVector RayStartPos;
 		FVector RayDirection;
-		MainController->DeprojectScreenPositionToWorld(ScreenSize.X * 0.5f, ScreenSize.Y * 0.5f, RayStartPos, RayDirection);
+		MainController->DeprojectScreenPositionToWorld(ScreenSize.X * 0.5f, ScreenSize.Y * 0.42f, RayStartPos, RayDirection);
 
 		//进行射线检测
 		FCollisionQueryParams TraceParams(true);
@@ -156,25 +157,28 @@ void APtPlayerCharacter::Attack(uint8 SkillId)
 		FVector SpawnPos = SkillPoint->GetComponentLocation();
 		FVector TargetPos;
 
-		if (SkillId == (uint8)ESkillType::Stone) {
-			//如果射线检测到对象
-			FHitResult HitResult(ForceInit);
-			if (GetWorld()->LineTraceSingleByChannel(HitResult, RayStartPos, RayStartPos + RayDirection * 10000.f, ECollisionChannel::ECC_GameTraceChannel1, TraceParams)) {
-				//更新射中点
+		//如果射线检测到对象
+		FHitResult HitResult(ForceInit);
+		if (GetWorld()->LineTraceSingleByChannel(HitResult, RayStartPos, RayStartPos + RayDirection * 10000.f, ECollisionChannel::ECC_GameTraceChannel1, TraceParams)) {
+			//更新射中点			
+			if (SkillId == (uint8)ESkillType::Stone) {
 				TargetPos = HitResult.Location;
 			}
 			else {
+				SpawnPos = HitResult.Location;
+				TargetPos = HitResult.Location;
+			}
+		}
+		else {
+			if (SkillId == (uint8)ESkillType::Stone) {
 				//如果射线没有检测到对象,设置最远距离1000
 				TargetPos = RayStartPos + RayDirection * 1000.f;
 			}
+			else {
+				TargetPos = SkillPoint->GetComponentLocation();
+			}			
 		}
-		else if (SkillId == (uint8)ESkillType::Thunder || SkillId == (uint8)ESkillType::XBlade) {
-			SpawnPos = TargetPos = FVector((RayStartPos + RayDirection * 10.f).X, (RayStartPos + RayDirection * 5.f).Y, 0.1);
-		}
-		else if (SkillId == (uint8)ESkillType::Therapy) {
-			SpawnPos = TargetPos = GetActorLocation();
-		}
-		//PtH::Debug() << "Skill SpawnPos: " << SpawnPos << "    TargetPos: " << TargetPos << PtH::Endl();
+
 		UKBEventData_Attack* EventData = NewObject<UKBEventData_Attack>();
 		EventData->SkillId = SkillId;
 		EventData->SpawnPos = SpawnPos;
@@ -286,6 +290,13 @@ void APtPlayerCharacter::OperateBag()
 	}
 }
 
+void APtPlayerCharacter::StartWriteMessage()
+{
+	if (MainGameWidget) {
+		MainGameWidget->StartWriteMessage();		
+	}
+}
+
 void APtPlayerCharacter::RequestNormalAttack()
 {
 
@@ -294,22 +305,22 @@ void APtPlayerCharacter::RequestNormalAttack()
 
 void APtPlayerCharacter::SkillOne()
 {
-	RequestSkill(0);
+	RequestSkill((uint8)ESkillType::Stone);
 }
 
 void APtPlayerCharacter::SkillTwo()
 {
-	RequestSkill(1);
+
 }
 
 void APtPlayerCharacter::SkillThree()
 {
-	RequestSkill(2);
+
 }
 
 void APtPlayerCharacter::SkillFour()
 {
-	RequestSkill(3);
+
 }
 
 void APtPlayerCharacter::RequestSkill(uint8 BlockId)

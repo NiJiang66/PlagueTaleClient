@@ -12,7 +12,6 @@ USTRUCT()
 struct FROLE_INFO
 {
 	GENERATED_BODY()
-
 	UPROPERTY()
 	uint64 Dbid;
 	UPROPERTY()
@@ -35,7 +34,6 @@ USTRUCT()
 struct FGOOD_INFO
 {
 	GENERATED_BODY()
-public:
 	/**	格子id */
 	UPROPERTY()
 	uint8 BlockId;
@@ -50,6 +48,28 @@ public:
 		BlockId = InBlockId;
 		GoodId = InGoodId;
 		Number = InNumber;
+	}
+};
+
+/**	聊天信息结构体 */
+USTRUCT()
+struct FCHAT_INFO
+{
+	GENERATED_BODY()
+	/**	发送者名字 */
+	UPROPERTY()
+	FString Name;
+	/**	发送时间 */
+	UPROPERTY()
+	FString Date;
+	/**	消息 */
+	UPROPERTY()
+	FString Message;
+
+	void InitInfo(FString InName, FString InDate, FString InMessage) {
+		Name = InName;
+		Date = InDate;
+		Message = InMessage;
 	}
 };
 
@@ -431,6 +451,28 @@ public:
 	/**	装备背包数据 */
 	UPROPERTY()
 	TArray<FGOOD_INFO> EquipBag;
+}; 
+
+/**	服务端主动更新聊天信息的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_OnAcceptChatList : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	聊天信息 */
+	UPROPERTY()
+	TArray<FCHAT_INFO> ChatList;
+};
+
+/**	向服务端发送聊天信息的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_SendChatInfo : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	一条聊天信息 */
+	UPROPERTY()
+	FString Message;
 };
 
 

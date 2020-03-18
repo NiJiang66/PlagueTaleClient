@@ -56,7 +56,12 @@ void KBEngine::PtRole::__init__()
 			pBaseEntityCall->PassGood(ServerData->ArcBagType, ServerData->ArcBlockId, ServerData->DesBagType, ServerData->DesBlockId);
 		});
 
-
+		//注册发送聊天消息事件
+		KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("SendChatInfo", "SendChatInfo", [this](const UKBEventData* EventData)
+		{
+			const UKBEventData_SendChatInfo* ServerData = Cast<UKBEventData_SendChatInfo>(EventData);
+			pBaseEntityCall->SendChatInfo(ServerData->Message);
+		});
 
 	}
 }
@@ -199,6 +204,19 @@ void KBEngine::PtRole::OnReqBagList(const BAG_INFO& arg1, const BAG_INFO& arg2, 
 	}
 
 	KBENGINE_EVENT_FIRE("OnReqBagList", EventData);
+}
+
+void KBEngine::PtRole::OnAcceptChatList(const CHAT_LIST& arg1)
+{
+	UKBEventData_OnAcceptChatList* EventData = NewObject<UKBEventData_OnAcceptChatList>();
+
+	for (auto Info : arg1.Value) {
+		FCHAT_INFO ChatInfo;
+		ChatInfo.InitInfo(Info.Name, Info.Date, Info.Message);
+		EventData->ChatList.Add(ChatInfo);
+	}
+
+	KBENGINE_EVENT_FIRE("OnAcceptChatList", EventData);
 }
 
 void KBEngine::PtRole::Attack(uint8 SkillId, FVector SpawnPos, FVector TargetPos)

@@ -46,6 +46,16 @@ void EntityBaseEntityCall_PtRoleBase::ReqBagList()
 	sendCall(NULL);
 }
 
+void EntityBaseEntityCall_PtRoleBase::SendChatInfo(const FString& arg1)
+{
+	Bundle* pBundleRet = newCall("SendChatInfo", 0);
+	if(!pBundleRet)
+		return;
+
+	pBundleRet->writeUnicode(arg1);
+	sendCall(NULL);
+}
+
 
 
 EntityCellEntityCall_PtRoleBase::EntityCellEntityCall_PtRoleBase(int32 eid, const FString& ename) : EntityCall(eid, ename)

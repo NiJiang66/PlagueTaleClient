@@ -28,6 +28,7 @@ public:
 	void PassGood(uint8 arg1, uint8 arg2, uint8 arg3, uint8 arg4);
 	void ReduceGood(uint8 arg1, uint8 arg2);
 	void ReqBagList();
+	void SendChatInfo(const FString& arg1);
 };
 
 class KBENGINEPLUGINS_API EntityCellEntityCall_PtRoleBase : public EntityCall

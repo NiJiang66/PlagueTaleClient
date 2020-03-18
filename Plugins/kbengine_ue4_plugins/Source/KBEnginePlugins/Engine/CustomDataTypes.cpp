@@ -137,5 +137,31 @@ void DATATYPE_SKILL_INFO::addToStreamEx(Bundle& stream, const SKILL_INFO& v)
 	stream.writeVector3(v.TargetPos);
 }
 
+void DATATYPE_CHAT_INFO::createFromStreamEx(MemoryStream& stream, CHAT_INFO& datas)
+{
+	datas.Index = stream.readUint32();
+	datas.Name = stream.readUnicode();
+	datas.Date = stream.readUnicode();
+	datas.Message = stream.readUnicode();
+}
+
+void DATATYPE_CHAT_INFO::addToStreamEx(Bundle& stream, const CHAT_INFO& v)
+{
+	stream.writeUint32(v.Index);
+	stream.writeUnicode(v.Name);
+	stream.writeUnicode(v.Date);
+	stream.writeUnicode(v.Message);
+}
+
+void DATATYPE_CHAT_LIST::createFromStreamEx(MemoryStream& stream, CHAT_LIST& datas)
+{
+	Value_DataType.createFromStreamEx(stream, datas.Value);
+}
+
+void DATATYPE_CHAT_LIST::addToStreamEx(Bundle& stream, const CHAT_LIST& v)
+{
+	Value_DataType.addToStreamEx(stream, v.Value);
+}
+
 
 }

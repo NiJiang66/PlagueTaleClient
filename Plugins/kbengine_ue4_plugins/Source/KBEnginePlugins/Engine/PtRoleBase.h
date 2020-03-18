@@ -43,6 +43,7 @@ public:
 	float SpeedRatio;
 	virtual void onSpeedRatioChanged(float oldValue) {}
 
+	virtual void OnAcceptChatList(const CHAT_LIST& arg1) = 0; 
 	virtual void OnAnimUpdate(const ANIM_INFO& arg1) = 0; 
 	virtual void OnAttack(uint8 arg1) = 0; 
 	virtual void OnIncreaseGood(uint8 arg1, const GOOD_INFO& arg2) = 0; 
