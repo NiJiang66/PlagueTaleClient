@@ -50,11 +50,9 @@ void APtEnemyCharacter::Tick(float DeltaTime)
 
 }
 
-void APtEnemyCharacter::PlayDeath()
+void APtEnemyCharacter::SetBaseHP(int32 InBaseHP)
 {
-	//动画由状态机自己判定HP是否小于0来播放
-	//延时销毁
-	GetWorld()->GetTimerManager().SetTimer(DestroyHandle, this, &APtEnemyCharacter::MonsterDestroy, 5.f);
+	BaseHP = InBaseHP;
 }
 
 void APtEnemyCharacter::SetHP(int32 InHP)
@@ -68,6 +66,20 @@ void APtEnemyCharacter::SetHP(int32 InHP)
 	float HPPercent = FMath::Clamp((float)HP / (float)BaseHP, 0.f, 1.f);
 	if (BloodBar) {
 		BloodBar->SetHPPercent(HPPercent);
+	}
+}
+
+void APtEnemyCharacter::PlayDeath()
+{
+	//动画由状态机自己判定HP是否小于0来播放
+	//延时销毁
+	GetWorld()->GetTimerManager().SetTimer(DestroyHandle, this, &APtEnemyCharacter::MonsterDestroy, 5.f);
+}
+
+void APtEnemyCharacter::OnAttack(uint8 SkillID)
+{
+	if (CharacterAnim) {
+		CharacterAnim->Montage_Play(AttackMontage);
 	}
 }
 

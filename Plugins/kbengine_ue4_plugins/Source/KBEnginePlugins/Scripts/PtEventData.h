@@ -299,6 +299,23 @@ public:
 	float SpeedRatio;
 };
 
+/**	客户端请求服务端攻击的事件数据类 */
+UCLASS()
+class KBENGINEPLUGINS_API UKBEventData_Attack : public UKBEventData
+{
+	GENERATED_BODY()
+public:
+	/**	技能id */
+	UPROPERTY()
+	uint8 SkillId;
+	/**	生成位置 */
+	UPROPERTY()
+	FVector SpawnPos;
+	/**	移动目标位置 */
+	UPROPERTY()
+	FVector TargetPos;
+};
+
 /**	客户端攻击的回调的事件数据类 */
 UCLASS()
 class KBENGINEPLUGINS_API UKBEventData_OnAttack : public UKBEventData
@@ -308,6 +325,9 @@ public:
 	/**	角色实体id */
 	UPROPERTY()
 	int32 EntityId;
+	/**	技能id ， 0:普通攻击  1：技能1  2技能2  3：技能3  4：技能4*/
+	UPROPERTY()
+	int32 SkillId;
 };
 
 /**	客户端请求服务端使用物品的事件数据类 */

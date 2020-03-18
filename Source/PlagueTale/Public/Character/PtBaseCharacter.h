@@ -38,7 +38,7 @@ public:
 	virtual void SetSpeedRatio(float InSpeedRatio) {}
 
 	/**	播放攻击动画 */
-	void OnAttack();
+	virtual void OnAttack(uint8 SkillID) {};
 
 protected:
 	virtual void BeginPlay() override;
@@ -81,6 +81,19 @@ public:
 	/**	保存受伤动画蒙太奇 */
 	UPROPERTY(EditAnywhere)
 	UAnimMontage* HurtMontage;
+
+	/**	保存播放技能寒冰之石蒙太奇 */
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* SkillIceStoneMontage;
+	/**	保存播放技能雷霆之光蒙太奇 */
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* SkillLightThunderMontage;
+	/**	保存播放技能无尽之刃蒙太奇 */
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* SkillInfinitySwordMontage;
+	/**	保存播放技能恢复之术蒙太奇 */
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* SkillRestorationMontage;
 
 protected:
 	/**	保存目标位置 */

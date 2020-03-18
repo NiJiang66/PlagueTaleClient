@@ -67,12 +67,13 @@ void EntityCellEntityCall_PtRoleBase::AnimUpdate(const ANIM_INFO& arg1)
 	sendCall(NULL);
 }
 
-void EntityCellEntityCall_PtRoleBase::Attack()
+void EntityCellEntityCall_PtRoleBase::Attack(const SKILL_INFO& arg1)
 {
 	Bundle* pBundleRet = newCall("Attack", 0);
 	if(!pBundleRet)
 		return;
 
+	((DATATYPE_SKILL_INFO*)EntityDef::id2datatypes[34])->addToStreamEx(*pBundleRet, arg1);
 	sendCall(NULL);
 }
 

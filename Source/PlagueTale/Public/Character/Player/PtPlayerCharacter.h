@@ -34,6 +34,12 @@ public:
 	/**	设置速度 */
 	virtual void SetSpeedRatio(float InSpeedRatio) override;
 
+	/**	攻击，包括技能，SkillId为 0:普通攻击  1：技能1  2技能2  3：技能3  4：技能4 */
+	void Attack(uint8 SkillId);
+
+	/**	攻击回调，实现具体的攻击表现 */
+	virtual void OnAttack(uint8 SkillID)override;
+
 protected:
 	void DoJump();
 	void DoStopJump();
@@ -88,6 +94,9 @@ protected:
 	UCameraComponent* FollowCamera = nullptr;
 	UPROPERTY(EditAnywhere)
 	USpringArmComponent* CameraBoom;
+
+	UPROPERTY(EditAnywhere)
+	USceneComponent* SkillPoint;
 
 	/**	更新动画到服务端定时器句柄 */
 	FTimerHandle AnimUpdateHandle;

@@ -58,6 +58,7 @@ void APtSkillActor::PlayExplode()
 
 void APtSkillActor::DestroySkill()
 {
+	SkillParticleComponent->DeactivaateNextTick();
 	Destroy();
 }
 

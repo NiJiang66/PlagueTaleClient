@@ -98,7 +98,8 @@ void PtRoleBase::onRemoteMethodCall(MemoryStream& stream)
 		}
 		case 28:
 		{
-			OnAttack();
+			uint8 OnAttack_arg1 = stream.readUint8();
+			OnAttack(OnAttack_arg1);
 			break;
 		}
 		case 19:

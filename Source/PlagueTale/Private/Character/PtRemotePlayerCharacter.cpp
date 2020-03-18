@@ -7,6 +7,7 @@
 #include "Components/WidgetComponent.h"
 #include "PtBloodBar.h"
 #include "Animation/AnimInstance.h"
+#include "PtDataMgr.h"
 
 FName APtRemotePlayerCharacter::GroundName(TEXT("Ground"));
 
@@ -98,6 +99,53 @@ void APtRemotePlayerCharacter::SetHP(int32 InHP)
 
 	float HPPercent = FMath::Clamp((float)HP / (float)BaseHP, 0.f, 1.f);
 	if (BloodBar){ BloodBar->SetHPPercent(HPPercent); }		
+}
+
+void APtRemotePlayerCharacter::OnAttack(uint8 SkillID)
+{
+	switch (SkillID)
+	{
+		case (int)ESkillType::Stone://寒冰之石
+		{
+			if (CharacterAnim) {
+				CharacterAnim->Montage_Play(SkillIceStoneMontage);
+			}
+		}
+		break;
+		case (int)ESkillType::Thunder://雷霆之光
+		{
+			if (CharacterAnim) {
+				CharacterAnim->Montage_Play(SkillLightThunderMontage);
+			}
+		}
+		break;
+		case (int)ESkillType::XBlade://无尽之刃
+		{
+			if (CharacterAnim) {
+				CharacterAnim->Montage_Play(SkillInfinitySwordMontage);
+			}
+		}
+		break;
+		case (int)ESkillType::Therapy://恢复之术
+		{
+			if (CharacterAnim) {
+				CharacterAnim->Montage_Play(SkillRestorationMontage);
+			}
+		}
+		break;
+		default:
+			break;
+	}
+}
+
+void APtRemotePlayerCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//获取血条
+	BloodBar = Cast<UPtBloodBar>(BloodBarComponent->GetUserWidgetObject());
+	//设置名字和类型
+	BloodBar->SetRole(RoleType, RoleName);
 }
 
 void APtRemotePlayerCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

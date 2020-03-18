@@ -56,10 +56,11 @@ void KBEngine::PtMonster::onHPChanged(int16 oldValue)
 	KBENGINE_EVENT_FIRE("SetHP", EventData);
 }
 
-void KBEngine::PtMonster::OnAttack()
+void KBEngine::PtMonster::OnAttack(uint8 arg1)
 {
 	UKBEventData_OnAttack* EventData = NewObject<UKBEventData_OnAttack>();
 	EventData->EntityId = id();
+	EventData->SkillId = arg1;
 	//告诉UE4客户端的APtGameMode,可以播放攻击动画了
 	KBENGINE_EVENT_FIRE("OnAttack", EventData);
 }

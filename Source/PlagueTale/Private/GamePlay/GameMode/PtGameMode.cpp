@@ -104,6 +104,7 @@ void APtGameMode::OnEnterWorld(const UKBEventData* EventData)
 				if (GameHud->MainGameWidget) {
 					MainGameWidget = GameHud->MainGameWidget;
 					MainGameWidget->SetName(RoleInst->Name);
+					MainGameWidget->PlayerCharacter = PlayerCharacter;
 					PlayerCharacter->MainGameWidget = MainGameWidget;
 				}
 			}
@@ -375,12 +376,12 @@ void APtGameMode::OnAttack(const UKBEventData* EventData)
 	const UKBEventData_OnAttack* ServerData = Cast<UKBEventData_OnAttack>(EventData);
 	//如果是玩家
 	if (ServerData->EntityId == PlayerCharacter->EntityId) {
-		PlayerCharacter->OnAttack();
+		PlayerCharacter->OnAttack(ServerData->SkillId);
 	}
 	//如果是其他角色（怪物或远程玩家角色）
 	else if (OtherCharacters.Contains(ServerData->EntityId)) {
 		APtBaseCharacter* CharacterEntity = *OtherCharacters.Find(ServerData->EntityId);
-		CharacterEntity->OnAttack();
+		CharacterEntity->OnAttack(ServerData->SkillId);
 	}
 }
 

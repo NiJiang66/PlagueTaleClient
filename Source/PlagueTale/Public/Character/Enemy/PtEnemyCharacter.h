@@ -22,8 +22,13 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	/**	设置基础血量 */
+	virtual void SetBaseHP(int32 InBaseHP) override;
 	/**	设置hp */
 	virtual void SetHP(int32 InHP) override;
+
+	/**	攻击回调，实现具体的攻击表现 */
+	virtual void OnAttack(uint8 SkillID)override;
 
 	/**	播放死亡动画 */
 	void PlayDeath();

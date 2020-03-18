@@ -123,5 +123,19 @@ void DATATYPE_BAG_INFO::addToStreamEx(Bundle& stream, const BAG_INFO& v)
 	Value_DataType.addToStreamEx(stream, v.Value);
 }
 
+void DATATYPE_SKILL_INFO::createFromStreamEx(MemoryStream& stream, SKILL_INFO& datas)
+{
+	datas.SkillId = stream.readUint8();
+	datas.SpawnPos = stream.readVector3();
+	datas.TargetPos = stream.readVector3();
+}
+
+void DATATYPE_SKILL_INFO::addToStreamEx(Bundle& stream, const SKILL_INFO& v)
+{
+	stream.writeUint8(v.SkillId);
+	stream.writeVector3(v.SpawnPos);
+	stream.writeVector3(v.TargetPos);
+}
+
 
 }

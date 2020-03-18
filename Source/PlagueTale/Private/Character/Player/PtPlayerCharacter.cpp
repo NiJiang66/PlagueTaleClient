@@ -45,6 +45,10 @@ APtPlayerCharacter::APtPlayerCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	//相机角色控制器控制朝向
 	FollowCamera->bUsePawnControlRotation = true;
+
+	//技能射出点
+	SkillPoint = CreateDefaultSubobject<USceneComponent>(TEXT("SkillPoint"));
+	SkillPoint->SetupAttachment(RootComponent);
 }
 
 void APtPlayerCharacter::Tick(float DeltaSeconds)
@@ -128,6 +132,95 @@ void APtPlayerCharacter::SetSpeedRatio(float InSpeedRatio)
 	GetCharacterMovement()->MaxWalkSpeed = 600 * InSpeedRatio;
 }
 
+void APtPlayerCharacter::Attack(uint8 SkillId)
+{
+	if (HP <= 0 || IsInAir_Anim) {
+		return;
+	}
+	if (MainController) {
+		//设置角色朝向
+		SetTargetRotator(FRotator(0, MainController->GetControlRotation().Yaw, 0));
+
+		FVector2D ScreenSize = GEngine->GameViewport->Viewport->GetSizeXY();
+		//获取射线起始点和方向
+		FVector RayStartPos;
+		FVector RayDirection;
+		MainController->DeprojectScreenPositionToWorld(ScreenSize.X * 0.5f, ScreenSize.Y * 0.5f, RayStartPos, RayDirection);
+
+		//进行射线检测
+		FCollisionQueryParams TraceParams(true);
+		TraceParams.AddIgnoredActor(this);
+		TraceParams.bReturnPhysicalMaterial = false;
+		TraceParams.bTraceComplex = true;
+
+		FVector SpawnPos = SkillPoint->GetComponentLocation();
+		FVector TargetPos;
+
+		if (SkillId == (uint8)ESkillType::Stone) {
+			//如果射线检测到对象
+			FHitResult HitResult(ForceInit);
+			if (GetWorld()->LineTraceSingleByChannel(HitResult, RayStartPos, RayStartPos + RayDirection * 10000.f, ECollisionChannel::ECC_GameTraceChannel1, TraceParams)) {
+				//更新射中点
+				TargetPos = HitResult.Location;
+			}
+			else {
+				//如果射线没有检测到对象,设置最远距离1000
+				TargetPos = RayStartPos + RayDirection * 1000.f;
+			}
+		}
+		else if (SkillId == (uint8)ESkillType::Thunder || SkillId == (uint8)ESkillType::XBlade) {
+			SpawnPos = TargetPos = FVector((RayStartPos + RayDirection * 10.f).X, (RayStartPos + RayDirection * 5.f).Y, 0.1);
+		}
+		else if (SkillId == (uint8)ESkillType::Therapy) {
+			SpawnPos = TargetPos = GetActorLocation();
+		}
+		//PtH::Debug() << "Skill SpawnPos: " << SpawnPos << "    TargetPos: " << TargetPos << PtH::Endl();
+		UKBEventData_Attack* EventData = NewObject<UKBEventData_Attack>();
+		EventData->SkillId = SkillId;
+		EventData->SpawnPos = SpawnPos;
+		EventData->TargetPos = TargetPos;
+		//通知服务器
+		KBENGINE_EVENT_FIRE("Attack", EventData);
+	}
+}
+
+void APtPlayerCharacter::OnAttack(uint8 SkillID)
+{
+	switch (SkillID)
+	{
+	case (int)ESkillType::Stone ://寒冰之石
+	{
+		if (CharacterAnim) {
+			CharacterAnim->Montage_Play(SkillIceStoneMontage);
+		}		
+	}
+	break;
+	case (int)ESkillType::Thunder ://雷霆之光
+	{
+		if (CharacterAnim) {
+			CharacterAnim->Montage_Play(SkillLightThunderMontage);
+		}
+	}
+	break;	
+	case (int)ESkillType::XBlade ://无尽之刃
+	{
+		if (CharacterAnim) {
+			CharacterAnim->Montage_Play(SkillInfinitySwordMontage);
+		}
+	}
+	break;
+	case (int)ESkillType::Therapy ://恢复之术
+	{
+		if (CharacterAnim) {
+			CharacterAnim->Montage_Play(SkillRestorationMontage);
+		}
+	}
+	break;
+	default:
+		break;
+	}
+}
+
 void APtPlayerCharacter::DoJump()
 {
 	Jump();
@@ -196,7 +289,7 @@ void APtPlayerCharacter::OperateBag()
 void APtPlayerCharacter::RequestNormalAttack()
 {
 
-	PtH::Debug() << "APtPlayerCharacter::RequestNormalAttack " << PtH::Endl();
+	//PtH::Debug() << "APtPlayerCharacter::RequestNormalAttack " << PtH::Endl();
 }
 
 void APtPlayerCharacter::SkillOne()
@@ -236,7 +329,7 @@ void APtPlayerCharacter::RequestSkill(uint8 BlockId)
 	EventData->BagType = (uint8)EBagType::SkillBag;
 	EventData->BlockId = BlockId;
 	KBENGINE_EVENT_FIRE("ReduceGood", EventData);
-	PtH::Debug() << "APtPlayerCharacter::RequestAttack: " << BlockId << PtH::Endl();
+	//PtH::Debug() << "APtPlayerCharacter::RequestAttack: " << BlockId << PtH::Endl();
 }
 
 void APtPlayerCharacter::BuffOne()

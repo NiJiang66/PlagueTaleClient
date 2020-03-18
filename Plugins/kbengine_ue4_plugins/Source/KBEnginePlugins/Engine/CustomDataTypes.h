@@ -171,4 +171,12 @@ public:
 };
 
 
+class KBENGINEPLUGINS_API DATATYPE_SKILL_INFO : DATATYPE_BASE
+{
+public:
+	void createFromStreamEx(MemoryStream& stream, SKILL_INFO& datas);
+	void addToStreamEx(Bundle& stream, const SKILL_INFO& v);
+};
+
+
 }

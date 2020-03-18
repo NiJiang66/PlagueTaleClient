@@ -25,7 +25,12 @@ public:
 
 	virtual void SetHP(int32 InHP) override;
 
+	/**	攻击回调，实现具体的攻击表现 */
+	virtual void OnAttack(uint8 SkillID)override;
+
 protected:
+	virtual void BeginPlay() override;
+
 	/**	用于更新动画的检测跳跃 */
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

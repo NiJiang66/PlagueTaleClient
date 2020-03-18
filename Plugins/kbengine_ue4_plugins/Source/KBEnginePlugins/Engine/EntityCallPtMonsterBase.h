@@ -35,7 +35,7 @@ public:
 
 	virtual ~EntityCellEntityCall_PtMonsterBase();
 	void AnimUpdate(const ANIM_INFO& arg1);
-	void Attack();
+	void Attack(const SKILL_INFO& arg1);
 	void Relive();
 };
 

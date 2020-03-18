@@ -21,7 +21,7 @@ namespace KBEngine
 		virtual void onHPChanged(int16 oldValue) override;
 		//virtual void onPowerRatioChanged(float oldValue) override;
 
-		virtual void OnAttack() override;
+		virtual void OnAttack(uint8 arg1) override;
 	};
 
 

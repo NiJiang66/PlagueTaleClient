@@ -42,7 +42,7 @@ public:
 	virtual void onSpeedRatioChanged(float oldValue) {}
 
 	virtual void OnAnimUpdate(const ANIM_INFO& arg1) = 0; 
-	virtual void OnAttack() = 0; 
+	virtual void OnAttack(uint8 arg1) = 0; 
 
 	void onComponentsEnterworld() override;
 	void onComponentsLeaveworld() override;

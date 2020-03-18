@@ -26,6 +26,12 @@ void KBEngine::PtRole::__init__()
 			AnimInfo.Direction = ServerData->Direction;
 			pCellEntityCall->AnimUpdate(AnimInfo);
 		});
+		//注册攻击事件
+		KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("Attack", "Attack", [this](const UKBEventData* EventData)
+		{
+			const UKBEventData_Attack* ServerData = Cast<UKBEventData_Attack>(EventData);
+			Attack(ServerData->SkillId, ServerData->SpawnPos, ServerData->TargetPos);
+		});
 		//注册复活事件
 		KBENGINE_REGISTER_EVENT_OVERRIDE_FUNC("Relive", "Relive", [this](const UKBEventData* EventData)
 		{
@@ -128,10 +134,11 @@ void KBEngine::PtRole::onSpeedRatioChanged(float oldValue)
 	KBENGINE_EVENT_FIRE("SetSpeedRatio", EventData);
 }
 
-void KBEngine::PtRole::OnAttack()
+void KBEngine::PtRole::OnAttack(uint8 arg1)
 {
 	UKBEventData_OnAttack* EventData = NewObject<UKBEventData_OnAttack>();
 	EventData->EntityId = id();
+	EventData->SkillId = arg1;
 	//告诉UE4客户端的APtGameMode,可以播放攻击动画了
 	KBENGINE_EVENT_FIRE("OnAttack", EventData);
 }
@@ -192,5 +199,14 @@ void KBEngine::PtRole::OnReqBagList(const BAG_INFO& arg1, const BAG_INFO& arg2, 
 	}
 
 	KBENGINE_EVENT_FIRE("OnReqBagList", EventData);
+}
+
+void KBEngine::PtRole::Attack(uint8 SkillId, FVector SpawnPos, FVector TargetPos)
+{
+	SKILL_INFO SkillInfo;
+	SkillInfo.SkillId = SkillId;
+	SkillInfo.SpawnPos = SpawnPos;
+	SkillInfo.TargetPos = TargetPos;
+	pCellEntityCall->Attack(SkillInfo);
 }
 

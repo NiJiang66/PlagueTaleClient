@@ -559,6 +559,7 @@ void EntityDef::initScriptModules()
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(OnAnimUpdate / 30).");
 
 	TArray<DATATYPE_BASE*> PtRole_OnAttack_args;
+	PtRole_OnAttack_args.Add(EntityDef::id2datatypes[2]);
 
 	Method* pPtRole_OnAttack = new Method();
 	pPtRole_OnAttack->name = TEXT("OnAttack");
@@ -709,6 +710,7 @@ void EntityDef::initScriptModules()
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtRole), method(AnimUpdate / 29).");
 
 	TArray<DATATYPE_BASE*> PtRole_Attack_args;
+	PtRole_Attack_args.Add(EntityDef::id2datatypes[34]);
 
 	Method* pPtRole_Attack = new Method();
 	pPtRole_Attack->name = TEXT("Attack");
@@ -898,6 +900,7 @@ void EntityDef::initScriptModules()
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(OnAnimUpdate / 39).");
 
 	TArray<DATATYPE_BASE*> PtMonster_OnAttack_args;
+	PtMonster_OnAttack_args.Add(EntityDef::id2datatypes[2]);
 
 	Method* pPtMonster_OnAttack = new Method();
 	pPtMonster_OnAttack->name = TEXT("OnAttack");
@@ -928,6 +931,7 @@ void EntityDef::initScriptModules()
 	//DEBUG_MSG("EntityDef::initScriptModules: add(PtMonster), method(AnimUpdate / 38).");
 
 	TArray<DATATYPE_BASE*> PtMonster_Attack_args;
+	PtMonster_Attack_args.Add(EntityDef::id2datatypes[34]);
 
 	Method* pPtMonster_Attack = new Method();
 	pPtMonster_Attack->name = TEXT("Attack");
@@ -1390,6 +1394,15 @@ void EntityDef::initDefTypes()
 		uint16 utype = 32;
 		FString typeName = TEXT("BAG_INFO");
 		DATATYPE_BAG_INFO* pDatatype = new DATATYPE_BAG_INFO();
+		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
+		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
+		EntityDef::datatype2id.Add(typeName, utype);
+	}
+
+	{
+		uint16 utype = 34;
+		FString typeName = TEXT("SKILL_INFO");
+		DATATYPE_SKILL_INFO* pDatatype = new DATATYPE_SKILL_INFO();
 		EntityDef::datatypes.Add(typeName, (DATATYPE_BASE*)pDatatype);
 		EntityDef::id2datatypes.Add(utype, EntityDef::datatypes[typeName]);
 		EntityDef::datatype2id.Add(typeName, utype);

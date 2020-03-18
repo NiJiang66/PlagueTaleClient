@@ -17,6 +17,6 @@ void UPtBaseBag::UpdateBlock(uint8 BlockId)
 	BlockGroup = Tmp;
 	if (BlockGroup.IsValidIndex(BlockId) && BlockGroup[BlockId]) {
 		BlockGroup[BlockId]->UpdateBlock();
-		PtH::Debug() << "UPtBaseBag::UpdateBlock!!!!!!!!``````" << PtH::Endl();
+		//PtH::Debug() << "UPtBaseBag::UpdateBlock!!!!!!!!``````" << PtH::Endl();
 	}
 }

@@ -44,7 +44,7 @@ public:
 	virtual void onSpeedRatioChanged(float oldValue) {}
 
 	virtual void OnAnimUpdate(const ANIM_INFO& arg1) = 0; 
-	virtual void OnAttack() = 0; 
+	virtual void OnAttack(uint8 arg1) = 0; 
 	virtual void OnIncreaseGood(uint8 arg1, const GOOD_INFO& arg2) = 0; 
 	virtual void OnPassGood(uint8 arg1, const GOOD_INFO& arg2, uint8 arg3, const GOOD_INFO& arg4) = 0; 
 	virtual void OnReduceGood(uint8 arg1, uint8 arg2, const GOOD_INFO& arg3) = 0; 

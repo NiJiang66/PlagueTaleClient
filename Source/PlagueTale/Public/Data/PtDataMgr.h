@@ -29,6 +29,16 @@ enum class EGoodType : uint8
 	Equip
 };
 
+/**	技能类型 */
+UENUM()
+enum class ESkillType : uint8
+{
+	Stone = 0,
+	Thunder,
+	XBlade,
+	Therapy
+};
+
 /**	使用物品的结果 */
 UENUM()
 enum class EReduceResult : uint8

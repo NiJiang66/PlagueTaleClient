@@ -85,10 +85,4 @@ void APtBaseCharacter::SetTargetAnim(float Speed, float Direction)
 	LastUpdateAnimTime = GetWorld()->TimeSeconds;
 }
 
-void APtBaseCharacter::OnAttack()
-{
-	if (CharacterAnim) {
-		CharacterAnim->Montage_Play(AttackMontage);
-	}		
-}
 

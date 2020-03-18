@@ -201,13 +201,13 @@ void UPtMainGameWidget::OnReduceGood(const UKBEventData* EventData)
 		if (GoodInfo.GoodType == EGoodType::Skill) {
 			//告诉Character请求服务器进行攻击
 			if (PlayerCharacter) {
-				//PlayerCharacter->Attack(GoodInfo.GoodKind);
-				PtH::Debug() << "PlayerCharacter using Skill" << PtH::Endl();
+				PlayerCharacter->Attack(GoodInfo.GoodKind);
+				//PtH::Debug() << "PlayerCharacter using Skill:" << GoodInfo.GoodKind << PtH::Endl();
 			}
 		}
 		else if (GoodInfo.GoodType == EGoodType::Buff) {
 			//放点特效啥的, ToDo
-			PtH::Debug() << "PlayerCharacter using Buff" << PtH::Endl();
+			//PtH::Debug() << "PlayerCharacter using Buff" << PtH::Endl();
 		}
 	}
 

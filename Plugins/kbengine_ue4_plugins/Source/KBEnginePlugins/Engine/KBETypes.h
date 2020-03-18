@@ -196,5 +196,21 @@ public:
 
 };
 
+class KBENGINEPLUGINS_API SKILL_INFO
+{
+public:
+	uint8 SkillId;
+	FVector SpawnPos;
+	FVector TargetPos;
+
+	SKILL_INFO():
+	SkillId(0),
+	SpawnPos(),
+	TargetPos()
+	{
+	}
+
+};
+
 
 }

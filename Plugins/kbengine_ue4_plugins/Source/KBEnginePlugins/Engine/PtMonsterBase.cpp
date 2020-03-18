@@ -98,7 +98,8 @@ void PtMonsterBase::onRemoteMethodCall(MemoryStream& stream)
 		}
 		case 37:
 		{
-			OnAttack();
+			uint8 OnAttack_arg1 = stream.readUint8();
+			OnAttack(OnAttack_arg1);
 			break;
 		}
 		default:
