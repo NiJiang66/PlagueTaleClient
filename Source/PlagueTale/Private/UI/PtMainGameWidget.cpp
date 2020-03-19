@@ -217,8 +217,10 @@ void UPtMainGameWidget::OnReduceGood(const UKBEventData* EventData)
 		}
 	}
 
-	//无论是否成功都要更新背包物品,先更新数据
-	UPtDataMgr::Get()->ChangeGoodInfo(BagType, GoodInfo);
+	//无论是否成功都要更新背包物品但技能除外,先更新数据
+	if (GoodInfo.GoodType != EGoodType::Skill) {
+		UPtDataMgr::Get()->ChangeGoodInfo(BagType, GoodInfo);
+	}
 }
 
 void UPtMainGameWidget::UpdateBagBlock(EBagType BagType, uint8 BlockId)

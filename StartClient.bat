@@ -9,7 +9,7 @@ rem ************循环开始
 set /a var+=1
 echo 第%var%次循环
 start /B "Client" "%UE_EXE%" "%CD%\PlagueTale.uproject" -game
-if %var% lss 2 goto continue
+if %var% lss 4 goto continue
 rem ************循环结束
 echo 循环执行完毕
 

@@ -140,7 +140,7 @@ void APtPlayerCharacter::Attack(uint8 SkillId)
 	}
 	if (MainController) {
 		//设置角色朝向
-		SetTargetRotator(FRotator(0, MainController->GetControlRotation().Yaw, 0));
+		SetActorRotation(FRotator(0, MainController->GetControlRotation().Yaw, 0));
 
 		FVector2D ScreenSize = GEngine->GameViewport->Viewport->GetSizeXY();
 		//获取射线起始点和方向
@@ -172,7 +172,7 @@ void APtPlayerCharacter::Attack(uint8 SkillId)
 		else {
 			if (SkillId == (uint8)ESkillType::Stone) {
 				//如果射线没有检测到对象,设置最远距离1000
-				TargetPos = RayStartPos + RayDirection * 1000.f;
+				TargetPos = RayStartPos + RayDirection * 5000.f;
 			}
 			else {
 				TargetPos = SkillPoint->GetComponentLocation();

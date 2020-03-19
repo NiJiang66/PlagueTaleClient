@@ -49,6 +49,8 @@ public:
 
 	//执行打印方法
 	inline void Output() {
+		return;
+
 		switch (PatternID)
 		{
 		case 0:

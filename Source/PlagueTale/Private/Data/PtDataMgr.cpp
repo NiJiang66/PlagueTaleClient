@@ -102,8 +102,7 @@ void UPtDataMgr::ChangeGoodInfo(EBagType BagType, FGoodInfo GoodInfo)
 			MainBag.Remove(GoodInfo.BlockId);
 			break;
 		case EBagType::SkillBag:
-			//技能不消耗，只进行冷却，ToDo
-			//SkillBag.Remove(GoodInfo.BlockId);
+			SkillBag.Remove(GoodInfo.BlockId);
 			break;
 		case EBagType::BuffBag:
 			BuffBag.Remove(GoodInfo.BlockId);

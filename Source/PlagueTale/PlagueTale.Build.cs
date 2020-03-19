@@ -22,7 +22,8 @@ public class PlagueTale : ModuleRules
             "HTTP",
             "MoviePlayer",
             "Slate",
-            "SlateCore"
+            "SlateCore",
+            "TL_GameLoadingScreen",
         });
 
 		// Uncomment if you are using Slate UI
